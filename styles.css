@@ -48,5 +48,6 @@ p {
 
 .project-list a:hover,
 .project-list a:focus {
+  color: #0b3a99;
   text-decoration: underline;
 }
