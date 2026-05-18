@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/</loc>
+      </url>
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/node-api/</loc>
+      </url>
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/client/</loc>
+      </url>
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/server/</loc>
+      </url>
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/quick_start/</loc>
+      </url>
+      <url>
+        <loc>https://o6-automation.github.io/o6-python-doc/main/core-concepts/</loc>
+      </url>
+</urlset>

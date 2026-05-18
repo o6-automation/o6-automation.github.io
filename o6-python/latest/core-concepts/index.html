@@ -1,0 +1,1550 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python bindings for open62541 with high-level OPC UA client and server utilities">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://o6-automation.github.io/o6-python-doc/main/core-concepts/">
+      
+      
+        <link rel="prev" href="../examples/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Core concepts - o6-python Documentation</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#protocol" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="./.." title="o6-python Documentation" class="md-header__button md-logo" aria-label="o6-python Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6-python Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Core concepts
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/o6-automation/o6-python-agpl" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    o6-automation/o6-python-agpl
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./.." class="md-tabs__link">
+        
+  
+  o6-Python Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../node-api/" class="md-tabs__link">
+        
+  
+  Node API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../client/" class="md-tabs__link">
+        
+  
+  Client
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../server/" class="md-tabs__link">
+        
+  
+  Server
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../api_reference/" class="md-tabs__link">
+        
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quick_start/" class="md-tabs__link">
+        
+  
+  Tutorials
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/" class="md-tabs__link">
+        
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="././" class="md-tabs__link">
+        
+  
+  Core Concepts of OPC UA
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./.." title="o6-python Documentation" class="md-nav__button md-logo" aria-label="o6-python Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+
+    </a>
+    o6-python Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/o6-automation/o6-python-agpl" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    o6-automation/o6-python-agpl
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="./.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6-Python Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../node-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Core Concepts of OPC UA
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Core Concepts of OPC UA
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Protocol
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Connection Layers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-and-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Endpoints and Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Services
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discovery-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Discovery Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securechannel-and-session-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        SecureChannel and Session Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribute-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Attribute Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        View Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Method Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodemanagement-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NodeManagement Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Query Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoreditem-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MonitoredItem Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscription-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Subscription Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-modelling" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Information Modelling
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Information Modelling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Node Classes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Attributes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        References
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variablenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VariableNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variabletypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VariableTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objectnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ObjectNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objecttypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ObjectTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencetypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ReferenceTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datatypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DataTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MethodNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ViewNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Protocol
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connection-layers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Connection Layers
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-and-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Endpoints and Security
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Services
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discovery-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Discovery Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securechannel-and-session-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        SecureChannel and Session Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attribute-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Attribute Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        View Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Method Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodemanagement-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        NodeManagement Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Query Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoreditem-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MonitoredItem Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subscription-service-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Subscription Service Set
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#information-modelling" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Information Modelling
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Information Modelling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#node-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Node Classes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Attributes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        References
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variablenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VariableNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variabletypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        VariableTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objectnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ObjectNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objecttypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ObjectTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencetypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ReferenceTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datatypenode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        DataTypeNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methodnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MethodNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewnode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        ViewNode
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+    <a href="https://github.com/o6-automation/o6-python-agpl/edit/main/docs/core-concepts.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/o6-automation/o6-python-agpl/raw/main/docs/core-concepts.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-code-2" viewBox="0 0 24 24"><path d="M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35"/><path d="M14 2v5a1 1 0 0 0 1 1h5M5 16l-3 3 3 3M9 22l3-3-3-3"/></svg>
+    </a>
+  
+
+
+<h1 id="core-concepts-of-opc-ua">Core Concepts of OPC UA<a class="headerlink" href="#core-concepts-of-opc-ua" title="Permanent link">&para;</a></h1>
+<p>In one sentence, OPC UA defines a framework for object-oriented information models that live in an OPC UA server together with a protocol that clients use to interact with those models over the network.</p>
+<p>This page introduces the core concepts of OPC UA first. The final section explains how those concepts surface in pyo6.</p>
+<p>For the full specification see the OPC UA standard at <a href="https://reference.opcfoundation.org/">https://reference.opcfoundation.org/</a>.</p>
+<h2 id="protocol">Protocol<a class="headerlink" href="#protocol" title="Permanent link">&para;</a></h2>
+<p>The most common OPC UA setup uses the binary protocol over TCP. Communication is based on a request-response model:</p>
+<ul>
+<li>Clients send requests to servers.</li>
+<li>Servers return responses for those requests.</li>
+<li>Responses do not have to arrive immediately or in strict request order.</li>
+</ul>
+<p>That asynchronous behavior matters because some operations take time. A read may wait for a device, a method call may perform work on the server, and subscriptions are realized through publish interactions whose responses can be delayed.</p>
+<h3 id="connection-layers">Connection Layers<a class="headerlink" href="#connection-layers" title="Permanent link">&para;</a></h3>
+<p>An OPC UA client-server connection is built in three nested layers:</p>
+<ul>
+<li>TCP connection: transports the bytes and establishes low-level transport settings.</li>
+<li>SecureChannel: binds messages to a secure communication context and controls signing and encryption.</li>
+<li>Session: provides application-level identity and state.</li>
+</ul>
+<p>In practical terms, a client connects to a server, opens a SecureChannel, creates a session, and activates that session before issuing most application requests.</p>
+<h3 id="endpoints-and-security">Endpoints and Security<a class="headerlink" href="#endpoints-and-security" title="Permanent link">&para;</a></h3>
+<p>Servers advertise one or more endpoints. An endpoint describes how a client can connect, including:</p>
+<ul>
+<li>the endpoint URL</li>
+<li>the security policy</li>
+<li>the message security mode</li>
+<li>the supported user authentication mechanisms</li>
+</ul>
+<p>Security is not a single switch. It is the combination of endpoint selection, SecureChannel settings, and session authentication. Depending on the server, authentication may be anonymous, username/password based, or certificate based.</p>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
+<p>All OPC UA communication is expressed as service calls with standardized request and response types. These services are grouped into service sets.</p>
+<h3 id="discovery-service-set">Discovery Service Set<a class="headerlink" href="#discovery-service-set" title="Permanent link">&para;</a></h3>
+<p>This service set is used to find servers and inspect how they can be reached.</p>
+<ul>
+<li>FindServers</li>
+<li>GetEndpoints</li>
+<li>FindServersOnNetwork</li>
+</ul>
+<p>These services are commonly used before a secure session is established.</p>
+<h3 id="securechannel-and-session-service-set">SecureChannel and Session Service Set<a class="headerlink" href="#securechannel-and-session-service-set" title="Permanent link">&para;</a></h3>
+<p>These services establish and maintain communication state.</p>
+<ul>
+<li>OpenSecureChannel and CloseSecureChannel manage the communication channel.</li>
+<li>CreateSession and ActivateSession establish the session.</li>
+<li>CloseSession terminates the session.</li>
+<li>Cancel can be used to cancel outstanding requests.</li>
+</ul>
+<p>The transport connection, the SecureChannel, and the session are related but distinct concepts.</p>
+<h3 id="attribute-service-set">Attribute Service Set<a class="headerlink" href="#attribute-service-set" title="Permanent link">&para;</a></h3>
+<p>This service set accesses attributes of nodes.</p>
+<ul>
+<li>Read retrieves attributes such as Value, DisplayName, or DataType.</li>
+<li>Write modifies writable attributes.</li>
+<li>HistoryRead and HistoryUpdate operate on historical data where a server supports it.</li>
+</ul>
+<p>For many applications, this is the most visible part of OPC UA because variable access is expressed through node attributes.</p>
+<h3 id="view-service-set">View Service Set<a class="headerlink" href="#view-service-set" title="Permanent link">&para;</a></h3>
+<p>This service set is used to navigate the address space.</p>
+<ul>
+<li>Browse</li>
+<li>BrowseNext</li>
+<li>TranslateBrowsePathsToNodeIds</li>
+<li>RegisterNodes and UnregisterNodes</li>
+</ul>
+<p>These services are what let clients discover structure instead of assuming fixed node locations.</p>
+<h3 id="method-service-set">Method Service Set<a class="headerlink" href="#method-service-set" title="Permanent link">&para;</a></h3>
+<p>Methods are callable functions attached to objects in the information model. The Call service invokes them in the context of an active session.</p>
+<h3 id="nodemanagement-service-set">NodeManagement Service Set<a class="headerlink" href="#nodemanagement-service-set" title="Permanent link">&para;</a></h3>
+<p>This service set allows clients to modify the address space dynamically:</p>
+<ul>
+<li>AddNodes</li>
+<li>DeleteNodes</li>
+<li>AddReferences</li>
+<li>DeleteReferences</li>
+</ul>
+<p>Not every server exposes these capabilities, but they are central when address spaces are created or extended programmatically.</p>
+<h3 id="query-service-set">Query Service Set<a class="headerlink" href="#query-service-set" title="Permanent link">&para;</a></h3>
+<p>The query service set provides a storage-independent way to query information exposed by a server. It is part of the OPC UA model even though many stacks and applications make little or no use of it.</p>
+<h3 id="monitoreditem-service-set">MonitoredItem Service Set<a class="headerlink" href="#monitoreditem-service-set" title="Permanent link">&para;</a></h3>
+<p>Monitored items define what data or events are observed.</p>
+<ul>
+<li>CreateMonitoredItems</li>
+<li>ModifyMonitoredItems</li>
+<li>DeleteMonitoredItems</li>
+<li>SetMonitoringMode</li>
+<li>SetTriggering</li>
+</ul>
+<p>Monitored items belong to a subscription and describe what should be sampled or reported.</p>
+<h3 id="subscription-service-set">Subscription Service Set<a class="headerlink" href="#subscription-service-set" title="Permanent link">&para;</a></h3>
+<p>Subscriptions provide server-driven notifications instead of repeated polling.</p>
+<ul>
+<li>CreateSubscription</li>
+<li>ModifySubscription</li>
+<li>SetPublishingMode</li>
+<li>Publish</li>
+<li>Republish</li>
+<li>DeleteSubscriptions</li>
+<li>TransferSubscriptions</li>
+</ul>
+<p>This service set is the core mechanism behind data change notifications and event delivery.</p>
+<h2 id="information-modelling">Information Modelling<a class="headerlink" href="#information-modelling" title="Permanent link">&para;</a></h2>
+<p>An OPC UA server exposes an address space. The address space is a graph of nodes connected by typed references.</p>
+<ul>
+<li>Nodes carry attributes and represent entities in the model.</li>
+<li>References define relationships between nodes.</li>
+<li>NodeIds uniquely identify nodes within the server.</li>
+</ul>
+<p>Information modelling is central to OPC UA. Clients browse and read the model. Servers create, organize, and constrain it.</p>
+<h3 id="node-classes">Node Classes<a class="headerlink" href="#node-classes" title="Permanent link">&para;</a></h3>
+<p>OPC UA defines a fixed set of node classes. The most important ones are:</p>
+<ul>
+<li>Variable: stores a value together with metadata.</li>
+<li>VariableType: constrains variables and describes their structure.</li>
+<li>Object: represents a system, device, or logical component.</li>
+<li>ObjectType: defines the structure of objects.</li>
+<li>Method: defines callable behavior.</li>
+<li>DataType: defines the type of values.</li>
+<li>ReferenceType: defines the meaning of relationships.</li>
+<li>View: defines a subset of the address space for browsing.</li>
+</ul>
+<p>The node class determines which attributes a node can carry and how it behaves in the model.</p>
+<h3 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h3>
+<p>Each node is identified by a NodeId and carries attributes defined by its node class. Common attributes include BrowseName, DisplayName, Description, and NodeClass. Additional attributes depend on the specific node class.</p>
+<p>In day-to-day OPC UA usage, many operations are simply reads or writes of node attributes.</p>
+<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
+<p>References are directed, typed links between nodes. They are what turn the address space into a navigable graph.</p>
+<p>Some references express hierarchy, such as containment or organization. Others express type relationships, properties, or non-hierarchical semantics. The standard defines a common hierarchy of reference types, and information models may extend it.</p>
+<h3 id="variablenode">VariableNode<a class="headerlink" href="#variablenode" title="Permanent link">&para;</a></h3>
+<p>Variables store values together with metadata that constrains how those values are interpreted.</p>
+<p>A variable typically combines:</p>
+<ul>
+<li>a Value</li>
+<li>a DataType</li>
+<li>a ValueRank</li>
+<li>optional ArrayDimensions</li>
+<li>access and sampling metadata</li>
+</ul>
+<p>These attributes constrain what values are valid and how clients should interpret them.</p>
+<h4 id="data-type">Data Type<a class="headerlink" href="#data-type" title="Permanent link">&para;</a></h4>
+<p>The data type constrains the type of the variable value. The data type is itself represented by a DataType node in the information model.</p>
+<h4 id="valuerank">ValueRank<a class="headerlink" href="#valuerank" title="Permanent link">&para;</a></h4>
+<p>ValueRank describes whether the value is scalar or array-like and, if it is an array, how many dimensions it can have.</p>
+<h4 id="arraydimensions">ArrayDimensions<a class="headerlink" href="#arraydimensions" title="Permanent link">&para;</a></h4>
+<p>If the value rank permits arrays, ArrayDimensions can further constrain the expected shape.</p>
+<h3 id="variabletypenode">VariableTypeNode<a class="headerlink" href="#variabletypenode" title="Permanent link">&para;</a></h3>
+<p>Variable types provide definitions and constraints for variable instances. They are used to describe structure and expected value semantics beyond the raw scalar type.</p>
+<h3 id="objectnode">ObjectNode<a class="headerlink" href="#objectnode" title="Permanent link">&para;</a></h3>
+<p>Objects represent systems, components, logical entities, or software-visible resources. They can contain variables, methods, and other objects.</p>
+<h3 id="objecttypenode">ObjectTypeNode<a class="headerlink" href="#objecttypenode" title="Permanent link">&para;</a></h3>
+<p>Object types provide reusable structure for object instances.</p>
+<h3 id="referencetypenode">ReferenceTypeNode<a class="headerlink" href="#referencetypenode" title="Permanent link">&para;</a></h3>
+<p>Reference types define the meaning of relationships between nodes. Some are hierarchical, some are symmetric, and many information models depend heavily on them for their domain semantics.</p>
+<h3 id="datatypenode">DataTypeNode<a class="headerlink" href="#datatypenode" title="Permanent link">&para;</a></h3>
+<p>Data types define the shape of values. OPC UA supports both built-in scalar types and structured data types. Data types may also be abstract and used only to constrain possible concrete values.</p>
+<h3 id="methodnode">MethodNode<a class="headerlink" href="#methodnode" title="Permanent link">&para;</a></h3>
+<p>Methods are callable nodes associated with objects. Their input and output signatures are described in the information model, while invocation happens through the Call service.</p>
+<h3 id="viewnode">ViewNode<a class="headerlink" href="#viewnode" title="Permanent link">&para;</a></h3>
+<p>Views define subsets of the address space for browsing and organization.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../examples/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Examples">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Examples
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"..","features":["announce.dismiss","content.action.edit","content.action.view","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":{"default":"latest","provider":"mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
