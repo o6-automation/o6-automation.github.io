@@ -1,0 +1,52 @@
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+.container {
+  max-width: 760px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.project-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.project-list li {
+  margin: 0.5rem 0;
+}
+
+.project-list a {
+  color: #0f4cc9;
+  text-decoration: none;
+}
+
+.project-list a:hover,
+.project-list a:focus {
+  text-decoration: underline;
+}
