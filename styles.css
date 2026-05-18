@@ -38,12 +38,12 @@ p {
 }
 
 .project-list a {
-  color: #0a3399;
+  color: #063d8c;
   text-decoration: none;
 }
 
 .project-list a:hover,
 .project-list a:focus {
-  color: #072878;
+  color: #042a63;
   text-decoration: underline;
 }
