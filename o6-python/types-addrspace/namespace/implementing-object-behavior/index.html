@@ -1,0 +1,4192 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python bindings for open62541 with high-level OPC UA client and server utilities">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://docs.o6-automation.com/o6-python/types-addrspace/namespace/implementing-object-behavior/">
+      
+      
+        <link rel="prev" href="../writing-nodesets-in-python/">
+      
+      
+        <link rel="next" href="../../../memory-management/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Implementing object behavior - o6\Python</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/o6-zensical-theme.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-three-parts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="o6\Python" class="md-header__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6\Python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementing object behavior
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tutorials/" class="md-tabs__link">
+          
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../opcua-basics/" class="md-tabs__link">
+          
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../api_reference/" class="md-tabs__link">
+        
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="o6\Python" class="md-nav__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    o6\Python
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Home
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../commercial-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Commercial build
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  First Steps
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/100_connect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Connect / disconnect
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/110_browse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Browse & Explore
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/120_read-write-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Reading & Writing
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/130_call-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Calling a method
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/140_node-api-syntax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API syntax
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Monitoring
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/200_monitor-datachange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitor datachange
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/210_subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/220_modify-subscription/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Modify a subscription
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/230_subscription-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Filter
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client Configuration
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client Configuration
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/300_security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/310_application-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Application Description
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/320_state-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  State Callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Information Modelling
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/410_load-packaged-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load packaged companion specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/420_load-nodeset-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load nodeset files
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/430_nodeids-and-namespace-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  NodeIds and namespace info
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/440_semantic-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Semantic Discovery
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced Topics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced Topics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/500_lowlevel-service-calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level service calls
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/510_async-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Async Clients
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Manual
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Manual
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../opcua-basics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OPC UA Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  OPC UA Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Protocol
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Services
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/information-modelling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/datatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  DataType
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/namespace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespace
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../opcua-basics/nodesets-and-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Nodeset Files & Companion Specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../node-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6\Python SDK Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  o6\Python SDK Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Built-in Types
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Built-in Types
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtin/primitive-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primitive Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtin/statuscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  StatusCode
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtin/container-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Container Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtin/address-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Address & Identity Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespaces in o6
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Namespaces in o6
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../namespace-mapping-in-o6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Registry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../loading-and-using-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Loading & Using Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compiling-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compiling Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../writing-nodesets-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Writing a Nodeset in Python
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing Object Behavior
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing Object Behavior
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The three parts
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The three parts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-declare" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Declare
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Implement
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Register
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-from-a-generated-declaration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Starting from a generated declaration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Methods
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binding-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Binding a target
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-callback-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The callback signature
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-dispatcher-two-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        One dispatcher, two entry points
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-in-a-subclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Overriding in a subclass
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Variables
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-the-variabletype" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        On the VariableType
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-the-owning-object-by-member-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        On the owning Object, by member path
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-callback-signature_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The callback signature
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-value-source-a-variable-ends-up-with" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Which value source a Variable ends up with
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#narrowing-a-members-python-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Narrowing a member's Python class
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-serverimplement-actually-binds" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What <code>server.implement</code> actually binds
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What server.implement actually binds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-binding-is-exact-and-per-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The binding is exact, and per server
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-before-nodes-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Register before nodes are created
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-python-construction-opts-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Direct Python construction opts out
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-a-single-slot-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replacing a single slot at runtime
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precedence-in-one-paragraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Precedence, in one paragraph
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pitfalls
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        See also
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../memory-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Memory management
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../client/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../client/address-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Working with the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../client/subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions & historical data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../client/raw-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Raw services & errors
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle & configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/address-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Building the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/declared-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declared types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/behaviour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing behaviour
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/events-and-timers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Events, monitored items & timers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control & roles
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../server/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Operations & interoperability
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Performance
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The three parts
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The three parts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-declare" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Declare
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Implement
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Register
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-from-a-generated-declaration" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Starting from a generated declaration
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Methods
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binding-a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Binding a target
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-callback-signature" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The callback signature
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-dispatcher-two-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        One dispatcher, two entry points
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overriding-in-a-subclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Overriding in a subclass
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Variables
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-the-variabletype" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        On the VariableType
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-the-owning-object-by-member-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        On the owning Object, by member path
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-callback-signature_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The callback signature
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#which-value-source-a-variable-ends-up-with" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Which value source a Variable ends up with
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#narrowing-a-members-python-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Narrowing a member's Python class
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-serverimplement-actually-binds" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What <code>server.implement</code> actually binds
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What server.implement actually binds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-binding-is-exact-and-per-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The binding is exact, and per server
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-before-nodes-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Register before nodes are created
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-python-construction-opts-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Direct Python construction opts out
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replacing-a-single-slot-at-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replacing a single slot at runtime
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precedence-in-one-paragraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Precedence, in one paragraph
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Pitfalls
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        See also
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../../../opcua-basics/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    o6\Python SDK Fundamentals
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../namespace-mapping-in-o6/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Namespaces in o6
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="implementing-object-behavior">Implementing Object Behavior<a class="headerlink" href="#implementing-object-behavior" title="Permanent link">&para;</a></h1>
+<p>A type declaration is a <strong>contract</strong>. <code>@o6.objecttype</code> says a <code>MachineType</code> has a <code>Reset</code> Method taking an <code>Int32</code> and returning a <code>Boolean</code>; it says nothing about what resetting a machine does. <code>@o6.variabletype</code> says a <code>Temperature</code> is a <code>Double</code>; it does not say where that Double comes from.</p>
+<p>The <strong>implement pattern</strong> is how the behavior gets attached: a second, undecorated Python class that subclasses the declaration and carries the code, registered with <code>server.implement(Declaration, Implementation)</code>. From that point on, every instance the server materialises for that UA type is an instance of your class.</p>
+<p>Keeping the two apart is what makes the pattern worth having:</p>
+<ul>
+<li><strong>A generated namespace stays untouched.</strong> Compiled companion specs and vendor nodesets describe the UA interface and are regenerated whenever the XML changes. Behavior lives in your own module and survives regeneration.</li>
+<li><strong>The contract stays honest.</strong> The declaration is exactly what a client browses. It cannot drift toward what the implementation happens to do.</li>
+<li><strong>Behavior is per server.</strong> The binding is stored on that server's own type node, so two servers in one process can implement the same UA type differently, and neither needs a global registry.</li>
+<li><strong>State is per node.</strong> Each live node <em>is</em> an instance of the implementation class, so ordinary <code>self.…</code> attributes give every object its own state.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This page is about applying behavior to your own or a generated type. The precedence rules it summarises are stated normatively in <a href="../../../server/callbacks/">Server callbacks</a>; the declaration side — <code>@o6.objecttype</code>, <code>o6.call(...)</code>, children and namespaces — is <a href="../writing-nodesets-in-python/">Writing a Nodeset in Python</a>.</p>
+</div>
+<hr />
+<h2 id="the-three-parts">The three parts<a class="headerlink" href="#the-three-parts" title="Permanent link">&para;</a></h2>
+<h3 id="1-declare">1. Declare<a class="headerlink" href="#1-declare" title="Permanent link">&para;</a></h3>
+<p>The declaration under <code>o6.call(...)</code> carries the Method's BrowseName and signature, and no function body.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><code>CounterType</code> is written out here only so that every moving part of the pipeline is visible in one page — the declaration, the implementation and the registration side by side. <strong>Step 1 is not something you always write.</strong> Any ObjectType whose Methods are already declared by a precompiled companion spec — a packaged <code>o6.ns.*</code> module, or a package produced by the <a href="../compiling-nodesets/">nodeset compiler</a> — arrives with its contract complete, and you start at step 2. That is in fact the pattern's main use: generated modules describe the UA interface and are regenerated whenever the XML changes, so behavior must live outside them. <a href="#starting-from-a-generated-declaration">Starting from a generated declaration</a> shows that path once both remaining steps have been introduced.</p>
+</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">o6</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">ns0</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">o6</span><span class="o">.</span><span class="n">ns</span><span class="o">.</span><span class="n">namespace</span><span class="p">(</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;http://o6-automation.com/UA/Tutorial/&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">objecttype</span><span class="p">(</span><span class="n">ns</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">nodeId</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;i=1&quot;</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;CounterType&quot;</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">CounterType</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">BaseObjectType</span><span class="p">):</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;A counter object type — declared only, implemented separately.&quot;&quot;&quot;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">increment</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">node</span><span class="o">.</span><span class="n">MethodNode</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">hasComponent</span><span class="p">(</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;Increment&quot;</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="n">inputArgs</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                <span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">Argument</span><span class="p">(</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                    <span class="n">dataType</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">,</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                    <span class="n">valueRank</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">ValueRank</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Amount to add to the counter&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                <span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="p">],</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="n">outputArgs</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                <span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">Argument</span><span class="p">(</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;total&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                    <span class="n">dataType</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>                    <span class="n">valueRank</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">ValueRank</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>                    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The counter value after incrementing&quot;</span><span class="p">,</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>                <span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="p">],</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="p">)</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="p">)</span>
+</span></code></pre></div>
+<p>The Python member is <code>increment</code> (lowercase, the attribute name), while the UA BrowseName is <code>Increment</code>. Both names matter later, for different things.</p>
+<h3 id="2-implement">2. Implement<a class="headerlink" href="#2-implement" title="Permanent link">&para;</a></h3>
+<p>Subclass the declaration — <strong>undecorated</strong>. A second <code>@o6.objecttype</code> would declare a new UA subtype, which is not what you want here and is rejected.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">CounterImpl</span><span class="p">(</span><span class="n">CounterType</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide the behavior for CounterType.&quot;&quot;&quot;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Increment&quot;</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_increment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">]:</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">))</span>
+</span></code></pre></div>
+<p><code>@o6.call("Increment")</code> binds this Python method to the declared UA Method. <code>self._count</code> is per-node state: two Counter objects on the same server count independently.</p>
+<p><code>__init__</code> runs on the already-complete node, so <code>super().__init__(**kwargs)</code> is the ordinary cooperative Python call and does no OPC UA work. Accept <code>**kwargs</code> and pass it through — nodes created natively or over <code>AddNodes</code> carry no Python-only arguments, so any extra parameter your class wants needs a default or must come from server/node state.</p>
+<h3 id="3-register">3. Register<a class="headerlink" href="#3-register" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">server</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">4840</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">server</span><span class="o">.</span><span class="n">ns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counter_types_module</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">CounterType</span><span class="p">,</span> <span class="n">CounterImpl</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">counter</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">addObject</span><span class="p">(</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;Counter&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">server</span><span class="o">.</span><span class="n">objectsNode</span><span class="p">,</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">typeDefinition</span><span class="o">=</span><span class="n">CounterType</span><span class="p">,</span>        <span class="c1"># the DECLARATION</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">nodeId</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;i=1000&quot;</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">ns</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">ns</span><span class="o">.</span><span class="n">tutorial</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="nb">isinstance</span><span class="p">(</span><span class="n">counter</span><span class="p">,</span> <span class="n">CounterImpl</span><span class="p">)</span>       <span class="c1"># True</span>
+</span></code></pre></div>
+<p>Note the asymmetry that makes the pattern pleasant to use: you name the <em>declaration</em> at the call site and get the <em>implementation</em> back. <code>CounterImpl</code> appears exactly once, in the <code>implement</code> call. Nothing downstream — not <code>addObject</code>, not a client's <code>AddNodes</code> request, not a nested child of another type — has to know it exists.</p>
+<h3 id="starting-from-a-generated-declaration">Starting from a generated declaration<a class="headerlink" href="#starting-from-a-generated-declaration" title="Permanent link">&para;</a></h3>
+<p>With a companion-spec type, step 1 is already done and only steps 2 and 3 remain. <code>ns0.objtypes.FileType</code> declares <code>Open</code>, <code>Read</code>, <code>Write</code>, <code>Close</code>, <code>GetPosition</code> and <code>SetPosition</code> with their full signatures, so the implementation subclasses the generated class directly and binds behavior to the BrowseNames the spec defines:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">ns0</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">FileImpl</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">FileType</span><span class="p">):</span>                  <span class="c1"># step 2</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Open&quot;</span><span class="p">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">Byte</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">UInt32</span><span class="p">]:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">UInt32</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle</span><span class="p">))</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">FileType</span><span class="p">,</span> <span class="n">FileImpl</span><span class="p">)</span>       <span class="c1"># step 3</span>
+</span></code></pre></div>
+<p>Both steps are byte-for-byte the same as for <code>CounterType</code>; only the source of the declaration differs. <code>ns0</code> needs no <code>append</code>, but any other companion spec does — <code>server.ns.append(di)</code> first, then <code>server.implement(...)</code>.</p>
+<p>Implementing only <em>some</em> of a type's Methods is normal: the ones you bind get your behavior, the rest stay declared-but-unimplemented and fail when called. And a Method whose BrowseName is declared in more than one appended namespace needs the qualified form, <code>@o6.call("ns=di;TransferToDevice")</code> — see <a href="#binding-a-target">Binding a target</a> below.</p>
+<hr />
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="binding-a-target">Binding a target<a class="headerlink" href="#binding-a-target" title="Permanent link">&para;</a></h3>
+<p><code>@o6.call(target)</code> takes the UA Method's BrowseName. A bare name is resolved against the Methods the type declares or inherits:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Increment&quot;</span><span class="p">)</span>                                  <span class="c1"># resolved for you</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;ns=tutorial;Increment&quot;</span><span class="p">)</span>                       <span class="c1"># explicitly qualified</span>
+</span></code></pre></div>
+<p>Pass the qualified form when the same bare name is declared in more than one namespace — o6 rejects an ambiguous bare name with an error telling you to qualify it. A target that matches nothing fails when the first instance is constructed:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>TypeError: Broken._x uses @o6.call for unknown UA Method &#39;ns=0;Rset&#39;;
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>declare or inherit that Method child
+</span></code></pre></div>
+<p>which is deliberate: a misspelled target is reported rather than becoming a silently unreachable implementation.</p>
+<p>A <strong>dotted target</strong> reaches a Method on a nested child. The path is made of <strong>Python member names</strong>, not BrowseNames:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">objecttype</span><span class="p">(</span><span class="n">ns</span><span class="o">=</span><span class="s2">&quot;demo&quot;</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;CellType&quot;</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">CellType</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">BaseObjectType</span><span class="p">):</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">controller</span><span class="p">:</span> <span class="n">ControllerType</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">hasComponent</span><span class="p">(</span><span class="n">ControllerType</span><span class="p">())</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">CellImpl</span><span class="p">(</span><span class="n">CellType</span><span class="p">):</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;controller.reset&quot;</span><span class="p">)</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_reset_controller</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Boolean</span><span class="p">]:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+</span></code></pre></div>
+<p>This is how an outer type owns behavior that spans its children — the cell decides what resetting its controller means, without the controller type needing an implementation of its own. The path is resolved <strong>once</strong>, when the containing Object finishes construction, and the callable is stored directly on that instance's Method node. Calls never browse the address space.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A dotted path traverses <strong>Objects</strong>. A segment naming a complex <em>Variable</em> child fails construction with <code>a construction owner must be an Object or ObjectType</code>. Implement the VariableType itself instead (see <a href="#variables">Variables</a> below).</p>
+</div>
+<h3 id="the-callback-signature">The callback signature<a class="headerlink" href="#the-callback-signature" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="o">*</span><span class="n">outputs</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>self</code> is the Object the Method was invoked on. Inputs and outputs follow the declared <code>InputArguments</code> / <code>OutputArguments</code> order.</p>
+<ul>
+<li>A Bad status may be returned <strong>alone</strong>: <code>return (o6.StatusCode.BAD_INVALID_ARGUMENT,)</code>.</li>
+<li>A non-Bad status must be followed by <strong>exactly</strong> the declared number of outputs.</li>
+<li><code>async def</code> works, with identical arguments and result-tuple behavior.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Divide&quot;</span><span class="p">)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">_divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dividend</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">):</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">if</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">BAD_INVALID_ARGUMENT</span><span class="p">,)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="n">dividend</span> <span class="o">/</span> <span class="n">divisor</span><span class="p">))</span>
+</span></code></pre></div>
+<p>A declared Method with no implementation is a valid node — browsable, with correct arguments — that fails when called. Declaring the contract before the behavior exists is a normal intermediate state.</p>
+<h3 id="one-dispatcher-two-entry-points">One dispatcher, two entry points<a class="headerlink" href="#one-dispatcher-two-entry-points" title="Permanent link">&para;</a></h3>
+<p>The same callback serves in-process attribute calls and OPC UA <code>Call</code> service requests, and both share the node's state:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">counter</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>                  <span class="c1"># in-process → (GOOD, 5)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">counter</span><span class="o">.</span><span class="n">Increment</span><span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>                  <span class="c1"># in-process → (GOOD, 8)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="n">counter</span><span class="p">),</span> <span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">Increment</span><span class="p">),</span> <span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>   <span class="c1"># → (GOOD, 18)</span>
+</span></code></pre></div>
+<p>Note that the <em>attribute</em> is <code>counter.Increment</code> — capitalised, from the BrowseName — while the declaration's Python member was <code>increment</code>. The live node exposes its children under their BrowseNames.</p>
+<p>o6 configures open62541 to copy every Method declaration into each Object instance, so each object has its own Method NodeId and its own callback slot. Nothing is looked up at invocation time: the callback is already stored on the concrete Method node.</p>
+<h3 id="overriding-in-a-subclass">Overriding in a subclass<a class="headerlink" href="#overriding-in-a-subclass" title="Permanent link">&para;</a></h3>
+<p>An ordinary Python override needs no decorator — same method name, new body. Repeat <code>@o6.call(...)</code> only when the <em>Python</em> name changes:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">AuditedCounterImpl</span><span class="p">(</span><span class="n">CounterImpl</span><span class="p">):</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Increment&quot;</span><span class="p">)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_increment_with_audit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">):</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_increment</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Two decorators in <strong>one</strong> class body may not target the same UA Method; class creation reports both competing Python names.</p>
+<hr />
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
+<p>Variables have two independent slots, <code>read</code> and <code>write</code>, and two ways to fill them.</p>
+<h3 id="on-the-variabletype">On the VariableType<a class="headerlink" href="#on-the-variabletype" title="Permanent link">&para;</a></h3>
+<p>Undecorated <code>@o6.read</code> / <code>@o6.write</code> implement the VariableType's <em>own</em> value:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">variabletype</span><span class="p">(</span><span class="n">ns</span><span class="o">=</span><span class="s2">&quot;plant&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">)</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">TemperatureType</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">vartypes</span><span class="o">.</span><span class="n">BaseDataVariableType</span><span class="p">):</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="k">pass</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">TemperatureImpl</span><span class="p">(</span><span class="n">TemperatureType</span><span class="p">):</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">20.0</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">read</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">includeSourceTimestamp</span><span class="p">):</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">write</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">TemperatureType</span><span class="p">,</span> <span class="n">TemperatureImpl</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Registered this way, the behavior applies to every Variable of that type the server materialises — including ones that appear as children of other types.</p>
+<h3 id="on-the-owning-object-by-member-path">On the owning Object, by member path<a class="headerlink" href="#on-the-owning-object-by-member-path" title="Permanent link">&para;</a></h3>
+<p><code>@o6.read("member")</code> / <code>@o6.write("member")</code> implement one <em>specific</em> Variable from the class that owns it. This is the form to reach a Variable whose own type you do not want to specialise:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">objecttype</span><span class="p">(</span><span class="n">ns</span><span class="o">=</span><span class="s2">&quot;tutorial&quot;</span><span class="p">,</span> <span class="n">nodeId</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;i=1&quot;</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;SetpointType&quot;</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">SetpointType</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">BaseObjectType</span><span class="p">):</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">setpoint</span><span class="p">:</span> <span class="n">ns0</span><span class="o">.</span><span class="n">vartypes</span><span class="o">.</span><span class="n">BaseDataVariableType</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">hasComponent</span><span class="p">(</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        <span class="n">ns0</span><span class="o">.</span><span class="n">vartypes</span><span class="o">.</span><span class="n">BaseDataVariableType</span><span class="p">(</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>            <span class="n">nodeId</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;i=2&quot;</span><span class="p">,</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>            <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;ns=tutorial;Setpoint&quot;</span><span class="p">,</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="n">dataType</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">,</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>            <span class="n">accessLevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>                      <span class="c1"># CurrentRead | CurrentWrite</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>            <span class="n">userAccessLevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="p">)</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="p">)</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="k">class</span><span class="w"> </span><span class="nc">SetpointImpl</span><span class="p">(</span><span class="n">SetpointType</span><span class="p">):</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="n">LOW</span><span class="p">,</span> <span class="n">HIGH</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mf">20.0</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;setpoint&quot;</span><span class="p">)</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_read_setpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">]:</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;setpoint&quot;</span><span class="p">)</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_write_setpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="p">]:</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>        <span class="n">clamped</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">value</span><span class="p">)))</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">clamped</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,)</span>
+</span></code></pre></div>
+<p>Because the value lives in <code>self._value</code> instead of the node's native storage, the write callback can validate before storing, and every subsequent read reflects the stored — clamped — value:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="mf">150.0</span><span class="p">))</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>                           <span class="c1"># 100.0</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">))</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>                           <span class="c1"># 0.0</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The read/write target is the <strong>Python member name</strong> (<code>"setpoint"</code>), not the BrowseName. This is the opposite of <code>@o6.call</code>, which resolves by BrowseName. Qualifying the child's BrowseName as <code>ns=tutorial;Setpoint</code> therefore does not change the decorator's target. Dotted paths work the same way as for <code>@o6.call</code> — <code>@o6.read("parameterSet.temperature")</code> — and every segment except the last must be an Object.</p>
+</div>
+<h3 id="the-callback-signature_1">The callback signature<a class="headerlink" href="#the-callback-signature_1" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">read</span><span class="p">:</span>  <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">includeSourceTimestamp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">StatusCode</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">write</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">session</span><span class="p">)</span>                  <span class="o">-&gt;</span> <span class="p">(</span><span class="n">StatusCode</span><span class="p">,)</span>
+</span></code></pre></div>
+<ul>
+<li>A Bad status is returned <strong>alone</strong>. A successful read returns exactly <strong>one</strong> value, converted using the Variable's declared DataType — or an <code>o6.DataValue</code> when you need to supply timestamps or picoseconds explicitly.</li>
+<li><code>value</code> on write is the requested <code>o6.DataValue</code>; <code>value.value</code> is the payload.</li>
+<li><code>range</code> is <code>None</code> for a whole-value access, or a tuple of stop-exclusive Python slices for an IndexRange — OPC UA <code>2:5</code> arrives as <code>(slice(2, 6),)</code>.</li>
+<li><code>session</code> is an <code>o6.Session</code> for client operations and <code>None</code> for internal ones.</li>
+<li>Variable callbacks are <strong>synchronous</strong>, and recursion is rejected with <code>BadInvalidState</code>: a read may not re-enter the same Variable's read or write.</li>
+</ul>
+<p>Accept <code>**kwargs</code> when you do not need the context, as both examples above do.</p>
+<h3 id="which-value-source-a-variable-ends-up-with">Which value source a Variable ends up with<a class="headerlink" href="#which-value-source-a-variable-ends-up-with" title="Permanent link">&para;</a></h3>
+<p>The two slots decide it together:</p>
+<table>
+<thead>
+<tr>
+<th><code>read</code> slot</th>
+<th><code>write</code> slot</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>absent</td>
+<td>absent</td>
+<td>native stored value</td>
+</tr>
+<tr>
+<td>present</td>
+<td>present</td>
+<td>Python callbacks own the value</td>
+</tr>
+<tr>
+<td>present</td>
+<td>absent</td>
+<td>Python callbacks, read-only</td>
+</tr>
+<tr>
+<td>absent</td>
+<td>present</td>
+<td><strong>rejected</strong> — an open62541 callback value source must be readable</td>
+</tr>
+</tbody>
+</table>
+<p>Once a Variable is callback-backed, its callbacks own the state; o6 keeps no shadow value. <code>variable()</code> and <code>variable(value)</code> are normal Value reads and writes and go through the callbacks like any client access — there is no syntax that reaches behind them into native storage.</p>
+<h3 id="narrowing-a-members-python-class">Narrowing a member's Python class<a class="headerlink" href="#narrowing-a-members-python-class" title="Permanent link">&para;</a></h3>
+<p>An Object implementation can select a Python-only implementation class for one of its Variable (or Object) children by annotating the member:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MachineImpl</span><span class="p">(</span><span class="n">vendor</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">MachineType</span><span class="p">):</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">temperature</span><span class="p">:</span> <span class="n">TemperatureImpl</span>
+</span></code></pre></div>
+<p>This changes only the concrete Python class for <em>this</em> Object's child. The Variable keeps its UA TypeDefinition and all address-space metadata, and an independently created <code>TemperatureType</code> elsewhere still uses its generated class. The annotation composes through nested Object implementations.</p>
+<p>For an inherited <strong>Optional</strong> member the annotation also decides inclusion: <code>temperature: TemperatureImpl</code> includes it in every instance built as this implementation, while <code>temperature: TemperatureImpl | None</code> leaves it optional. The UA declaration and its ModellingRule are unchanged either way.</p>
+<hr />
+<h2 id="what-serverimplement-actually-binds">What <code>server.implement</code> actually binds<a class="headerlink" href="#what-serverimplement-actually-binds" title="Permanent link">&para;</a></h2>
+<h3 id="the-binding-is-exact-and-per-server">The binding is exact, and per server<a class="headerlink" href="#the-binding-is-exact-and-per-server" title="Permanent link">&para;</a></h3>
+<p>It matches <strong>that one UA TypeDefinition</strong>. A subtype is a different type node and is not covered:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">MachineType</span><span class="p">,</span> <span class="n">MachineImpl</span><span class="p">)</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">server</span><span class="o">.</span><span class="n">addObject</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">typeDefinition</span><span class="o">=</span><span class="n">CncMachineType</span><span class="p">)</span>   <span class="c1"># NOT MachineImpl</span>
+</span></code></pre></div>
+<p>Register each subtype explicitly. To share behavior across them, put it in a plain mixin rather than in a registered implementation class:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ResetBehaviour</span><span class="p">:</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="nd">@o6</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;Reset&quot;</span><span class="p">)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">MachineImpl</span><span class="p">(</span><span class="n">ResetBehaviour</span><span class="p">,</span> <span class="n">plant</span><span class="o">.</span><span class="n">MachineType</span><span class="p">):</span> <span class="o">...</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">CncImpl</span><span class="p">(</span><span class="n">ResetBehaviour</span><span class="p">,</span> <span class="n">plant</span><span class="o">.</span><span class="n">CncMachineType</span><span class="p">):</span> <span class="o">...</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">plant</span><span class="o">.</span><span class="n">MachineType</span><span class="p">,</span> <span class="n">MachineImpl</span><span class="p">)</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">plant</span><span class="o">.</span><span class="n">CncMachineType</span><span class="p">,</span> <span class="n">CncImpl</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The binding lives in that server's own nodestore, which is what makes it naturally server-local. Repeating the same pair is harmless; a <strong>competing</strong> pair on the same server is rejected:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>TypeError: MachineType is already implemented by MachineImpl on this server
+</span></code></pre></div>
+<p>The implementation must be undecorated — a <code>@o6.objecttype</code> subclass declares a UA subtype and is rejected with <code>implementation must be undecorated; it must not declare a UA subtype</code>.</p>
+<h3 id="register-before-nodes-are-created">Register before nodes are created<a class="headerlink" href="#register-before-nodes-are-created" title="Permanent link">&para;</a></h3>
+<p>The binding decides how nodes are <em>constructed</em>. Existing instances are never rewritten by a later <code>implement</code>, so call it after <code>server.ns.append(...)</code> and before anything creates instances of the type — including before <code>server.start()</code> lets a client issue <code>AddNodes</code>.</p>
+<p>Passing <code>None</code> restores the declaration's own Python class for <strong>future</strong> instances only:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">MachineType</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="direct-python-construction-opts-out">Direct Python construction opts out<a class="headerlink" href="#direct-python-construction-opts-out" title="Permanent link">&para;</a></h3>
+<p>The binding covers nodes entering through native type instantiation: <code>Server.addObject</code>, native APIs, and client <code>AddNodes</code> requests. Calling the declaration class directly deliberately keeps the generated Python class, for itself <em>and</em> for its children:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">m</span> <span class="o">=</span> <span class="n">plant</span><span class="o">.</span><span class="n">MachineType</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">objectsNode</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>                <span class="c1"># MachineType__Live — not MachineImpl</span>
+</span></code></pre></div>
+<p>Instantiate the implementation class when that is what you want:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">m</span> <span class="o">=</span> <span class="n">MachineImpl</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">objectsNode</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;M&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This is a common surprise when a hand-written namespace module creates its own instances: those instances are built by Python construction and therefore ignore <code>implement</code> bindings.</p>
+<h3 id="replacing-a-single-slot-at-runtime">Replacing a single slot at runtime<a class="headerlink" href="#replacing-a-single-slot-at-runtime" title="Permanent link">&para;</a></h3>
+<p><code>call=</code>, <code>read=</code> and <code>write=</code> set one slot on one concrete node — or on a VariableType, as a template for Variables created afterwards:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">call</span><span class="o">=</span><span class="n">divide</span><span class="p">)</span>                      <span class="c1"># one Method node</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="n">instance_read</span><span class="p">)</span>   <span class="c1"># one Variable</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">TemperatureType</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="n">type_read</span><span class="p">)</span>           <span class="c1"># future Variables of that type</span>
+</span></code></pre></div>
+<p>Here the callables are plain functions whose first parameter is the node, rather than bound methods:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="k">if</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">BAD_INVALID_ARGUMENT</span><span class="p">,)</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="n">dividend</span> <span class="o">/</span> <span class="n">divisor</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>None</code> clears a slot without revealing or recomputing an earlier one:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Removing the <em>last</em> callback from a concrete Variable needs an explicit whole-node decision. Positional <code>None</code> repeats construction-time resolution; a positional value switches the Variable to native storage without consulting the old read callback:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>              <span class="c1"># re-resolve as at construction</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="n">server</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">machine</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">Double</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>     <span class="c1"># native storage, value 20</span>
+</span></code></pre></div>
+<p>Positional <code>None</code> on a Variable that was constructed with native storage in the first place is an error (<code>use implement(variable, value) to restore it</code>) — there is nothing to restore.</p>
+<hr />
+<h2 id="precedence-in-one-paragraph">Precedence, in one paragraph<a class="headerlink" href="#precedence-in-one-paragraph" title="Permanent link">&para;</a></h2>
+<p><code>read</code>, <code>write</code> and <code>call</code> all resolve the same way, and only ever at <strong>construction</strong> time:</p>
+<ol>
+<li>Start at the node's concrete Python implementation type and search upwards through its bases. The first matching callback is copied onto the concrete Variable or Method node.</li>
+<li>As containing Objects finish — innermost first — every matching <code>@o6.read("path")</code>, <code>@o6.write("path")</code> or <code>@o6.call("path")</code> <strong>replaces</strong> that slot. An outer path therefore wins when two paths target the same node.</li>
+<li>A later <code>Server.implement</code> replaces or clears the slot directly.</li>
+</ol>
+<p>Invocation never searches a type hierarchy and never resolves a path; it calls the callback already stored on the node. The full normative statement, including Optional-member behavior and the async-Method details, is in <a href="../../../server/callbacks/">Server callbacks</a>.</p>
+<hr />
+<h2 id="pitfalls">Pitfalls<a class="headerlink" href="#pitfalls" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addObject</code> returns the declaration class, not the implementation</td>
+<td><code>implement</code> not called, called after the node was created, or the node's TypeDefinition is a <em>subtype</em> of the registered one</td>
+</tr>
+<tr>
+<td><code>implementation must be undecorated; it must not declare a UA subtype</code></td>
+<td>the implementation carries <code>@o6.objecttype</code> / <code>@o6.variabletype</code></td>
+</tr>
+<tr>
+<td><code>uses @o6.call for unknown UA Method 'ns=0;X'</code></td>
+<td>misspelled or undeclared target; a bare name that needs qualifying</td>
+</tr>
+<tr>
+<td><code>one Python method cannot implement two UA Methods</code></td>
+<td>two <code>@o6.call</code> decorators on one function</td>
+</tr>
+<tr>
+<td><code>a construction owner must be an Object or ObjectType</code></td>
+<td>a dotted <code>read</code>/<code>write</code>/<code>call</code> path traverses a complex <em>Variable</em> child</td>
+</tr>
+<tr>
+<td>a <code>@o6.read("…")</code> never fires</td>
+<td>the target is the <strong>Python member name</strong>, not the BrowseName</td>
+</tr>
+<tr>
+<td>writes silently do nothing</td>
+<td>a <code>write</code> callback that returns <code>GOOD</code> without storing — a callback-backed Variable has no native storage behind it</td>
+</tr>
+<tr>
+<td>behavior missing on a Python-constructed instance</td>
+<td>direct construction of the declaration class bypasses <code>implement</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="see-also">See also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The two runnable tutorials this page is built from:
+  <a href="https://github.com/o6-automation/o6-python-agpl/blob/main/examples/highlevel/implement_objtype.py"><code>examples/highlevel/implement_objtype.py</code></a>
+  and <a href="https://github.com/o6-automation/o6-python-agpl/blob/main/examples/highlevel/implement_readwrite.py"><code>examples/highlevel/implement_readwrite.py</code></a>.</li>
+<li>The normative callback reference — signatures, resolution, Optional members, async Methods, recursion guards:
+  <a href="../../../server/callbacks/">Server callbacks</a>.</li>
+<li>Declaring the types these implementations attach to:
+  <a href="../writing-nodesets-in-python/">Writing a Nodeset in Python</a>.</li>
+<li>Implementing a type that came from XML rather than from Python:
+  <a href="../compiling-nodesets/">Compiling Nodesets</a>.</li>
+<li>Instance ownership, type children and access control:
+  <a href="../../../server/">Server</a>.</li>
+<li>What the specification says about Methods and their arguments:
+  <a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11">Part 4, §5.11 — Method Service Set</a>
+  and <a href="https://reference.opcfoundation.org/Core/Part3/v105/docs/4.7">Part 3, §4.7 — Methods</a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../writing-nodesets-in-python/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Writing a Nodeset in Python">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Writing a Nodeset in Python
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../memory-management/" class="md-footer__link md-footer__link--next" aria-label="Next: Memory management">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Memory management
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
