@@ -223,8 +223,13 @@ body {
   line-height: var(--o6-doc-line-height-body);
 }
 
+.md-grid {
+  /* Make room for the wider text column alongside the existing sidebars. */
+  max-width: 70rem;
+}
+
 .md-content__inner {
-  max-width: 74ch;
+  max-width: 100ch;
 }
 
 .md-typeset h1,
@@ -289,12 +294,8 @@ body {
   --md-default-bg-color: var(--o6-color-surface);
   --md-code-fg-color: var(--o6-color-text);
   --md-code-bg-color: var(--o6-color-surface-muted);
-  --md-code-hl-number-color: var(--o6-color-text);
-  --md-code-hl-special-color: var(--o6-color-brand);
-  --md-code-hl-function-color: var(--o6-color-brand);
-  --md-code-hl-constant-color: var(--o6-color-text);
-  --md-code-hl-keyword-color: var(--o6-color-brand);
-  --md-code-hl-string-color: var(--o6-color-text);
+  /* Keep Zensical's language-token colors for numbers, strings, keywords,
+     functions, constants, and special syntax. */
   --md-code-hl-name-color: var(--o6-color-text);
   --md-code-hl-operator-color: var(--o6-color-inactive);
   --md-code-hl-punctuation-color: var(--o6-color-inactive);
@@ -354,15 +355,8 @@ body {
   --md-default-bg-color: var(--o6-color-surface);
   --md-code-fg-color: var(--o6-color-text);
   --md-code-bg-color: var(--o6-color-surface-muted);
-  /* Syntax highlighting keeps the light scheme's restraint, inverted: the
-     brand tone carries language structure, the text tone carries values, and
-     the inactive tone carries comments and punctuation. */
-  --md-code-hl-number-color: var(--o6-color-text);
-  --md-code-hl-special-color: var(--o6-color-brand);
-  --md-code-hl-function-color: var(--o6-color-brand);
-  --md-code-hl-constant-color: var(--o6-color-text);
-  --md-code-hl-keyword-color: var(--o6-color-brand);
-  --md-code-hl-string-color: var(--o6-color-text);
+  /* Inherit Zensical's dark syntax palette; keep ordinary names and
+     annotations aligned with the corporate text and muted colors. */
   --md-code-hl-name-color: var(--o6-color-text);
   --md-code-hl-operator-color: var(--o6-color-inactive);
   --md-code-hl-punctuation-color: var(--o6-color-inactive);

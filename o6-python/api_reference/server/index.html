@@ -5389,8 +5389,8 @@ from another loop, which receive awaitables; see
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-module-attribute&quot;&gt;&lt;code&gt;module-attribute&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../maybeawaitable/#o6.MaybeAwaitable"><code>MaybeAwaitable</code></a>.</p>
-<p>See the <a href="../manual/server/">Server guide</a> for the whole picture, and
-<a href="../manual/server/callbacks/">Server callbacks</a> for behaviour implementation.</p>
+<p>See the <a href="../../manual/server/">Server guide</a> for the whole picture, and
+<a href="../../manual/server/callbacks/">Server callbacks</a> for behaviour implementation.</p>
 
 
 
@@ -5747,7 +5747,7 @@ server creates and manages its loop; callers must not close it directly.
     <div class="doc doc-contents ">
 
         <p>Registry of server-lifecycle notification handlers.</p>
-<p>See <a href="../manual/server/notification-handler/#lifecycle">Lifecycle</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#lifecycle">Lifecycle</a>.</p>
 
     </div>
 
@@ -5773,7 +5773,7 @@ server creates and manages its loop; callers must not close it directly.
     <div class="doc doc-contents ">
 
         <p>Registry of secure-channel opened/closed notification handlers.</p>
-<p>See <a href="../manual/server/notification-handler/#secure-channel">Secure Channel</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#secure-channel">Secure Channel</a>.</p>
 
     </div>
 
@@ -5799,7 +5799,7 @@ server creates and manages its loop; callers must not close it directly.
     <div class="doc doc-contents ">
 
         <p>Registry of session created/activated/deactivated/closed notification handlers.</p>
-<p>See <a href="../manual/server/notification-handler/#session">Session</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#session">Session</a>.</p>
 
     </div>
 
@@ -5827,7 +5827,7 @@ server creates and manages its loop; callers must not close it directly.
         <p>Registry of service-call begin/end notification handlers.</p>
 <p>Fires around every individual service request the server processes,
 so a handler here is on the hot path.</p>
-<p>See <a href="../manual/server/notification-handler/#service">Service</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#service">Service</a>.</p>
 
     </div>
 
@@ -5854,7 +5854,7 @@ so a handler here is on the hot path.</p>
 
         <p>Registry of subscription created/modified/publishing-mode/transferred/deleted
 notification handlers.</p>
-<p>See <a href="../manual/server/notification-handler/#subscription">Subscription</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#subscription">Subscription</a>.</p>
 
     </div>
 
@@ -5881,7 +5881,7 @@ notification handlers.</p>
 
         <p>Registry of monitored-item created/modified/monitoring-mode-changed/deleted
 notification handlers.</p>
-<p>See <a href="../manual/server/notification-handler/#monitoreditem">MonitoredItem</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#monitoreditem">MonitoredItem</a>.</p>
 
     </div>
 
@@ -5909,7 +5909,7 @@ notification handlers.</p>
         <p>Registry of discovery RegisterServer notification handlers.</p>
 <p>A separate category from <code>onDiscoveryServerOnNetworkNotification</code>;
 the two payloads are disjoint.</p>
-<p>See <a href="../manual/server/notification-handler/#discovery-registerserver">Discovery: RegisterServer</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#discovery-registerserver">Discovery: RegisterServer</a>.</p>
 
     </div>
 
@@ -5937,7 +5937,7 @@ the two payloads are disjoint.</p>
         <p>Registry of discovery ServerOnNetwork notification handlers.</p>
 <p>A separate category from <code>onDiscoveryRegisterServerNotification</code>;
 the two payloads are disjoint.</p>
-<p>See <a href="../manual/server/notification-handler/#discovery-serveronnetwork">Discovery: ServerOnNetwork</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#discovery-serveronnetwork">Discovery: ServerOnNetwork</a>.</p>
 
     </div>
 
@@ -5967,7 +5967,7 @@ the two payloads are disjoint.</p>
 <code>server.config.auditingEnabled</code> is <code>True</code>.
 <code>notification.auditEventType</code> names the specific standardized
 <code>AuditEventType</code> subtype.</p>
-<p>See <a href="../manual/server/notification-handler/#audit">Audit</a>.</p>
+<p>See <a href="../../manual/server/notification-handler/#audit">Audit</a>.</p>
 
     </div>
 
@@ -6501,8 +6501,8 @@ Method nor a Variable.</p>
           </tr>
       </tbody>
     </table>
-        <p>See <a href="../manual/server/behaviour/#implementing-behaviour">Implementing behaviour</a> and
-<a href="../manual/server/callbacks/">Server callbacks</a>.</p>
+        <p>See <a href="../../manual/server/behaviour/#implementing-behaviour">Implementing behaviour</a> and
+<a href="../../manual/server/callbacks/">Server callbacks</a>.</p>
 
 
     </div>
@@ -11228,7 +11228,7 @@ an alias with its existing request/response contract.</p>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">HierarchicalReferences</span><span class="p">,</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">refsubtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">nodeClassMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">NodeClass</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">NONE</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
 </span></code></pre></div>
 
@@ -11352,11 +11352,11 @@ want with <code>|</code>. <code>UNSPECIFIED</code> returns all.</p>
               <div class="doc-md-description">
                 <p>Which reference fields to fill in, as the <code>UInt32</code> the
 service takes. Compose the <code>BrowseResultMask</code> members you want
-with <code>|</code>. <code>NONE</code> returns only the target NodeIds.</p>
+with <code>|</code>. Defaults to <code>ALL</code>; <code>NONE</code> returns only the target NodeIds.</p>
               </div>
             </td>
             <td>
-                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.NONE">NONE</span></code>
+                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.ALL">ALL</span></code>
             </td>
           </tr>
       </tbody>
@@ -11480,7 +11480,7 @@ points are released on failure where the backend permits release.</p>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">HierarchicalReferences</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">refsubtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">nodeClassMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">NodeClass</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">NONE</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
 </span></code></pre></div>
 
@@ -11621,11 +11621,11 @@ want with <code>|</code>. <code>UNSPECIFIED</code> returns all.</p>
               <div class="doc-md-description">
                 <p>Which reference fields to fill in, as the <code>UInt32</code> the
 service takes. Compose the <code>BrowseResultMask</code> members you want
-with <code>|</code>. <code>NONE</code> returns only the target NodeIds.</p>
+with <code>|</code>. Defaults to <code>ALL</code>; <code>NONE</code> returns only the target NodeIds.</p>
               </div>
             </td>
             <td>
-                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.NONE">NONE</span></code>
+                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.ALL">ALL</span></code>
             </td>
           </tr>
       </tbody>
@@ -12767,7 +12767,7 @@ server would otherwise reject an empty <code>EventFilter</code> with
 
   <div class="md-copyright">
     <div class="md-copyright__highlight">
-      Copyright &copy; 2026 o6-Automation
+      Copyright &copy; 2026 o6 Automation GmbH
 
     </div>
   </div>

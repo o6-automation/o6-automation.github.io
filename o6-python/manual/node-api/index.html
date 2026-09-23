@@ -6166,35 +6166,58 @@ including local reads and writes that complete immediately. Sync and async share
 </span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="c1">#   NODEID  NODECLASS  BROWSENAME  DISPLAYNAME  VALUE  ...</span>
 </span></code></pre></div>
 <p>The dotted navigation fetches and caches child nodes on demand; the first <code>&lt;TAB&gt;</code> after connecting pays a single <code>Browse</code> round-trip, subsequent <code>&lt;TAB&gt;</code> presses on the same node are served from the cache.</p>
+<p><code>dir(node)</code> exposes Python aliases for child BrowseNames. Instance aliases use
+the same spelling rules as generated model members: <code>My Variable</code> becomes
+<code>mySpaceVariable</code>, <code>My-Variable</code> becomes <code>myMinusVariable</code>, <code>3DPosition</code> becomes
+<code>threeDPosition</code>, and <code>Class</code> becomes <code>class_</code>. Type nodes keep class-style names,
+replacing punctuation with underscores, for example <code>My Type</code> becomes <code>My_Type</code>.
+Aliases that would start with <code>_</code> receive a <code>node</code> prefix (<code>Node</code> for types), so
+they remain accessible without looking up private Python attributes.
+Unicode aliases are normalized to the identifier spelling Python uses in source code.</p>
+<p>The original BrowseName is unchanged and remains usable through <code>getattr</code> or a
+namespace-qualified browse path (namespace index <code>1</code> in this example):</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">mySpaceVariable</span><span class="p">()</span>          <span class="c1"># Read using the Python alias.</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nb">getattr</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">,</span> <span class="s2">&quot;My Variable&quot;</span><span class="p">)()</span>  <span class="c1"># Read using the original BrowseName.</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;/1:My Variable&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]()</span>      <span class="c1"># Resolve by browse path and read.</span>
+</span></code></pre></div>
+<p>Exact original names take precedence; otherwise lookup matches original names
+and aliases case-insensitively. Collisions, such as <code>My Variable</code> and
+<code>MySpaceVariable</code> both appearing as <code>mySpaceVariable</code>, raise <code>AttributeError</code>
+instead of selecting an arbitrary child. Use an exact original name or a browse
+path to disambiguate. Existing Python attributes retain normal precedence over
+child lookup; browse paths remain available when those attributes hide a child.</p>
+<p>On the client's owning event loop, <code>dir(node)</code> lists cached children and Python
+attributes without making a remote request. Use <code>await client.browse(...)</code> for
+fresh discovery in that context.</p>
 <blockquote>
 <p><strong>Tip:</strong> <code>dir(node)</code> returns a list synchronously, even though the children are resolved from the server. It is implemented with <code>asyncio.run_coroutine_threadsafe</code> against the client's background loop, so it works in a regular interactive shell without <code>await</code>.</p>
 </blockquote>
 <hr />
 <h2 id="putting-it-together">Putting it together<a class="headerlink" href="#putting-it-together" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;opc.tcp://localhost:4840&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="c1"># browse (dot and bracket)</span>
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="n">var</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">MyVariables</span><span class="o">.</span><span class="n">MyInteger</span>
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    <span class="n">method</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;TestMethods/Hello&quot;</span><span class="p">]</span>
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="c1"># read</span>
-</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;before:&quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">())</span>
-</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>
-</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="c1"># write</span>
-</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="n">var</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
-</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="c1"># read again</span>
-</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;after: &quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">())</span>
-</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
-</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>    <span class="c1"># call</span>
-</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>    <span class="n">greeting</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="s2">&quot;o6&quot;</span><span class="p">)</span>
-</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;call:  &quot;</span><span class="p">,</span> <span class="n">greeting</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;opc.tcp://localhost:4840&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="c1"># browse (dot and bracket)</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="n">var</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">MyVariables</span><span class="o">.</span><span class="n">MyInteger</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="n">method</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;TestMethods/Hello&quot;</span><span class="p">]</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="c1"># read</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;before:&quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">())</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    <span class="c1"># write</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>    <span class="n">var</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>    <span class="c1"># read again</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;after: &quot;</span><span class="p">,</span> <span class="n">var</span><span class="p">())</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>    <span class="c1"># call</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>    <span class="n">greeting</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="s2">&quot;o6&quot;</span><span class="p">)</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;call:  &quot;</span><span class="p">,</span> <span class="n">greeting</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Expected output (values will differ):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>before: 0
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>after:  7
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>call:   Hello, o6!
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>before: 0
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>after:  7
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>call:   Hello, o6!
 </span></code></pre></div>
 <h3 id="quick-reference">Quick reference<a class="headerlink" href="#quick-reference" title="Permanent link">&para;</a></h3>
 <table>
@@ -6344,7 +6367,7 @@ including local reads and writes that complete immediately. Sync and async share
 
   <div class="md-copyright">
     <div class="md-copyright__highlight">
-      Copyright &copy; 2026 o6-Automation
+      Copyright &copy; 2026 o6 Automation GmbH
 
     </div>
   </div>

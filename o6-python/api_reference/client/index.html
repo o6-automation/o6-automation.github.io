@@ -5387,8 +5387,8 @@ own event loop, and an awaitable when it runs on an external one; see
       &lt;small class=&quot;doc doc-label doc-label-module-attribute&quot;&gt;&lt;code&gt;module-attribute&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../maybeawaitable/#o6.MaybeAwaitable"><code>MaybeAwaitable</code></a>. Operations on a client that is not
 connected raise instead of silently doing nothing.</p>
-<p>See the <a href="../manual/client/">Client guide</a> for the whole picture, and the
-<a href="../tutorials/">tutorials</a> for task-by-task walkthroughs.</p>
+<p>See the <a href="../../manual/client/">Client guide</a> for the whole picture, and the
+<a href="../../tutorials/">tutorials</a> for task-by-task walkthroughs.</p>
 
 
 
@@ -5654,7 +5654,7 @@ connected raise instead of silently doing nothing.</p>
 connection produces (lifecycle, service calls, ...).</p>
 <p>Use as a decorator, a callable, or a list, exactly like the
 <code>Server.on&lt;category&gt;Notification</code> registries.</p>
-<p>See <a href="../manual/client/notification-handler/">Notification handler</a>.</p>
+<p>See <a href="../../manual/client/notification-handler/">Notification handler</a>.</p>
 
     </div>
 
@@ -5681,7 +5681,7 @@ connection produces (lifecycle, service calls, ...).</p>
 
         <p>Registry of handlers for this client's own lifecycle notifications
 (connection started/stopped), independent of <code>onGlobalNotification</code>.</p>
-<p>See <a href="../manual/client/notification-handler/">Notification handler</a>.</p>
+<p>See <a href="../../manual/client/notification-handler/">Notification handler</a>.</p>
 
     </div>
 
@@ -5708,7 +5708,7 @@ connection produces (lifecycle, service calls, ...).</p>
 
         <p>Registry of handlers for this client's own service-call begin/end
 notifications, independent of <code>onGlobalNotification</code>.</p>
-<p>See <a href="../manual/client/notification-handler/">Notification handler</a>.</p>
+<p>See <a href="../../manual/client/notification-handler/">Notification handler</a>.</p>
 
     </div>
 
@@ -8214,7 +8214,7 @@ status. Method-result failures do not raise.</p>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">HierarchicalReferences</span><span class="p">,</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">refsubtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">nodeClassMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">NodeClass</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">NONE</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
 </span></code></pre></div>
 
@@ -8341,11 +8341,12 @@ want with <code>|</code>.</p>
               <div class="doc-md-description">
                 <p>A browse result mask to customize returned fields, as
 the <code>UInt32</code> the service takes. Compose the
-<code>BrowseResultMask</code> members you want with <code>|</code>.</p>
+<code>BrowseResultMask</code> members you want with <code>|</code>. Defaults to <code>ALL</code>;
+<code>NONE</code> returns only target NodeIds.</p>
               </div>
             </td>
             <td>
-                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.NONE">NONE</span></code>
+                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.ALL">ALL</span></code>
             </td>
           </tr>
       </tbody>
@@ -8455,7 +8456,7 @@ or cancellation where the connection permits release.</p>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">HierarchicalReferences</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">refsubtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">nodeClassMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">NodeClass</span><span class="o">.</span><span class="n">UNSPECIFIED</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">NONE</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">)</span>
 </span></code></pre></div>
 
@@ -8590,11 +8591,12 @@ or cancellation where the connection permits release.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Reference fields to return; zero returns target IDs only.</p>
+                <p>Reference fields to return; defaults to <code>ALL</code>.
+Zero returns target IDs only.</p>
               </div>
             </td>
             <td>
-                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.NONE">NONE</span></code>
+                  <code><span title="o6.ns.ns0.datatypes.BrowseResultMask.ALL">ALL</span></code>
             </td>
           </tr>
       </tbody>
@@ -13011,7 +13013,7 @@ full (default: <code>True</code>).</p>
 
   <div class="md-copyright">
     <div class="md-copyright__highlight">
-      Copyright &copy; 2026 o6-Automation
+      Copyright &copy; 2026 o6 Automation GmbH
 
     </div>
   </div>
