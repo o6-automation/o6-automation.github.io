@@ -1,0 +1,1602 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ncc — compile an OPC UA NodeSet2.xml to C or Python source">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://docs.o6-automation.com/o6-nodeset-compiler/open62541/migration/">
+      
+      
+        <link rel="prev" href="../cmake/">
+      
+      
+        <link rel="next" href="../../o6-python/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Migration - o6\ncc</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/o6-zensical-theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#choose-the-replacement-command-or-cmake-function" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="o6\ncc" class="md-header__button md-logo" aria-label="o6\ncc" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\ncc">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6\ncc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Migration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  open62541
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../o6-python/" class="md-tabs__link">
+          
+  
+  o6\Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../utility/inventory/" class="md-tabs__link">
+          
+  
+  Utility
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="o6\ncc" class="md-nav__button md-logo" aria-label="o6\ncc" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\ncc">
+
+    </a>
+    o6\ncc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Home
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compatibility
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell-completion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Shell completion
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  open62541
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  open62541
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Command reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../datatypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Datatype tables
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cmake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CMake integration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrating from open62541
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrating from open62541
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-the-replacement-command-or-cmake-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Choose the replacement command or CMake function
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#address-space-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace address-space generation
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replace address-space generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keep-existing-datatype-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace address-space generation while keeping existing datatype tables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-datatype-tables-with-ncc" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace datatype generation while keeping filenames and symbols
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodeid-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace NodeId header generation while keeping macro names
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedded-bsd-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace BSD extraction while keeping your datatype generator
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Load the ncc CMake helper
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replace-cmake-generation-calls-while-keeping-existing-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace CMake generation calls while keeping existing targets
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-migrated-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Check your migrated application
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6\Python
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  o6\Python
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../o6-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../o6-python/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Command reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../o6-python/generated-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Use generated packages
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../o6-python/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Dependencies & shortnames
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../o6-python/bundled-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  List of bundled companion specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Utility
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Utility
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inventory
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility/graphviz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Graphviz
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-the-replacement-command-or-cmake-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Choose the replacement command or CMake function
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#address-space-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace address-space generation
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Replace address-space generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keep-existing-datatype-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace address-space generation while keeping existing datatype tables
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-datatype-tables-with-ncc" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace datatype generation while keeping filenames and symbols
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodeid-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace NodeId header generation while keeping macro names
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedded-bsd-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace BSD extraction while keeping your datatype generator
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cmake-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Load the ncc CMake helper
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#replace-cmake-generation-calls-while-keeping-existing-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Replace CMake generation calls while keeping existing targets
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-your-migrated-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Check your migrated application
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="migrating-from-open62541">Migrating from open62541<a class="headerlink" href="#migrating-from-open62541" title="Permanent link">&para;</a></h1>
+<p>Replace the NodeSet compiler scripts shipped with open62541 with <code>ncc</code>, while
+keeping your model inputs and the generated filenames and symbols your application
+uses. For example:</p>
+<p><strong>Before</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>/path/to/open62541/tools/nodeset_compiler/nodeset_compiler.py<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span>-e<span class="w"> </span>Opc.Ua.NodeSet2.xml<span class="w"> </span>-x<span class="w"> </span>MyModel.xml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span>generated/namespace_mymodel_generated
+</span></code></pre></div>
+<p><strong>After</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>MyModel.xml<span class="w"> </span>-e<span class="w"> </span>Opc.Ua.NodeSet2.xml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span>--shortname<span class="w"> </span>namespace_mymodel_generated<span class="w"> </span>-o<span class="w"> </span>generated
+</span></code></pre></div>
+<p>Both commands produce <code>namespace_mymodel_generated.c/.h</code> and an initializer named
+<code>namespace_mymodel_generated</code>. Replace the example paths with your existing inputs
+and output basename. Install the compiler with
+<code>python -m pip install o6-ncc</code>; generation does not require an installed
+open62541 SDK. Building the generated C still requires your SDK and C toolchain.</p>
+<h2 id="choose-the-replacement-command-or-cmake-function">Choose the replacement command or CMake function<a class="headerlink" href="#choose-the-replacement-command-or-cmake-function" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Existing tool or workflow</th>
+<th>ncc replacement command or CMake function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nodeset_compiler.py</code></td>
+<td>Terminal command: <code>ncc c</code></td>
+</tr>
+<tr>
+<td><code>generate_datatypes.py</code></td>
+<td>Terminal command: <code>ncc c datatypes</code></td>
+</tr>
+<tr>
+<td><code>generate_nodeid_header.py</code></td>
+<td>Terminal command: <code>ncc c nodeids</code></td>
+</tr>
+<tr>
+<td><code>generate_bsd.py</code></td>
+<td>Terminal command: <code>ncc c bsd</code></td>
+</tr>
+<tr>
+<td>Separate CMake generation helpers</td>
+<td>CMake helper functions: <code>ncc_generate_nodeset</code>, <code>ncc_generate_datatypes</code>, <code>ncc_generate_nodeid_header</code></td>
+</tr>
+<tr>
+<td>Coordinated generation of all model artifacts</td>
+<td><code>ncc c model</code>; CMake helper function: <code>ncc_generate_model</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>cncc</code> is an alias for <code>ncc c</code>, including its subcommands. The examples below use
+separate commands so you can preserve your application's names and build steps.</p>
+<h2 id="address-space-generation">Replace address-space generation<a class="headerlink" href="#address-space-generation" title="Permanent link">&para;</a></h2>
+<p>Replace <code>nodeset_compiler.py</code> while keeping the generated filenames and initializer:</p>
+<p><strong>Before</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>/path/to/open62541/tools/nodeset_compiler/nodeset_compiler.py<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span>-e<span class="w"> </span>Opc.Ua.NodeSet2.xml<span class="w"> </span>-x<span class="w"> </span>MyModel.xml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span>generated/namespace_mymodel_generated
+</span></code></pre></div>
+<p><strong>After</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>MyModel.xml<span class="w"> </span>-e<span class="w"> </span>Opc.Ua.NodeSet2.xml<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--shortname<span class="w"> </span>namespace_mymodel_generated<span class="w"> </span>-o<span class="w"> </span>generated
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Upstream argument</th>
+<th>ncc argument</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-x MyModel.xml</code></td>
+<td><code>MyModel.xml</code>; supply multiple targets as positional inputs</td>
+</tr>
+<tr>
+<td>Positional <code>generated/namespace_mymodel_generated</code></td>
+<td><code>--shortname namespace_mymodel_generated -o generated</code></td>
+</tr>
+<tr>
+<td><code>-e Dependency.xml</code></td>
+<td>Same; repeat for every dependency</td>
+</tr>
+<tr>
+<td><code>--bsd MyTypes.bsd</code>, <code>-t UA_TYPES_MYMODEL</code></td>
+<td>Same; preserve array order</td>
+</tr>
+<tr>
+<td><code>-b blacklist.txt</code>, <code>-i ignore.txt</code>, <code>-v</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td><code>--internal-headers</code></td>
+<td>Accepted; SDK headers are selected at C compile time</td>
+</tr>
+</tbody>
+</table>
+<p>Keep all dependency XMLs in <code>-e</code>, including transitive dependencies, and load their
+initializers before the dependent model. See the <a href="../reference/">command reference</a>
+for output naming and the generated API.</p>
+<h3 id="keep-existing-datatype-tables">Replace address-space generation while keeping existing datatype tables<a class="headerlink" href="#keep-existing-datatype-tables" title="Permanent link">&para;</a></h3>
+<p>Supply your existing datatype arrays and BSD definitions to keep using the
+upstream-generated datatype <code>.c</code> and <code>.h</code> files:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>MyModel.xml<span class="w"> </span>-e<span class="w"> </span>Opc.Ua.NodeSet2.xml<span class="w"> </span>--bsd<span class="w"> </span>MyTypes.bsd<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span>-t<span class="w"> </span>UA_TYPES_MYMODEL<span class="w"> </span>--shortname<span class="w"> </span>namespace_mymodel_generated<span class="w"> </span>-o<span class="w"> </span>generated
+</span></code></pre></div>
+<p>No metadata or table regeneration is required; preserve array order, output
+basename and runtime namespace assumptions. See
+<a href="../datatypes/#reuse-upstream-tables">external datatype tables</a>.</p>
+<h2 id="generate-datatype-tables-with-ncc">Replace datatype generation while keeping filenames and symbols<a class="headerlink" href="#generate-datatype-tables-with-ncc" title="Permanent link">&para;</a></h2>
+<p>Replace <code>generate_datatypes.py</code>, keeping the output basename to preserve
+<code>types_mymodel_generated.c/.h</code> and <code>UA_TYPES_MYMODEL</code>:</p>
+<p><strong>Before</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>/path/to/open62541/tools/generate_datatypes.py<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span>-t<span class="w"> </span>MyTypes.bsd<span class="w"> </span>-c<span class="w"> </span>NodeIds.csv<span class="w"> </span>--no-builtin<span class="w"> </span>generated/types_mymodel
+</span></code></pre></div>
+<p><strong>After</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>datatypes<span class="w"> </span>-t<span class="w"> </span>MyTypes.bsd<span class="w"> </span>-c<span class="w"> </span>NodeIds.csv<span class="w"> </span>--no-builtin<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--namespaceMap<span class="w"> </span><span class="m">2</span>:urn:my:model<span class="w"> </span>generated/types_mymodel
+</span></code></pre></div>
+<ul>
+<li>Replace <code>2:urn:my:model</code> with the namespace index needed by your standalone
+  consumer and the BSD's <code>TargetNamespace</code>; supply one mapping per custom
+  namespace, matching any namespace-qualified CSV IDs.</li>
+<li>Keep the generated <code>.ncc.json</code> beside the table files and regenerate them
+  together; it enables namespace resolution by URI during initialization.
+  If the tables are outside the address-space output directory, pass
+  <code>--types-metadata /path/to/types_mymodel_generated.ncc.json</code>.</li>
+</ul>
+<p>See <a href="../reference/#datatype-options">datatype options</a> for imports, selections and
+opaque mappings.</p>
+<h2 id="nodeid-headers">Replace NodeId header generation while keeping macro names<a class="headerlink" href="#nodeid-headers" title="Permanent link">&para;</a></h2>
+<p>Replace <code>generate_nodeid_header.py</code>, preserving the header basename and
+case-sensitive namespace prefix:</p>
+<p><strong>Before</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python<span class="w"> </span>/path/to/open62541/tools/generate_nodeid_header.py<span class="w"> </span>NodeIds.csv<span class="w"> </span>generated/ids<span class="w"> </span>NS0
+</span></code></pre></div>
+<p><strong>After</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>nodeids<span class="w"> </span>NodeIds.csv<span class="w"> </span>--prefix<span class="w"> </span>NS0<span class="w"> </span>-o<span class="w"> </span>generated/ids.h
+</span></code></pre></div>
+<p>Include <code>.h</code> in the output path. This preserves constants such as
+<code>UA_NS0ID_MYVARIABLE</code>; <code>ncc c model</code> instead uses <code>NCC_&lt;NAME&gt;_ID_...</code> names.
+See <a href="../datatypes/#generate-only-nodeid-constants">NodeId constants</a> for CSV formats.</p>
+<h2 id="embedded-bsd-extraction">Replace BSD extraction while keeping your datatype generator<a class="headerlink" href="#embedded-bsd-extraction" title="Permanent link">&para;</a></h2>
+<p>Replace <code>generate_bsd.py</code> and continue passing the extracted BSD file to your
+existing datatype generator:</p>
+<p><strong>Before</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>/path/to/open62541/tools/generate_bsd.py<span class="w"> </span>-x<span class="w"> </span>MyModel.xml<span class="w"> </span>generated/MyTypes.bsd
+</span></code></pre></div>
+<p><strong>After</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ncc<span class="w"> </span>c<span class="w"> </span>bsd<span class="w"> </span>MyModel.xml<span class="w"> </span>-o<span class="w"> </span>generated/MyTypes.bsd
+</span></code></pre></div>
+<p>The decoded bytes are preserved; exactly one distinct embedded dictionary is
+required. XML <code>&lt;Definition&gt;</code> elements alone do not provide BSD layouts. See
+<a href="../datatypes/#extract-only-an-embedded-bsd-dictionary">extraction behavior</a>.</p>
+<h2 id="cmake-projects">Load the ncc CMake helper<a class="headerlink" href="#cmake-projects" title="Permanent link">&para;</a></h2>
+<p>Add this after <code>project(...)</code> to load <code>Ncc.cmake</code> (CMake 3.20 or newer):</p>
+<div class="language-cmake highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">find_program</span><span class="p">(</span><span class="s">NCC_EXECUTABLE</span><span class="w"> </span><span class="s">ncc</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span><span class="w"> </span><span class="s2">"${NCC_EXECUTABLE}"</span><span class="w"> </span><span class="s">c</span><span class="w"> </span><span class="s">--cmake-dir</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="s">OUTPUT_VARIABLE</span><span class="w"> </span><span class="s">ncc_cmake</span><span class="w"> </span><span class="s">OUTPUT_STRIP_TRAILING_WHITESPACE</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="s">COMMAND_ERROR_IS_FATAL</span><span class="w"> </span><span class="s">ANY</span><span class="p">)</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="nb">include</span><span class="p">(</span><span class="s2">"${ncc_cmake}/Ncc.cmake"</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="replace-cmake-generation-calls-while-keeping-existing-targets">Replace CMake generation calls while keeping existing targets<a class="headerlink" href="#replace-cmake-generation-calls-while-keeping-existing-targets" title="Permanent link">&para;</a></h2>
+<p>Replace <code>ua_generate_nodeset</code> while preserving filenames, the initializer,
+the generator target name and existing datatype tables:</p>
+<p><strong>Before, using open62541Macros.cmake</strong></p>
+<div class="language-cmake highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">ua_generate_nodeset</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">mymodel</span><span class="w"> </span><span class="s">FILE</span><span class="w"> </span><span class="s">MyModel.xml</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="s">DEPENDS_NS</span><span class="w"> </span><span class="s">Opc.Ua.NodeSet2.xml</span><span class="w"> </span><span class="s">FILES_BSD</span><span class="w"> </span><span class="s">MyTypes.bsd</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="s">TYPES_ARRAY</span><span class="w"> </span><span class="s">UA_TYPES_MYMODEL</span><span class="w"> </span><span class="s">OUTPUT_DIR</span><span class="w"> </span><span class="s2">"${CMAKE_BINARY_DIR}/generated"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>After, using Ncc.cmake</strong></p>
+<div class="language-cmake highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">ncc_generate_nodeset</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="s">open62541-generator-ns-mymodel</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="s">NAME</span><span class="w"> </span><span class="s">namespace_mymodel_generated</span><span class="w"> </span><span class="s">FILES</span><span class="w"> </span><span class="s">MyModel.xml</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="s">EXISTING</span><span class="w"> </span><span class="s">Opc.Ua.NodeSet2.xml</span><span class="w"> </span><span class="s">BSD</span><span class="w"> </span><span class="s">MyTypes.bsd</span><span class="w"> </span><span class="s">TYPES_ARRAY</span><span class="w"> </span><span class="s">UA_TYPES_MYMODEL</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="s">OUTPUT_DIRECTORY</span><span class="w"> </span><span class="s2">"${CMAKE_BINARY_DIR}/generated"</span><span class="p">)</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Upstream helper</th>
+<th>ncc helper</th>
+<th>Argument changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ua_generate_nodeset</code></td>
+<td><code>ncc_generate_nodeset</code></td>
+<td><code>NAME mymodel</code> → <code>NAME namespace_mymodel_generated</code>; <code>FILE</code> → <code>FILES</code>, <code>DEPENDS_NS</code> → <code>EXISTING</code>, <code>FILES_BSD</code> → <code>BSD</code>; combine <code>DEPENDS_TYPES</code> and <code>TYPES_ARRAY</code> in order as <code>TYPES_ARRAY</code>.</td>
+</tr>
+<tr>
+<td><code>ua_generate_datatypes</code></td>
+<td><code>ncc_generate_datatypes</code></td>
+<td>Keep <code>NAME</code>; <code>FILES_BSD</code> → <code>BSD</code>, <code>FILE_CSV</code> → <code>CSV</code>, <code>FILE_XML</code> → <code>XML</code>, <code>FILES_SELECTED</code> → <code>SELECTED_TYPES</code>; add <code>NAMESPACE_MAP</code> for custom namespaces and <code>NO_BUILTIN</code> to retain upstream's default.</td>
+</tr>
+<tr>
+<td><code>ua_generate_nodeid_header</code></td>
+<td><code>ncc_generate_nodeid_header</code></td>
+<td>Keep <code>NAME</code>; <code>FILE_CSV</code> → <code>CSV</code>, <code>ID_PREFIX</code> → <code>PREFIX</code>.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Replace <code>OUTPUT_DIR</code> with <code>OUTPUT_DIRECTORY</code> and set <code>TARGET</code> explicitly.</li>
+<li>Read <code>NCC_SOURCES</code>, <code>NCC_HEADERS</code>, <code>NCC_OUTPUTS</code> and <code>NCC_INCLUDE_DIRS</code> with
+  <code>get_target_property</code> instead of upstream's exported variables.</li>
+<li><code>DEPENDS_TARGETS</code> orders generation; supply dependency XML, arrays and metadata
+  explicitly. Use <code>DEPENDS</code> for file dependencies.</li>
+</ul>
+<p>These helpers need no SDK or C compiler. See
+<a href="../cmake/#independent-artifact-generation">independent CMake generation</a> for linking
+the outputs, or <a href="../cmake/#generate-and-link-a-model">model integration</a> to adopt
+<code>ncc_generate_model</code>, its combined artifact naming and SDK-linked static library.</p>
+<h2 id="check-your-migrated-application">Check your migrated application<a class="headerlink" href="#check-your-migrated-application" title="Permanent link">&para;</a></h2>
+<p>Rebuild with the same SDK and inputs, then check filenames, includes, symbols,
+namespace and datatype identities, and initial values. XML initial values require
+<code>UA_ENABLE_XML_ENCODING</code>; an initializer returning <code>Good</code> does not verify them.</p>
+<p>The tested baseline is open62541 revision
+<code>3bea2f6a7b655e7c48841fe78668edd540997bfc</code> on Linux, with separate headers and
+amalgamation using reduced NS0. Coverage is custom-model generation, excluding
+SDK-internal/NS0 generation and AUTOLOAD integration. See
+<a href="../cmake/#supported-runtime-configuration">runtime requirements</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../cmake/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CMake integration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                CMake integration
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../o6-python/" class="md-footer__link md-footer__link--next" aria-label="Next: Quickstart">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Quickstart
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
