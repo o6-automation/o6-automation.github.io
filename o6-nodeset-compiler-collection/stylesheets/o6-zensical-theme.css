@@ -489,7 +489,7 @@ body {
 }
 
 .md-header__topic:first-child {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: var(--o6-weight-medium);
   line-height: 1.3333;
 }
@@ -755,7 +755,7 @@ body {
     pointer-events: auto;
     transform: translateY(-50%);
     z-index: 0;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: var(--o6-weight-medium);
     line-height: 1.3333;
     cursor: text;
@@ -851,7 +851,7 @@ body {
 @media screen and (max-width: 63.984375em) {
   .md-header__topic:first-child {
     top: 50%;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     transform: translateY(-50%);
   }
 
