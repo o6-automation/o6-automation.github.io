@@ -4,13 +4,19 @@
         <loc>https://docs.o6-automation.com/o6-python/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/install/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/home/install/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/commercial-build/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/home/commercial-build/</loc>
       </url>
       <url>
         <loc>https://docs.o6-automation.com/o6-python/tutorials/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/setup/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/client/</loc>
       </url>
       <url>
         <loc>https://docs.o6-automation.com/o6-python/tutorials/client/100_connect/</loc>
@@ -67,105 +73,279 @@
         <loc>https://docs.o6-automation.com/o6-python/tutorials/client/510_async-client/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/protocol/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/100_create-server/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/services/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/105_add-hierarchy/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/information-modelling/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/110_add-variable/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/datatype/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/120_add-method/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/namespace/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/130_data-source/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/opcua-basics/nodesets-and-companion-specs/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/140_async-server/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/node-api/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/150_implement-variable/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/160_implement-objecttype/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/builtin/primitive-types/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/200_declare-object-type/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/builtin/statuscode/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/210_declare-variable-type/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/builtin/container-types/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/220_declare-reference-type/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/builtin/address-types/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/230_declare-data-type/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/namespace/namespace-mapping-in-o6/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/310_method-implementations/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/namespace/loading-and-using-nodesets/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/320_variables-with-sources/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/namespace/compiling-nodesets/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/330_server-callbacks/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/namespace/writing-nodesets-in-python/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/340_events/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/types-addrspace/namespace/implementing-object-behavior/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/350_timers/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/memory-management/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/400_access-control-roles/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/client/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/410_access-control-auth/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/client/lifecycle/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/420_security-policies/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/client/address-space/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/430_server-monitoring/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/client/subscriptions/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/440_history/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/client/raw-services/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/tutorials/server/500_distillery_server/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/lifecycle/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/address-space/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/protocol/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/declared-types/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/services/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/behaviour/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/information-modelling/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/callbacks/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/datatype/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/events-and-timers/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/namespace/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/security/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/opcua-fundamentals/nodesets-and-companion-specs/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/server/operations/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/node-api/</loc>
       </url>
       <url>
-        <loc>https://docs.o6-automation.com/o6-python/performance/</loc>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/builtin/primitive-types/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/builtin/statuscode/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/builtin/container-types/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/builtin/address-types/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/namespace/namespace-mapping-in-o6/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/namespace/loading-and-using-nodesets/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/namespace/compiling-nodesets/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/namespace/writing-nodesets-in-python/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/sdk-fundamentals/namespace/implementing-object-behavior/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/client/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/client/lifecycle/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/client/address-space/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/client/subscriptions/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/client/raw-services/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/lifecycle/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/address-space/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/declared-types/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/behaviour/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/callbacks/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/events-and-timers/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/security/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/server/operations/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/performance/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/memory-management/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/variable-callbacks/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/namespace-matching/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/gil-and-event-loop/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/implementation-details/wire-format-mapping/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/manual/release-notes/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C01_lowlevel/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C02_firststeps/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C03_browsing/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C04_configuration/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C05_usernamepw/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C06_async_modes/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C07_nodemanagement/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C08_subscriptions_firststeps/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C09_subscriptions_modify/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C10_subscriptions_events/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C11_subscriptions_triggering/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/client-C12_browser/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S01_lowlevel/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S02_minimal/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S03_firststeps/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S04_variables/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S05_objects/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S06_methods/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S07_data_source/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S08_asynchronous/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S09_implement_readwrite/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S10_implement_objtype/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/server-S11_history/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/type_authoring-T01_lowlevel/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/type_authoring-T02_types/</loc>
+      </url>
+      <url>
+        <loc>https://docs.o6-automation.com/o6-python/examples/type_authoring-T03_nodeset_authoring-example/</loc>
       </url>
 </urlset>

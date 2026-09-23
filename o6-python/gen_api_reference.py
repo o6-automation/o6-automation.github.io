@@ -3,8 +3,8 @@
 Every page in ``docs/api_reference`` is written by this script and holds nothing
 but a heading, the canonical import path, and an ``mkdocstrings`` directive.
 All prose therefore belongs in the docstring of the documented symbol, never in
-the generated Markdown. The narrative guides (``docs/client.md``,
-``docs/server.md``, the tutorials) are separate hand-written pages that this
+the generated Markdown. The narrative guides (``docs/manual/client/``,
+``docs/manual/server/``, the tutorials) are separate hand-written pages that this
 script neither reads nor overwrites.
 """
 

@@ -1,0 +1,6416 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python bindings for open62541 with high-level OPC UA client and server utilities">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://docs.o6-automation.com/o6-python/manual/client/address-space/">
+      
+      
+        <link rel="prev" href="../lifecycle/">
+      
+      
+        <link rel="next" href="../subscriptions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Address space - o6\Python</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/o6-zensical-theme.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reading-attributes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="o6\Python" class="md-header__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6\Python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Address space
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../tutorials/" class="md-tabs__link">
+          
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../examples/" class="md-tabs__link">
+          
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../api_reference/" class="md-tabs__link">
+        
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="o6\Python" class="md-nav__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    o6\Python
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Home
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../home/commercial-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Commercial build
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Set the Stage
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  First Steps
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/100_connect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Connect / disconnect
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/110_browse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Browse & Explore
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/120_read-write-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Reading & Writing
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/130_call-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Calling a method
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/140_node-api-syntax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API syntax
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Monitoring
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/200_monitor-datachange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitor datachange
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/210_subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/220_modify-subscription/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Modify a subscription
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/230_subscription-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Filter
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_4" id="__nav_2_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client Configuration
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client Configuration
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/300_security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/310_application-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Application Description
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/320_state-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  State Callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_5" id="__nav_2_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Information Modelling
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/410_load-packaged-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load packaged companion specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/420_load-nodeset-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load nodeset files
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/430_nodeids-and-namespace-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  NodeIds and namespace info
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/440_semantic-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Semantic Discovery
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_6" id="__nav_2_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced Topics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced Topics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/500_lowlevel-service-calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level service calls
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/client/510_async-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Async Clients
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../tutorials/server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Foundation
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Foundation
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/100_create-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Creating a server
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/105_add-hierarchy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a hierarchy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/110_add-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a variable
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/120_add-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a method
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Patterns
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Patterns
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/130_data-source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Values from an external source
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/140_async-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Running on asyncio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/150_implement-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare and implement a Variable
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/160_implement-objecttype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare and implement an ObjectType
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_4" id="__nav_2_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Composition
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Composition
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/200_declare-object-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare an object type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/210_declare-variable-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a variable type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/220_declare-reference-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a reference type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/230_declare-data-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a data type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_5" id="__nav_2_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Behaviour
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Behaviour
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/310_method-implementations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Method implementations
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/320_variables-with-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variables with sources
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/330_server-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/340_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/350_timers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Timers and async loops
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_6" id="__nav_2_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Security
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/400_access-control-roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control — roles
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/410_access-control-auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control — authentication
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/420_security-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security policies and endpoints
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/430_server-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscribe monitoring on the server side
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/440_history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Historical data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../tutorials/server/500_distillery_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The distillery server
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Manual
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Manual
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../opcua-fundamentals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OPC UA Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  OPC UA Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Protocol
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Services
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/information-modelling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/datatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  DataType
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/namespace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespace
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../opcua-fundamentals/nodesets-and-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Nodeset Files & Companion Specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../node-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../sdk-fundamentals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6\Python SDK Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  o6\Python SDK Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Built-in Types
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Built-in Types
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/builtin/primitive-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primitive Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/builtin/statuscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  StatusCode
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/builtin/container-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Container Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/builtin/address-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Address & Identity Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespaces in o6
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Namespaces in o6
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/namespace/namespace-mapping-in-o6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Registry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/namespace/loading-and-using-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Loading & Using Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/namespace/compiling-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compiling Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/namespace/writing-nodesets-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Writing a Nodeset in Python
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk-fundamentals/namespace/implementing-object-behavior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing Object Behavior
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Working with the address space
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Working with the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reading-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Reading attributes
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-attribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Choosing the attribute
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#values-or-the-whole-datavalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Values, or the whole <code>DataValue</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-ranges" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Index ranges
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-read-raises" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What read raises
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Writing attributes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calling-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Calling methods
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Browsing
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Browsing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#browsing-interactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Browsing interactively
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#namespaces-and-nodeids" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Namespaces and NodeIds
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-node-api-from-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The Node API from a client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-servers-address-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changing the server's address space
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-nodes-with-friendly-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Creating nodes with friendly inputs
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paging-and-translating-browse-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paging and translating browse paths
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions & historical data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../raw-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Raw services & errors
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle & configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/address-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Building the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/declared-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declared types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/behaviour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing behaviour
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/events-and-timers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Events, monitored items & timers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control & roles
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Operations & interoperability
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Performance
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../implementation-details/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementation details
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_8" id="__nav_3_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Implementation details
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../implementation-details/memory-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Memory management
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../implementation-details/variable-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variable callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../implementation-details/namespace-matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespace matching
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../implementation-details/gil-and-event-loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  GIL and event-loop bridging
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../implementation-details/wire-format-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Wire-format mapping
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Release Notes
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C02_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C03_browsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Browsing
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C04_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C05_usernamepw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Username / Password Authentication
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C06_async_modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Sync/Async Calling Patterns
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C07_nodemanagement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node Management
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C08_subscriptions_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C09_subscriptions_modify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Modification
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C10_subscriptions_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C11_subscriptions_triggering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Triggering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/client-C12_browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Interactive Browser
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S02_minimal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Minimal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S03_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S04_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variables
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S05_objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Objects
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S06_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Methods
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S07_data_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Source Updates
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S08_asynchronous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Async
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S09_implement_readwrite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variable Read/Write Override
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S10_implement_objtype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  ObjectType Implementation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/server-S11_history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  History
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Type Authoring
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Type Authoring
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/type_authoring-T01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Types (Low-level)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/type_authoring-T02_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Built-in Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../examples/type_authoring-T03_nodeset_authoring-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Nodeset Authoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reading-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Reading attributes
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-attribute" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Choosing the attribute
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#values-or-the-whole-datavalue" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Values, or the whole <code>DataValue</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index-ranges" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Index ranges
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-read-raises" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        What read raises
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Writing attributes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calling-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Calling methods
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Browsing
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Browsing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#browsing-interactively" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Browsing interactively
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#namespaces-and-nodeids" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Namespaces and NodeIds
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-node-api-from-a-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        The Node API from a client
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-the-servers-address-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Changing the server's address space
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-nodes-with-friendly-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Creating nodes with friendly inputs
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paging-and-translating-browse-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Paging and translating browse paths
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Manual
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Client
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="working-with-the-address-space">Working with the address space<a class="headerlink" href="#working-with-the-address-space" title="Permanent link">&para;</a></h1>
+<h2 id="reading-attributes">Reading attributes<a class="headerlink" href="#reading-attributes" title="Permanent link">&para;</a></h2>
+<p><code>read()</code> is the workhorse. In its simplest form it reads the <code>Value</code> attribute
+of one node and gives you a Python value:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">value</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The target is anything a <code>NodeId</code> can be built from: a NodeId string, an
+<code>o6.NodeId</code>, an <code>ExpandedNodeId</code>, a <a href="../../node-api/">Node</a> object, or a generated
+type class:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="mi">2255</span><span class="p">))</span>                       <span class="c1"># NamespaceArray</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">client</span><span class="p">[</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">])</span>      <span class="c1"># a Node object</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">objtypes</span><span class="o">.</span><span class="n">BaseObjectType</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;browseName&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Passing a list reads all of them in a <strong>single</strong> <code>Read</code> request, which is the
+whole point — one round trip instead of <em>n</em>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">values</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">([</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;ns=1;s=DoubleVariable&quot;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">])</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># [np.int32(42), np.float64(3.14159)]</span>
+</span></code></pre></div>
+<p>Numeric values come back as NumPy scalars and arrays, which preserves the exact
+OPC UA data type (<code>Int32</code> stays 32 bit) and makes array data cheap to work with.</p>
+<h3 id="choosing-the-attribute">Choosing the attribute<a class="headerlink" href="#choosing-the-attribute" title="Permanent link">&para;</a></h3>
+<p><code>attr</code> selects which attribute to read. It accepts an <code>o6.AttributeId</code> member or
+a name as a string, matched case-insensitively and ignoring separators:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">AttributeId</span><span class="o">.</span><span class="n">NODE_CLASS</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;browseName&quot;</span><span class="p">)</span>   <span class="c1"># same as BROWSE_NAME</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;access_level&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This is how you get at metadata: <code>BROWSE_NAME</code>, <code>DISPLAY_NAME</code>, <code>DESCRIPTION</code>,
+<code>DATA_TYPE</code>, <code>VALUE_RANK</code>, <code>ARRAY_DIMENSIONS</code>, <code>ACCESS_LEVEL</code>, <code>HISTORIZING</code>,
+<code>DATA_TYPE_DEFINITION</code>, and the rest of <code>o6.AttributeId</code>.</p>
+<h3 id="values-or-the-whole-datavalue">Values, or the whole <code>DataValue</code><a class="headerlink" href="#values-or-the-whole-datavalue" title="Permanent link">&para;</a></h3>
+<p>By default <code>read()</code> returns the value for every Good-severity status, including
+informational codes and flags, and raises for Uncertain or Bad. Choosing
+<code>valueOnly=True</code> discards status and timestamps; use <code>valueOnly=False</code> to receive
+DataValues and interpret their quality yourself.
+Service failures still raise. The range-error handling described below also
+applies in this mode:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">dv</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">valueOnly</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">dv</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">dv</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="n">dv</span><span class="o">.</span><span class="n">sourceTimestamp</span><span class="p">,</span> <span class="n">dv</span><span class="o">.</span><span class="n">serverTimestamp</span><span class="p">)</span>
+</span></code></pre></div>
+<p>This is the form to use when you need status details, including information
+carried by a successful read, or timestamps.</p>
+<p><code>timestampsToReturn</code> selects <code>SOURCE</code>, <code>SERVER</code>, <code>BOTH</code>, or <code>NEITHER</code> from
+<code>ns0.datatypes.TimestampsToReturn</code>. Omitting it (or passing <code>None</code>) selects
+<code>SOURCE</code> on both client and server.</p>
+<h3 id="index-ranges">Index ranges<a class="headerlink" href="#index-ranges" title="Permanent link">&para;</a></h3>
+<p><code>range</code> reads a slice of an array variable instead of the whole thing. It takes
+OPC UA's inclusive string syntax or Python slices, which are stop-exclusive as
+usual:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=ArrayVariable&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="s2">&quot;1:3&quot;</span><span class="p">)</span>            <span class="c1"># elements 1,2,3</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=ArrayVariable&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>      <span class="c1"># identical</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=ArrayVariable&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),))</span>   <span class="c1"># identical</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=Matrix&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="s2">&quot;1:3,4:6&quot;</span><span class="p">)</span>               <span class="c1"># two dimensions</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=Matrix&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)))</span>
+</span></code></pre></div>
+<p>Slices must have explicit non-negative bounds and no step — OPC UA's
+<code>NumericRange</code> cannot express anything else, and violations raise <code>ValueError</code>
+before a request is sent. With a list of targets you may pass a list of ranges,
+one per target. Invalid, out-of-bounds, and non-array ranges follow the ordinary
+read error policy below. With <code>valueOnly=False</code>, the returned DataValue retains
+its original error status; batch reads return one DataValue per target.</p>
+<p>A scalar range broadcasts across a target list; a range list must have exactly
+one entry per target. <code>None</code> and <code>""</code> request the entire attribute. A nonempty
+range on a non-Value attribute returns <code>BAD_INDEX_RANGE_NO_DATA</code> using the
+same raw/value-only error policy. Invalid range strings are OPC UA status
+failures; malformed Python slices raise <code>TypeError</code> or <code>ValueError</code>.</p>
+<p>An empty target list returns <code>[]</code> without issuing a request, including when the
+client is disconnected. Options and range-list lengths are still validated.
+Unsupported Python argument types raise <code>TypeError</code>; unknown attribute names,
+invalid slices and mismatched range-list lengths raise <code>ValueError</code>.
+<code>valueOnly</code> must be a bool. Only a Python list selects batch mode.</p>
+<h3 id="what-read-raises">What read raises<a class="headerlink" href="#what-read-raises" title="Permanent link">&para;</a></h3>
+<p>Client and server reads share this error contract:</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Good severity, <code>valueOnly=True</code></td>
+<td>returns the value, discarding status and timestamps</td>
+</tr>
+<tr>
+<td>Single target, Uncertain or Bad, <code>valueOnly=True</code></td>
+<td>raises <code>o6.StatusCodeError</code></td>
+</tr>
+<tr>
+<td>List of targets, any Uncertain or Bad, <code>valueOnly=True</code></td>
+<td>raises <code>o6.StatusCodeError</code> with the failed index in <code>__notes__</code></td>
+</tr>
+<tr>
+<td>Any per-target status, <code>valueOnly=False</code></td>
+<td>returns the DataValue; inspect <code>DataValue.status</code></td>
+</tr>
+<tr>
+<td>Service itself failed</td>
+<td>raises <code>o6.StatusCodeError</code>; <code>.code</code> retains <code>serviceResult</code></td>
+</tr>
+<tr>
+<td>Client not connected</td>
+<td>raises <code>RuntimeError("Client is not connected")</code></td>
+</tr>
+</tbody>
+</table>
+<p>Callable <code>node()</code> reads follow the value-only policy too. Write return values
+and <code>StatusCode.check()</code> are unchanged; <code>check()</code> still compares exact codes.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=DoesNotExist&quot;</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># o6.StatusCodeError: BAD_NODE_ID_UNKNOWN</span>
+</span></code></pre></div>
+<h2 id="writing-attributes">Writing attributes<a class="headerlink" href="#writing-attributes" title="Permanent link">&para;</a></h2>
+<p><code>write()</code> mirrors <code>read()</code> and comes in three shapes.</p>
+<p>One node, one value:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">status</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Parallel lists, when you want per-node index ranges:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">statuses</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="p">[</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="s2">&quot;ns=1;s=DoubleVariable&quot;</span><span class="p">],</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mf">2.7182</span><span class="p">],</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>Or a mapping, which is the most readable form for a batch:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">statuses</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">({</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="s2">&quot;ns=1;s=DoubleVariable&quot;</span><span class="p">:</span> <span class="mf">2.7182</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">})</span>
+</span></code></pre></div>
+<p>Nonempty writes are sent as one <code>Write</code> request. The single-node form returns one
+<code>o6.StatusCode</code>; the list and mapping forms return a list of status codes in
+input order, including a one-element batch. Empty lists/mappings return <code>[]</code>
+without a service call. The <code>value</code> argument must be omitted for the mapping form, and must
+be a list of matching length for the list form — anything else raises
+<code>ValueError</code> before writing. Even explicit <code>value=None</code> conflicts with a mapping.
+A list value for one scalar target is an array. All targets are attempted despite
+per-target failures; writes do not provide rollback. <code>Server.write</code> uses these
+same argument shapes and result types with local administrative privileges.</p>
+<p>Explicit <code>None</code> writes a null value in scalar, list, and mapping forms, just as
+<code>o6.DataValue(value=None)</code> does. Nullable targets such as String variables accept
+it; non-nullable numeric targets return <code>BAD_TYPE_MISMATCH</code> and keep their value.
+A typed empty array, such as <code>numpy.array([], dtype=numpy.int32)</code>, is an array
+with zero elements, not a null value. Omitting the value in <code>client.write(node)</code>
+raises <code>ValueError</code>. For callable nodes, <code>node()</code> reads and <code>node(None)</code> writes
+a null, raising <code>StatusCodeError</code> if the target rejects it.</p>
+<p><code>attr</code> works exactly as in <code>read()</code>, so writes are not restricted to values:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">o6</span><span class="o">.</span><span class="n">LocalizedText</span><span class="p">(</span><span class="s2">&quot;Counter&quot;</span><span class="p">),</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>range</code> accepts an inclusive string, a stop-exclusive slice or tuple of slices,
+a broadcast range, or a per-target list. <code>None</code> and <code>""</code> mean the whole attribute.
+Nonempty ranges require the Value attribute. It is supported for the single-node
+and list forms (not the mapping form, which has nowhere to put it):</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ns=1;s=ArrayVariable&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">98</span><span class="p">],</span> <span class="nb">range</span><span class="o">=</span><span class="s2">&quot;1:2&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>To supply a status code or timestamps along with the value, pass a <code>DataValue</code>
+instead of a bare Python value. The server must permit it — writing timestamps
+requires <code>AccessLevelType.TIMESTAMP_WRITE</code>, writing a status requires
+<code>STATUS_WRITE</code>, and without them the write comes back
+<code>BAD_WRITE_NOT_SUPPORTED</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">dv</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">DataValue</span><span class="p">()</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">dv</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="mi">77</span><span class="p">)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">dv</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Unlike <code>read()</code>, <code>Client.write()</code> <strong>never raises for a bad per-node status</strong> — the status
+code is the return value. Service-level failures raise <code>o6.StatusCodeError</code> with
+the actual <code>.code</code>; Python input errors raise <code>TypeError</code> or <code>ValueError</code>. Check
+results explicitly, either directly or with
+<code>StatusCode.check()</code>, which raises <code>StatusCodeError</code> for anything but <code>GOOD</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">status</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="s2">&quot;not an int&quot;</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>                      <span class="c1"># BAD_TYPE_MISMATCH</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">if</span> <span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">BAD</span> <span class="ow">in</span> <span class="n">status</span><span class="p">:</span>    <span class="c1"># StatusCode is a full IntFlag</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="o">...</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="n">status</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>                     <span class="c1"># raises o6.StatusCodeError</span>
+</span></code></pre></div>
+<p>The <code>node(value)</code> shorthand checks the write result and raises <code>StatusCodeError</code>
+on rejection, in both synchronous and asynchronous code.</p>
+<p>Client, server, and callable-node writes accept the same payloads. Ordinary
+Value writes retain type inference, so <code>client.write(node, 123)</code> remains valid
+when its inferred datatype matches the node. Use explicitly typed NumPy numbers
+when exact width or signedness matters.</p>
+<p>Non-Value attributes require their expected datatype: use
+<code>o6.LocalizedText("Description")</code>, <code>o6.QualifiedName("Name")</code>, or
+<code>numpy.uint8(3)</code> for Description, BrowseName, or AccessLevel respectively.
+No attribute-specific coercion is applied. A value-only <code>DataValue</code> envelope is
+also accepted; explicit status or timestamp fields on non-Value attributes
+return <code>BAD_WRITE_NOT_SUPPORTED</code>, including an explicitly supplied <code>GOOD</code> status.</p>
+<h2 id="calling-methods">Calling methods<a class="headerlink" href="#calling-methods" title="Permanent link">&para;</a></h2>
+<p><code>call()</code> invokes an OPC UA method. It needs the object that owns the method, the
+method itself, and the input arguments in declaration order:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">status</span><span class="p">,</span> <span class="n">greeting</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="s2">&quot;ns=1;s=TestMethods&quot;</span><span class="p">,</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="s2">&quot;ns=1;s=MethodHelloString&quot;</span><span class="p">,</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="p">[</span><span class="s2">&quot;World&quot;</span><span class="p">],</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1"># (StatusCode.GOOD, &#39;Hello World!&#39;)</span>
+</span></code></pre></div>
+<p>The return value is always a tuple whose first element is the method's status
+code, followed by the decoded output arguments — so a method with no outputs
+returns a one-element tuple. <code>Node</code> objects inside <code>inputArgs</code> are converted to
+their NodeIds automatically, at any nesting depth, so you can pass nodes where a
+method expects a NodeId.</p>
+<p>A failing service raises <code>o6.StatusCodeError</code>, with the original status in
+<code>.code</code>. A method that returns a bad status code does not raise; invalid method
+selection and argument validation also return status tuples. Available outputs
+are preserved, so inspect the status before using them. Python argument
+conversion failures remain Python exceptions such as <code>TypeError</code>.
+<code>server.call()</code> follows the same result contract with administrative privileges;
+remote calls check session permissions. <code>BAD_INVALID_ARGUMENT</code> almost always means
+the argument list does not match the method's <code>InputArguments</code> declaration in
+count, type, or value rank.</p>
+<p>The <a href="../../node-api/">Node API</a> offers the same call in object syntax, which reads
+better when you already hold the node:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">testMethods</span><span class="o">.</span><span class="n">MethodHelloString</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Typed Method node calls check the method status and raise <code>StatusCodeError</code>
+on failure. Their successful tuple includes the status and outputs. Remote
+Method nodes now perform this check explicitly; use <code>client.call()</code> when a bad
+status should be returned as data. Both forms can be awaited from async code.</p>
+<h2 id="browsing">Browsing<a class="headerlink" href="#browsing" title="Permanent link">&para;</a></h2>
+<p><code>browse()</code> follows references from a node and returns a flat list of
+<code>ReferenceDescription</code> objects. Continuation points are handled internally: the
+call issues <code>BrowseNext</code> as often as needed, so the list is always complete even
+when the server chunks its response, including empty intermediate pages.
+<code>server.browse()</code> accepts the same filters and returns the same list shape.
+Node and NodeId targets work in synchronous code; async tasks await the call.
+Service and per-result failures raise <code>o6.StatusCodeError</code>. On failure or
+cancellation, collection attempts to release the outstanding continuation point;
+a lost connection can prevent release.</p>
+<p>For explicit client pagination, use <code>serviceBrowse</code> and <code>serviceBrowseNext</code>,
+checking response-header and per-result statuses yourself. Local server paging
+uses <code>browsePage</code> and <code>browseNext</code>; see <a href="../../server/operations/#explicit-pages-and-migration">explicit pages and migration</a>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">references</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">browse</span><span class="p">(</span><span class="s2">&quot;i=85&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>There is one thing to know before using the result, and it catches everyone
+once: the default <code>resultMask</code> is <strong>empty</strong>, so the server only fills in the
+target <code>nodeId</code> and leaves <code>browseName</code>, <code>displayName</code>, <code>nodeClass</code>,
+<code>referenceTypeId</code>, <code>isForward</code>, and <code>typeDefinition</code> at their zero values. Ask
+for the fields you need:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">ns0</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">browse</span><span class="p">(</span><span class="s2">&quot;i=85&quot;</span><span class="p">,</span> <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span><span class="p">):</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">browseName</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">nodeClass</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">nodeId</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">typeDefinition</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The remaining parameters narrow the traversal:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">references</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">browse</span><span class="p">(</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="s2">&quot;ns=1;s=Plant&quot;</span><span class="p">,</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">direction</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseDirection</span><span class="o">.</span><span class="n">FORWARD</span><span class="p">,</span>   <span class="c1"># FORWARD, INVERSE, BOTH</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">HasComponent</span><span class="p">,</span>                 <span class="c1"># reference type to follow</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="n">refsubtypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                                  <span class="c1"># include its subtypes</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="n">nodeClassMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">NodeClass</span><span class="o">.</span><span class="n">VARIABLE</span><span class="p">,</span>    <span class="c1"># only Variables</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    <span class="n">resultMask</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">BrowseResultMask</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">)</span>
+</span></code></pre></div>
+<p><code>reftype</code> defaults to <code>HierarchicalReferences</code> with <code>refsubtypes=True</code>, which is
+the "show me the children" traversal. <code>INVERSE</code> walks to the parent.
+<code>nodeClassMask</code> defaults to <code>UNSPECIFIED</code>, meaning every node class.</p>
+<p>To resolve a path rather than enumerate children, use the browse-path syntax on
+a node — that goes through <code>TranslateBrowsePathsToNodeIds</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">node</span><span class="p">,</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="s2">&quot;/1:Plant/1:IntegerVariable&quot;</span><span class="p">]</span>
+</span></code></pre></div>
+<h3 id="browsing-interactively">Browsing interactively<a class="headerlink" href="#browsing-interactively" title="Permanent link">&para;</a></h3>
+<p>For exploring an unfamiliar server there is a fully interactive browser built into the
+client:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">selected</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">browseInteractive</span><span class="p">()</span>          <span class="c1"># starts at Objects</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">selected</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">browseInteractive</span><span class="p">(</span><span class="s2">&quot;i=85&quot;</span><span class="p">)</span>    <span class="c1"># or anywhere else</span>
+</span></code></pre></div>
+<p>It needs <code>curses</code> (on Windows: <code>pip install windows-curses</code>, otherwise
+<code>ImportError</code>). Quitting with <code>n</code> or <code>p</code> returns the selected NodeId or browse
+path as a string so you can paste it straight into code; any other exit returns
+<code>None</code>.</p>
+<h2 id="namespaces-and-nodeids">Namespaces and NodeIds<a class="headerlink" href="#namespaces-and-nodeids" title="Permanent link">&para;</a></h2>
+<p>A NodeId string like <code>"ns=1;s=IntegerVariable"</code> is namespace-relative, and the
+index <code>1</code> means something different on every server. <code>o6</code> resolves this for you,
+which is why <code>connect()</code> spends two of its steps on namespaces.</p>
+<p>On connect, the client reads the server's <code>ApplicationUri</code> and registers it in
+the process-wide namespace table under the shortname <code>&lt;clientname&gt;_ns1</code>, scoped
+to the endpoint URL. Then <code>updateRemoteNamespaces()</code> reads the server's
+<code>NamespaceArray</code> and maps every remaining namespace URI onto a compiled
+namespace module, scoped to the client name. Where several compiled versions of
+the same URI exist, the client reads the server's <code>NamespaceMetadata</code> (its
+<code>NamespaceVersion</code>) and picks the matching one, falling back to the newest
+available and logging a warning if the server is newer than anything you have
+compiled.</p>
+<p>The visible effect is that <code>ns=1</code> in your code means "namespace 1 <em>of the server
+this client is connected to</em>", and NodeIds returned to you print with the
+resolved shortname:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">,</span> <span class="n">attr</span><span class="o">=</span><span class="s2">&quot;browseName&quot;</span><span class="p">))</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="c1"># client1_ns1:IntegerVariable</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">info</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">ns</span><span class="o">.</span><span class="n">client1_ns1</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="c1"># urn:open62541.unconfigured.application  opc.tcp://localhost:4840  129</span>
+</span></code></pre></div>
+<p>If a connected server adds namespaces at runtime, call
+<code>client.updateRemoteNamespaces()</code> again. It builds the new mapping — Python
+namespace table, SecureChannel decoder mapping, and custom data type chain — and
+swaps it in as one snapshot; a failed refresh leaves the previous, working
+snapshot in place, and an unchanged one is not rebuilt.</p>
+<p>To discover the structure definitions of a server's custom data types, use
+<code>getRemoteDataTypes()</code>. Automatic discovery follows every browse page and preserves
+numeric, string, GUID, and opaque NodeIds. References with a remote server index
+or namespace URI are skipped because they cannot be read as local NodeIds through
+this session. Failed browse/read services and attribute reads raise
+<code>StatusCodeError</code>; types without the optional DataTypeDefinition attribute are
+skipped:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">getRemoteDataTypes</span><span class="p">():</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">dt</span><span class="p">[</span><span class="s2">&quot;typeName&quot;</span><span class="p">],</span> <span class="n">dt</span><span class="p">[</span><span class="s2">&quot;typeId&quot;</span><span class="p">],</span> <span class="n">dt</span><span class="p">[</span><span class="s2">&quot;structureType&quot;</span><span class="p">],</span> <span class="n">dt</span><span class="p">[</span><span class="s2">&quot;membersSize&quot;</span><span class="p">])</span>
+</span></code></pre></div>
+<p>It walks the DataType hierarchy below <code>Structure</code> (<code>i=22</code>) and reads
+<code>DataTypeDefinition</code> and <code>BrowseName</code> for every node it finds, returning one
+dict per type with the keys <code>typeName</code>, <code>typeId</code>, <code>binaryEncodingId</code>,
+<code>structureType</code>, and <code>membersSize</code>. Only nodes that actually carry a
+<code>StructureDefinition</code> — structures, structures with optional fields, and unions
+— appear. Pass a list of DataType NodeIds to query just those instead of walking
+the tree; an empty list returns <code>[]</code> without contacting the server.</p>
+<p>The namespace machinery itself is described in
+<a href="../../sdk-fundamentals/namespace/namespace-mapping-in-o6/">Namespace mapping in o6</a>,
+and loading nodesets so that custom types decode into real Python classes is
+covered in
+<a href="../../sdk-fundamentals/namespace/loading-and-using-nodesets/">Loading and using nodesets</a>.</p>
+<h2 id="the-node-api-from-a-client">The Node API from a client<a class="headerlink" href="#the-node-api-from-a-client" title="Permanent link">&para;</a></h2>
+<p>Everything above addresses nodes by NodeId. The <a href="../../node-api/">Node API</a> lets you
+address them the way the server models them — as an object graph. A connected
+client exposes the four standard entry points as live nodes:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">client</span><span class="o">.</span><span class="n">root</span>       <span class="c1"># i=84</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span>    <span class="c1"># i=85</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">client</span><span class="o">.</span><span class="n">types</span>      <span class="c1"># i=86</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">client</span><span class="o">.</span><span class="n">views</span>      <span class="c1"># i=87</span>
+</span></code></pre></div>
+<p>Attribute access resolves a child by BrowseName through a <code>Browse</code> request and
+caches it; calling a node reads or writes it; indexing resolves a browse path:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">plant</span><span class="o">.</span><span class="n">integerVariable</span><span class="p">()</span>            <span class="c1"># read the Value</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">plant</span><span class="o">.</span><span class="n">integerVariable</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>          <span class="c1"># write the Value</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">plant</span><span class="o">.</span><span class="n">integerVariable</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="s2">&quot;browseName&quot;</span><span class="p">)</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">testMethods</span><span class="o">.</span><span class="n">MethodHelloString</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>dir()</code> on a node browses it and returns its children, so <strong>tab completion walks
+the live address space</strong>: type <code>client.objects.</code> in a REPL and the server's
+actual nodes are offered, one <code>Browse</code> request at a time. That is the fastest way
+to explore an unfamiliar server, and it is why the dotted form is worth using
+even when you already know the NodeId.</p>
+<div class="admonition warning">
+<p class="admonition-title">BrowseNames are not Python identifiers — sometimes you need <code>[]</code></p>
+<p>A BrowseName is an arbitrary OPC UA string. A Python attribute name is an
+identifier. Dot syntax can only reach the children whose BrowseName happens
+to be a valid identifier, and <code>dir()</code> deliberately lists only those — so a
+child missing from tab completion is not missing from the server.</p>
+<p>Within that subset, lookup matches the BrowseName exactly first and then
+case-insensitively, so <code>ServerStatus</code> and <code>serverStatus</code> both resolve.
+Completion offers the spelling the generated declarations use: instances
+(Objects, Variables, Methods, Views) with a lowercased first letter,
+type nodes (ObjectType, VariableType, ReferenceType, DataType) in their
+original PascalCase.</p>
+<p>Everything else goes through the browse-path form, <code>node["/&lt;ns&gt;:&lt;BrowseName&gt;"]</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">plant</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">plant</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:Device Name&quot;</span><span class="p">]</span>      <span class="c1"># spaces</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:2Fast&quot;</span><span class="p">]</span>            <span class="c1"># leading digit</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:Motor-Current&quot;</span><span class="p">]</span>    <span class="c1"># dashes and other punctuation</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:class&quot;</span><span class="p">]</span>            <span class="c1"># a Python keyword</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:Set&amp;.Point&quot;</span><span class="p">]</span>       <span class="c1"># &#39;.&#39; escaped with &#39;&amp;&#39;</span>
+</span></code></pre></div>
+<p><code>.</code>, <code>/</code>, <code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>:</code>, <code>#</code>, and <code>!</code> are reserved in a browse path and
+are escaped with a leading <code>&amp;</code>.</p>
+<p>The other case that needs <code>[]</code> is ambiguity. When two references from the
+same node carry the same BrowseName, dot access refuses to guess and raises
+<code>AttributeError</code> listing the candidates, while the browse path returns all
+matches — indexing always returns a <strong>list</strong>, even for a single hit:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">plant</span><span class="o">.</span><span class="n">shared</span>                 <span class="c1"># AttributeError: ... is ambiguous; 2 matching references</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:Shared&quot;</span><span class="p">]</span>           <span class="c1"># [VariableNode(...Dup1), VariableNode(...Dup2)]</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">node</span><span class="p">,</span> <span class="o">=</span> <span class="n">plant</span><span class="p">[</span><span class="s2">&quot;/1:Temperature&quot;</span><span class="p">]</span>
+</span></code></pre></div>
+</div>
+<p>Indexing the <em>client</em> itself resolves a NodeId into a typed node without knowing
+its node class up front. It reads <code>NodeClass</code> and <code>BrowseName</code> and returns the
+matching subclass — <code>VariableNode</code>, <code>ObjectNode</code>, <code>MethodNode</code>, and so on:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">node</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">]</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>     <span class="c1"># client1_ns1:IntegerVariable: VariableNode(ns=1;s=IntegerVariable)</span>
+</span></code></pre></div>
+<p>An unknown NodeId raises <code>StatusCodeError</code> with code <code>BAD_NODE_ID_UNKNOWN</code>,
+matching <code>server[nodeId]</code>. A browse path that resolves to nothing raises
+<code>KeyError</code>; a missing child raises <code>AttributeError</code>. In async code every form is
+awaited:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">node</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">[</span><span class="s2">&quot;ns=1;s=IntegerVariable&quot;</span><span class="p">]</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">value</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">plant</span><span class="o">.</span><span class="n">integerVariable</span><span class="p">()</span>
+</span></code></pre></div>
+<p>The <a href="../../node-api/#usage">Node API usage guide</a> and the
+<a href="../../../tutorials/client/140_node-api-syntax/">Node API syntax tutorial</a> go through
+this in detail.</p>
+<h2 id="changing-the-servers-address-space">Changing the server's address space<a class="headerlink" href="#changing-the-servers-address-space" title="Permanent link">&para;</a></h2>
+<p>A client can modify a remote address space, provided the server allows it. There
+is one method per node class, all keyword-only, all returning the NodeId the
+server assigned:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">o6.ns</span><span class="w"> </span><span class="kn">import</span> <span class="n">ns0</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="n">attrs</span> <span class="o">=</span> <span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">VariableAttributes</span><span class="p">()</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="n">attrs</span><span class="o">.</span><span class="n">displayName</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">LocalizedText</span><span class="p">(</span><span class="s2">&quot;FromClient&quot;</span><span class="p">)</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="n">attrs</span><span class="o">.</span><span class="n">dataType</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">Int32</span><span class="p">)</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">attrs</span><span class="o">.</span><span class="n">valueRank</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">ValueRank</span><span class="o">.</span><span class="n">SCALAR</span><span class="p">)</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="n">attrs</span><span class="o">.</span><span class="n">accessLevel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>    <span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">AccessLevelType</span><span class="o">.</span><span class="n">CURRENT_READ</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>    <span class="o">|</span> <span class="n">ns0</span><span class="o">.</span><span class="n">datatypes</span><span class="o">.</span><span class="n">AccessLevelType</span><span class="o">.</span><span class="n">CURRENT_WRITE</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="p">)</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="n">attrs</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">Int32</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="n">nodeId</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">addVariableNode</span><span class="p">(</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>    <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;ns=1;s=Plant&quot;</span><span class="p">,</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>    <span class="n">browseName</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">QualifiedName</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;FromClient&quot;</span><span class="p">),</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>    <span class="n">attributes</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a>    <span class="n">requestedNodeId</span><span class="o">=</span><span class="s2">&quot;ns=1;s=FromClient&quot;</span><span class="p">,</span>     <span class="c1"># optional; omit to let the server pick</span>
+</span><span id="__span-29-18"><a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>The family is <code>addVariableNode</code>, <code>addVariableTypeNode</code>, <code>addObjectNode</code>,
+<code>addObjectTypeNode</code>, <code>addViewNode</code>, <code>addReferenceTypeNode</code>, <code>addDataTypeNode</code>,
+and <code>addMethodNode</code>. Each takes <code>parent</code>, <code>browseName</code>, <code>attributes</code> (the
+matching <code>*Attributes</code> structure), an optional <code>requestedNodeId</code>, and a
+<code>parentReference</code> that defaults sensibly per node class — <code>HasComponent</code> for
+Variables, Objects, Views, and Methods, <code>HasSubtype</code> for the type node classes.
+<code>addVariableNode</code> and <code>addObjectNode</code> additionally take a <code>typeDefinition</code>,
+defaulting to <code>BaseDataVariableType</code> and <code>BaseObjectType</code>.</p>
+<p>References and nodes can be removed and rewired:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">client</span><span class="o">.</span><span class="n">addReference</span><span class="p">(</span><span class="s2">&quot;i=85&quot;</span><span class="p">,</span> <span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">Organizes</span><span class="p">,</span> <span class="n">nodeId</span><span class="p">)</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">client</span><span class="o">.</span><span class="n">deleteReference</span><span class="p">(</span><span class="s2">&quot;i=85&quot;</span><span class="p">,</span> <span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">Organizes</span><span class="p">,</span> <span class="n">nodeId</span><span class="p">)</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">client</span><span class="o">.</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">nodeId</span><span class="p">)</span>                      <span class="c1"># or a list of NodeIds</span>
+</span></code></pre></div>
+<p><code>addReference</code> and <code>deleteReference</code> return the individual <code>StatusCode</code> (await
+it inside async tasks). Rejected mutations return non-Good statuses; service
+failures raise <code>StatusCodeError</code>. Use <code>forward=False</code> for inverse edges and
+<code>deleteBidirectional=False</code> to remove only the requested edge. Both accept
+expanded targets and preserve their remote metadata. Creation also accepts
+<code>targetNodeClass</code> and <code>targetServerUri</code> for validation by the remote server.
+The server uses the same canonical arguments; see
+<a href="../../server/address-space/#references-and-deletion">reference migration and local metadata capabilities</a>.</p>
+<p><code>deleteNode(nodeId, deleteTargetReferences=True)</code> accepts one Node or NodeId-like
+target, or a list. A scalar target returns one <code>StatusCode</code>; a list returns one
+status per target in input order, including a one-element list. Every target is
+attempted despite individual failures, and an empty list returns <code>[]</code> without
+a request. Call <code>status.check()</code> on each result to raise for individual
+failures; service failures raise <code>StatusCodeError</code>. Malformed Python
+arguments raise <code>TypeError</code> or <code>ValueError</code> before deletion starts. Await the
+operation in async tasks.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">firstNode</span><span class="p">,</span> <span class="s2">&quot;ns=1;s=Missing&quot;</span><span class="p">,</span> <span class="n">lastNode</span><span class="p">]</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">statuses</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">deleteNode</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">statuses</span><span class="p">):</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Batch calls previously returned one aggregate status. Update callers to inspect
+the returned list; scalar calls retain their existing return type.</p>
+<p><code>deleteTargetReferences=True</code> removes incoming references from remaining nodes;
+<code>False</code> leaves dangling references. Browse omits those edges until the target
+NodeId is reused. The native stack can also delete hierarchical children that
+have no other parent, with either flag. Client operations use the remote
+session's permissions. See <a href="../../server/address-space/#node-deletion">server deletion and migration</a>
+for the matching local administrative API and retained-handle behavior.</p>
+<p>Note that a client adding a Method node can only create the node, not its
+behaviour: the implementation lives on the server. See <a href="../../server/">Server</a> for
+that side.</p>
+<h2 id="creating-nodes-with-friendly-inputs">Creating nodes with friendly inputs<a class="headerlink" href="#creating-nodes-with-friendly-inputs" title="Permanent link">&para;</a></h2>
+<p><code>addObject</code> and <code>addVariable</code> match the server conveniences and return typed
+handles. In async tasks, await both creation and subsequent node operations.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">parent</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">addObject</span><span class="p">(</span><span class="s2">&quot;Plant&quot;</span><span class="p">,</span> <span class="n">client</span><span class="o">.</span><span class="n">objects</span><span class="p">)</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">temperature</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">)</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">temperature</span><span class="p">())</span>
+</span></code></pre></div>
+<p>Use <code>nodeId</code>, <code>typeDefinition</code>, and <code>ns</code> to control identity and naming; variables
+also accept <code>dataType</code> and <code>writable</code>. Numeric and array inference matches the
+server, including typed empty arrays. Both APIs default <code>parentReference</code> to
+<code>Organizes</code> and allow an explicit reference type. Existing attribute-based
+<code>addObjectNode</code> and <code>addVariableNode</code> retain their NodeId results and
+<code>HasComponent</code> default. Local history registration and Python behavior
+installation remain server-only capabilities.</p>
+<p>If a client convenience is cancelled after the server creates the node, it
+attempts to remove that node before propagating cancellation. Cleanup requires
+a working connection; a failed cleanup is attached as an exception note.</p>
+<h2 id="paging-and-translating-browse-paths">Paging and translating browse paths<a class="headerlink" href="#paging-and-translating-browse-paths" title="Permanent link">&para;</a></h2>
+<p>Both APIs expose <code>browsePage(target, maxReferences=...)</code> and
+<code>browseNext(releaseContinuationPoint, continuationPoint)</code>. <code>browsePage</code> returns
+one <code>BrowseResult</code>; <code>browseNext</code> accepts a token or list/tuple and always returns
+a list of results. An empty token list returns <code>[]</code>. Tokens belong to the
+issuing server/session. Release unused tokens when abandoning a traversal:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">page</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">browsePage</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">maxReferences</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>    <span class="k">for</span> <span class="n">reference</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">references</span><span class="p">:</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">reference</span><span class="o">.</span><span class="n">nodeId</span><span class="p">)</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="k">finally</span><span class="p">:</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>    <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">continuationPoint</span><span class="p">:</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>        <span class="n">client</span><span class="o">.</span><span class="n">browseNext</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">continuationPoint</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>browse</code> still collects every page automatically. Paging conveniences raise on
+service or per-page failures and attempt token release on failure/cancellation.</p>
+<p><code>translateBrowsePathsToNodeIds</code> accepts a <code>BrowsePath</code> or a list, returning one
+<code>BrowsePathResult</code> or a list in the same order. <code>[]</code> returns <code>[]</code>; path failures
+remain in each result's status and service failures raise.
+<code>browseSimplifiedBrowsePaths(origin, ["1:Plant", "1:Temperature"])</code> resolves one
+BrowseName chain through forward hierarchical references. It returns one
+<code>BrowsePathResult</code>, including an unresolved-path status. Both helpers have the
+same contracts on client and server.</p>
+<p><code>serviceTranslateBrowsePathsToNodeIds</code> preserves raw request/response access on
+both APIs; the existing server <code>translateBrowsePaths(request)</code> name is retained.
+<code>server.browseRecursive</code> remains a local native traversal. Await all these
+dual-mode operations from async tasks.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../lifecycle/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lifecycle">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lifecycle
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../subscriptions/" class="md-footer__link md-footer__link--next" aria-label="Next: Subscriptions &amp; historical data">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Subscriptions & historical data
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+
+  <div class="md-copyright">
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,6872 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python bindings for open62541 with high-level OPC UA client and server utilities">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://docs.o6-automation.com/o6-python/manual/release-notes/">
+      
+      
+        <link rel="prev" href="../implementation-details/wire-format-mapping/">
+      
+      
+        <link rel="next" href="../../examples/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Release notes - o6\Python</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/o6-zensical-theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#220" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="o6\Python" class="md-header__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6\Python
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Release notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorials/" class="md-tabs__link">
+          
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Manual
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/" class="md-tabs__link">
+          
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api_reference/" class="md-tabs__link">
+        
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="o6\Python" class="md-nav__button md-logo" aria-label="o6\Python" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\Python">
+
+    </a>
+    o6\Python
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Home
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Install
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../home/commercial-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Commercial build
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tutorials
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tutorials
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Set the Stage
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  First Steps
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/100_connect/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Connect / disconnect
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/110_browse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Browse & Explore
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/120_read-write-node/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Reading & Writing
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/130_call-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Calling a method
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/140_node-api-syntax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API syntax
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitoring
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Monitoring
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/200_monitor-datachange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Monitor datachange
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/210_subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/220_modify-subscription/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Modify a subscription
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/230_subscription-filter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Filter
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_4" id="__nav_2_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client Configuration
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client Configuration
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/300_security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/310_application-description/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Application Description
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/320_state-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  State Callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_5" id="__nav_2_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Information Modelling
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/410_load-packaged-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load packaged companion specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/420_load-nodeset-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Load nodeset files
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/430_nodeids-and-namespace-info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  NodeIds and namespace info
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/440_semantic-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Semantic Discovery
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_6" id="__nav_2_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Advanced Topics
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Advanced Topics
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/500_lowlevel-service-calls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level service calls
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/client/510_async-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Async Clients
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../tutorials/server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Foundation
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Foundation
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/100_create-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Creating a server
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/105_add-hierarchy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a hierarchy
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/110_add-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a variable
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/120_add-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Add a method
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Patterns
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Patterns
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/130_data-source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Values from an external source
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/140_async-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Running on asyncio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/150_implement-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare and implement a Variable
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/160_implement-objecttype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare and implement an ObjectType
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_4" id="__nav_2_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Composition
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Composition
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/200_declare-object-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare an object type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/210_declare-variable-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a variable type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/220_declare-reference-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a reference type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/230_declare-data-type/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declare a data type
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_5" id="__nav_2_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Behaviour
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Behaviour
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/310_method-implementations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Method implementations
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/320_variables-with-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variables with sources
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/330_server-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/340_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/350_timers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Timers and async loops
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_6" id="__nav_2_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Security
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/400_access-control-roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control — roles
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/410_access-control-auth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control — authentication
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/420_security-policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Security policies and endpoints
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/430_server-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscribe monitoring on the server side
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/440_history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Historical data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/server/500_distillery_server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  The distillery server
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Manual
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Manual
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../opcua-fundamentals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OPC UA Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  OPC UA Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Protocol
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Services
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/information-modelling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Information Modelling
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/datatype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  DataType
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/namespace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespace
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opcua-fundamentals/nodesets-and-companion-specs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Nodeset Files & Companion Specs
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../node-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node API
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../sdk-fundamentals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6\Python SDK Fundamentals
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  o6\Python SDK Fundamentals
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_2" id="__nav_3_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Built-in Types
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Built-in Types
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/builtin/primitive-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Primitive Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/builtin/statuscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  StatusCode
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/builtin/container-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Container Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/builtin/address-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Address & Identity Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4_3" id="__nav_3_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespaces in o6
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Namespaces in o6
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/namespace/namespace-mapping-in-o6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Registry
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/namespace/loading-and-using-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Loading & Using Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/namespace/compiling-nodesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compiling Nodesets
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/namespace/writing-nodesets-in-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Writing a Nodeset in Python
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sdk-fundamentals/namespace/implementing-object-behavior/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing Object Behavior
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../client/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_5" id="__nav_3_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/address-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Working with the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/subscriptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions & historical data
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../client/raw-services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Raw services & errors
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../server/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_6" id="__nav_3_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Lifecycle & configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/address-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Building the address space
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/declared-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Declared types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/behaviour/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementing behaviour
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/events-and-timers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Events, monitored items & timers
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Access control & roles
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Operations & interoperability
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Performance
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../implementation-details/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Implementation details
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_8" id="__nav_3_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Implementation details
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-details/memory-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Memory management
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-details/variable-callbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variable callbacks
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-details/namespace-matching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Namespace matching
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-details/gil-and-event-loop/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  GIL and event-loop bridging
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-details/wire-format-mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Wire-format mapping
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Release Notes
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Release Notes
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#220" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2.0
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Known Issues
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1.0
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.3
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.2
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.1
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Distribution
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API organization
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Examples
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Examples
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Client
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Client
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C02_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C03_browsing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Browsing
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C04_configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C05_usernamepw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Username / Password Authentication
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C06_async_modes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Sync/Async Calling Patterns
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C07_nodemanagement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Node Management
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C08_subscriptions_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscriptions
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C09_subscriptions_modify/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Modification
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C10_subscriptions_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Events
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C11_subscriptions_triggering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Subscription Triggering
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/client-C12_browser/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Interactive Browser
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Server
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Server
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Low-level
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S02_minimal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Minimal
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S03_firststeps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  First Steps
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S04_variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variables
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S05_objects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Objects
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S06_methods/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Methods
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S07_data_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Data Source Updates
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S08_asynchronous/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Async
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S09_implement_readwrite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Variable Read/Write Override
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S10_implement_objtype/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  ObjectType Implementation
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/server-S11_history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  History
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Type Authoring
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Type Authoring
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/type_authoring-T01_lowlevel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Types (Low-level)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/type_authoring-T02_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Built-in Types
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/type_authoring-T03_nodeset_authoring-example/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Nodeset Authoring
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  API Reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#220" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2.0
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Known Issues
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#210" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1.0
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.3
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#improvements_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.2
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#improvements_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Improvements
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.0.1
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.0.1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Distribution
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        API organization
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#breaking-changes_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Breaking Changes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-features_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        New Features
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bug-fixes_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Bug Fixes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<!-- Keep the repository release notes as the single source of truth. -->
+<h1 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h1>
+<h2 id="220">2.2.0<a class="headerlink" href="#220" title="Permanent link">&para;</a></h2>
+<h3 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Added bundled namespaces for CNC, DI package metadata, FDT, plastics dosing and foam cutting, surface cleaning and multi-stage systems, and unattended retail.</p>
+</li>
+<li>
+<p>Client <code>browsePage</code>/<code>browseNext</code> and shared path-translation helpers match server browsing contracts.</p>
+</li>
+<li>
+<p>Client <code>addObject</code>/<code>addVariable</code> return typed handles with server-style inputs; both conveniences accept <code>parentReference</code> and default to <code>Organizes</code>.</p>
+</li>
+<li>
+<p><code>server.loop</code> exposes the server's owning asyncio event loop as a read-only property.</p>
+</li>
+<li>
+<p><code>Client.connect(createDefaultSubscription=False)</code> opens a session without requiring subscription support or capacity.</p>
+</li>
+<li>
+<p><code>Client.invalidateNodeCache(node)</code> clears cached child navigation; omit <code>node</code> to invalidate all handles.</p>
+</li>
+<li>
+<p>Servers expose typed <code>server[nodeId]</code> lookup and <code>root</code>, <code>objects</code>, <code>types</code>, and <code>views</code> folder handles, preserving node identity and application state; await indexing in async tasks.</p>
+</li>
+<li>
+<p>Python history backends can serve pages through <code>getHistoryPage</code>, including token release and session validation.</p>
+</li>
+</ul>
+<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>The Server SDK is now considered stable; removed the beta warning from startup banners and documentation.</p>
+</li>
+<li>
+<p>Event-monitoring callback types and guides describe path-string payload keys, including nested fields.</p>
+</li>
+<li>
+<p><code>MonitoredItem.requestedParams</code> exposes the original creation settings; configuration snapshots also isolate nested filters.</p>
+</li>
+<li>
+<p>Clarified value conversion, namespace mapping, and API behavior in the guides and examples, and repaired reference links.</p>
+</li>
+</ul>
+<h3 id="bug-fixes">Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Value-only client/server reads and callable nodes accept all Good-severity statuses; use <code>valueOnly=False</code> to inspect status and timestamps.</p>
+</li>
+<li>
+<p>Scalar <code>write(node, None)</code> now matches batch null writes; callable local nodes return <code>None</code> when reading an accepted null value.</p>
+</li>
+<li>
+<p>Variables added with <code>historizing=True</code> to a running server register for history immediately; failed registration removes the new node.</p>
+</li>
+<li>
+<p>Variable creation accepts typed empty NumPy arrays and explicitly typed empty sequences, retaining the datatype and declared ValueRank.</p>
+</li>
+<li>
+<p>Automatic datatype discovery preserves string, GUID, and opaque NodeIds, follows every browse page, and reports read failures.</p>
+</li>
+<li>
+<p>Client child-navigation caches refresh after client mutations, reconnects, namespace updates, explicit browsing, and cached misses.</p>
+</li>
+<li>
+<p>Callable local nodes preserve DataValue status and timestamp metadata, matching client nodes.</p>
+</li>
+<li>
+<p>Client node creation and history failures preserve <code>StatusCodeError.code</code>; batch history errors identify the failed target in exception notes.</p>
+</li>
+<li>
+<p>Node lookup validates service and attribute results; malformed responses raise <code>RuntimeError</code>.</p>
+</li>
+<li>
+<p><code>Server.historize()</code> and <code>unhistorize()</code> work in async code and restore node attributes when history configuration fails.</p>
+</li>
+<li>
+<p>Calling <code>Server.stop()</code> from its worker loop no longer blocks shutdown; async worker callbacks can await the returned task.</p>
+</li>
+<li>
+<p>Repeated <code>Server.deleteMonitoredItem(handle)</code> calls remain awaitable in async code.</p>
+</li>
+<li>
+<p>Client monitored items retain accepted filters, discard policies, monitoring modes, and server-revised parameters across partial modifications.</p>
+</li>
+<li>
+<p>Async client monitoring and subscription lifecycle callbacks now run on the client loop and log failures.</p>
+</li>
+<li>
+<p>Monitoring rejects subscriptions owned by another client; triggering links reject foreign, uninitialized, or deleted items before sending requests.</p>
+</li>
+<li>
+<p><code>Server</code> now raises <code>ValueError</code> for incomplete or empty certificate/key pairs and for <code>secureOnly=True</code> without credentials.</p>
+</li>
+<li>
+<p>Encrypted servers preserve the constructor's <code>applicationUri</code> in configuration and discovery responses.</p>
+</li>
+<li>
+<p><code>deleteNode([])</code> returns <code>[]</code> without a deletion request on both client and server.</p>
+</li>
+<li>
+<p><code>Client.deleteReference()</code> now preserves the namespace URI and server index of <code>ExpandedNodeId</code> targets.</p>
+</li>
+<li>
+<p><code>Client.addReference()</code> and <code>deleteReference()</code> service failures now raise <code>StatusCodeError</code> instead of <code>ValueError</code>, preserving the status code.</p>
+</li>
+<li>
+<p>Browsing attempts to release outstanding continuation points on failure or cancellation, including tokens returned during client cancellation.</p>
+</li>
+<li>
+<p><code>Client.call()</code> service failures now raise <code>StatusCodeError</code> with the original status available in <code>.code</code>.</p>
+</li>
+<li>
+<p>Remote typed Method calls now raise <code>StatusCodeError</code> for failed method results, matching local calls and the documented behavior.</p>
+</li>
+<li>
+<p><code>Server.read()</code> now matches client read options, including raw DataValues and timestamp selection (SOURCE by default); explicit attributes use <code>attr=</code>.</p>
+</li>
+<li>
+<p>Read service and value-only batch failures consistently raise <code>StatusCodeError</code>, preserving status codes and identifying failed batch entries.</p>
+</li>
+<li>
+<p>Server-local monitored items report their actual target, mode, filter, and revised settings; ID-only handles explicitly report unavailable metadata.</p>
+</li>
+<li>
+<p>Unsupported local <code>modify()</code>, <code>setMonitoringMode()</code>, and <code>setTriggering()</code> calls raise <code>NotImplementedError</code> without changing the item.</p>
+</li>
+<li>
+<p><code>Server.write()</code> with a <code>DataValue</code> now honors the requested attribute and rejects unsupported combinations without overwriting Value.</p>
+</li>
+<li>
+<p>Awaiting server node creation from another event loop now returns a usable, fully configured handle and preserves creation errors.</p>
+</li>
+<li>
+<p>Fixed crashes when awaiting <code>Server.browse()</code> with typed nodes; async calls now consistently require <code>await</code> for both Node and NodeId targets.</p>
+</li>
+<li>
+<p>Synchronous server startup and asynchronous context entry wait for listening sockets and raise bind failures. Asynchronous callers of <code>start()</code> can await <code>waitReady()</code> before connecting clients.</p>
+</li>
+<li>
+<p>Servers can restart after shutdown with active or pending TCP connections.</p>
+</li>
+<li>
+<p>Namespace publication can be retried after a failure without recreating completed nodes or rerunning their initializers.</p>
+</li>
+<li>
+<p>Role equality is consistent with hashing; name-only roles remain usable in permission APIs but are distinct from resolved roles.</p>
+</li>
+<li>
+<p>Failed subscription and monitored-item deletions preserve retry handles; native deletion clears client handles, and subscription modifications retain accepted settings.</p>
+</li>
+<li>
+<p>Server-local monitored-item handles become invalid after numeric deletion or server cleanup; foreign handles and out-of-range numeric IDs are rejected before deletion.</p>
+</li>
+<li>
+<p>Repeated value encoding and decoding no longer leak datatype references, field names, or partially converted values.</p>
+</li>
+<li>
+<p>Range reads retain error statuses in raw DataValues and raise on invalid or out-of-bounds value-only reads.</p>
+</li>
+<li>
+<p><code>historyRead</code> follows server-issued pages and releases unused continuation points on limits, failure, or cancellation.</p>
+</li>
+<li>
+<p>Writes through <code>node(value)</code> now raise <code>StatusCodeError</code> when the server rejects them.</p>
+</li>
+<li>
+<p>Node introspection no longer blocks its own event loop during interactive completion.</p>
+</li>
+<li>
+<p>Client and server callback cycles are collected, including Python plugins and pending requests.</p>
+</li>
+<li>
+<p>Cancelled client requests no longer raise errors when their responses arrive.</p>
+</li>
+<li>
+<p>Namespace conversion preserves native values during callbacks and repeated datatype lookups.</p>
+</li>
+<li>
+<p>Fixed Python 3.11 reference-count corruption during value conversion, DateTime comparisons, and timer callbacks.</p>
+</li>
+<li>
+<p>DateTime comparisons with unrelated types now follow Python comparison semantics.</p>
+</li>
+<li>
+<p>Empty union values no longer crash namespace conversion.</p>
+</li>
+<li>
+<p>Deleting optional DataValue or DiagnosticInfo fields clears them safely; deleting required native properties raises <code>AttributeError</code>.</p>
+</li>
+<li>
+<p><code>Client.read</code> now honors <code>timestampsToReturn</code>.</p>
+</li>
+<li>
+<p>Newly created subscriptions report the publishing interval, lifetime, and keepalive count revised by the server.</p>
+</li>
+<li>
+<p>Fixed memory leaks during binary/JSON decoding, <code>DataValue.value</code> access, and structure formatting.</p>
+</li>
+<li>
+<p>Non-type codec datatype arguments, oversized DateTime strings, invalid Guid byte lengths, and invalid string inputs are now rejected safely.</p>
+</li>
+<li>
+<p>Async method, read, and write callbacks run on the server event loop and may suspend; shutdown cancels pending callbacks.</p>
+</li>
+<li>
+<p>Fields declared with an abstract structured DataType accept concrete subtype values.</p>
+</li>
+</ul>
+<h3 id="breaking-changes">Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Commercial wheels without a valid Credential now use ten-minute Script Mode instead of the two-hour evaluation period; commercial use is permitted in Script Mode.</p>
+</li>
+<li>
+<p>Async tasks must await local server creation, node calls, dynamic child lookups, reference mutations, reverse-connect, discovery, and dataset operations, even for immediate results; synchronous SDK callbacks retain their nonblocking behavior.</p>
+</li>
+<li>
+<p>Client credentials no longer enable plaintext password tokens implicitly; configure encryption or explicitly set <code>allowNonePolicyPassword=True</code>.</p>
+</li>
+<li>
+<p>Startup raises for pending history registrations without a configured database or when registration fails, retaining pending entries for retry.</p>
+</li>
+<li>
+<p><code>Client.getEndpoints()</code>, <code>findServers()</code>, and <code>findServersOnNetwork()</code> raise <code>StatusCodeError</code> for service failures instead of returning empty lists; raw discovery services still return full responses.</p>
+</li>
+<li>
+<p>Non-Value writes require the attribute's expected datatype on client, server, and callable nodes; use <code>LocalizedText</code> for Description and <code>numpy.uint8</code> for AccessLevel. Ordinary Value writes retain type inference.</p>
+</li>
+<li>
+<p>Client non-Value writes reject DataValue status/timestamp metadata with <code>BAD_WRITE_NOT_SUPPORTED</code> instead of allowing it to be discarded.</p>
+</li>
+<li>
+<p>Unknown <code>client[nodeId]</code> lookups raise <code>StatusCodeError(BAD_NODE_ID_UNKNOWN)</code> instead of <code>KeyError</code>, matching server lookup; local disconnected-client checks and malformed responses raise <code>RuntimeError</code>.</p>
+</li>
+<li>
+<p><code>Client.deleteNode()</code> and <code>Server.deleteNode()</code> return a list of per-target statuses for batch calls instead of one aggregate status; scalar calls return one <code>StatusCode</code>.</p>
+</li>
+<li>
+<p>Rename the server deletion keyword <code>deleteReferences</code> to <code>deleteTargetReferences</code>, and await <code>deleteNode()</code> inside async tasks.</p>
+</li>
+<li>
+<p><code>Client.deleteNode()</code> service failures now raise <code>StatusCodeError</code> instead of <code>ValueError</code>.</p>
+</li>
+<li>
+<p><code>addReference()</code> and <code>deleteReference()</code> now use <code>(source, reftype, target)</code> and <code>deleteBidirectional</code>, return <code>StatusCode</code>, and require <code>await</code> in async tasks; use <code>addReferenceLegacy()</code> / <code>deleteReferenceLegacy()</code> to retain the old contract.</p>
+</li>
+<li>
+<p><code>Server.browse()</code> now returns a complete list of references, matching <code>Client.browse()</code>; remove <code>.references</code> access and move <code>maxReferences=</code> calls to <code>Server.browsePage()</code> for explicit pagination.</p>
+</li>
+<li>
+<p><code>Client.browse()</code> failures now raise <code>StatusCodeError</code> instead of <code>ValueError</code>; <code>Server.browseNext()</code> now raises <code>StatusCodeError</code> for failed page statuses.</p>
+</li>
+<li>
+<p><code>Server.call()</code> now returns <code>(status, *outputs)</code> for method failures, matching <code>Client.call()</code>; use <code>status.check()</code> to retain exception-based handling.</p>
+</li>
+<li>
+<p><code>Server.write()</code> now accepts parallel target/value lists or a mapping; replace broadcast calls with <code>write(nodes, [value] * len(nodes))</code> and pass attributes with <code>attr=</code>.</p>
+</li>
+<li>
+<p><code>Server.write()</code> returns one status or an ordered list of statuses and continues batches after individual failures; check results with <code>status.check()</code> to retain exception-based handling.</p>
+</li>
+<li>
+<p><code>Client.write()</code> service failures now raise <code>StatusCodeError</code> instead of <code>ValueError</code>.</p>
+</li>
+</ul>
+<h3 id="known-issues">Known Issues<a class="headerlink" href="#known-issues" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Malformed binary union values can crash the underlying SDK decoder; an upstream fix is required.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h2 id="210">2.1.0<a class="headerlink" href="#210" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_1">New Features<a class="headerlink" href="#new-features_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><code>Server.createEvent()</code> emits immediately, matching the C SDK, with
+  <code>emitEvent()</code> as an alias. Construct reusable drafts with <code>o6.Event(server, ...)</code>
+  and emit them with <code>trigger()</code>.</p>
+</li>
+<li>
+<p>When <code>eventType</code> is omitted, emission uses the type of <code>eventInstance</code> if
+  supplied; otherwise, the source's type definition is browsed for a
+  <code>GeneratesEvent</code> reference, and that EventType is used.</p>
+</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">server</span><span class="o">.</span><span class="n">addReference</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">source</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="n">PumpType</span><span class="p">),</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">reftype</span><span class="o">=</span><span class="n">ns0</span><span class="o">.</span><span class="n">reftypes</span><span class="o">.</span><span class="n">GeneratesEvent</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">target</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">NodeId</span><span class="p">(</span><span class="n">PumpFaultType</span><span class="p">),</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">pump</span> <span class="o">=</span> <span class="n">PumpType</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">objectsNode</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;Pump1&quot;</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">server</span><span class="o">.</span><span class="n">createEvent</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">pump</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Cavitation detected&quot;</span><span class="p">)</span>   <span class="c1"># PumpFaultType</span>
+</span></code></pre></div>
+<p>Without an event instance, a type declaring no <code>GeneratesEvent</code> target falls
+  back to <code>BaseEventType</code>. A type declaring more than one, or a source with no
+  type definition at all, raises <code>ValueError</code>. Passing <code>eventType=</code> explicitly
+  selects the type argument. An <code>Event</code> draft resolves it at each <code>trigger()</code>.
+  Field values retain C's precedence: explicit fields, instance properties,
+  then emission defaults.</p>
+<ul>
+<li><code>ObjectNode</code> and <code>ViewNode</code> fire an event sourced at themselves with <code>&lt;&lt;</code>,
+  without going back to the owning <code>Server</code>:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">pump</span> <span class="o">&lt;&lt;</span> <span class="n">o6</span><span class="o">.</span><span class="n">Event</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Cavitation detected&quot;</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">pump</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Cavitation detected&quot;</span><span class="p">,</span> <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">}</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">pump</span> <span class="o">&lt;&lt;</span> <span class="n">eventInstance</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">pump</span> <span class="o">&lt;&lt;</span> <span class="p">{</span><span class="s2">&quot;eventInstance&quot;</span><span class="p">:</span> <span class="n">eventInstance</span><span class="p">}</span>
+</span></code></pre></div>
+<p>An event instance must be an Object of <code>BaseEventType</code> or a subtype on the
+  same server; emission reads its current fields without modifying the node.</p>
+<ul>
+<li>Variable read and write callbacks may be <code>async def</code>, matching Method
+  callbacks:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">read</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">GOOD</span><span class="p">,</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">readTemperature</span><span class="p">())</span>
+</span></code></pre></div>
+<p>A coroutine that returns without awaiting completes synchronously. One that
+  awaits leaves the operation pending and completes it when the coroutine
+  finishes; server shutdown cancels it. This previously raised
+  <code>TypeError: Variable callbacks cannot be async</code>.</p>
+<ul>
+<li><code>@o6.enumtype</code> supports declaring more than 255 members. This previously
+  failed registration outright:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">UA_DataType_fromEnumDescription</span> <span class="n">failed</span><span class="p">:</span> <span class="n">BadEncodingLimitsExceeded</span>
+</span></code></pre></div>
+<p>This unblocks <code>o6.ns.bacnet</code>, whose <code>BACnetPropertyIdentifier</code> declares 396.</p>
+<ul>
+<li>Server-side historizing is added. <code>historizing=True</code> on
+  <code>addVariable</code> used to only set the <code>Historizing</code> attribute; once
+  <code>server.config.setHistoryDatabase(...)</code> is configured, it registers the
+  Variable too:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">server</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">setHistoryDatabase</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">server</span><span class="o">.</span><span class="n">addVariable</span><span class="p">(</span><span class="s2">&quot;Level&quot;</span><span class="p">,</span> <span class="n">plant</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">historizing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>historizing=o6.History(capacity=, strategy=, interval=)</code> customizes
+  capacity and sampling strategy per Variable; <code>server.historize(target, ...)</code>
+  / <code>unhistorize(target)</code> do the same for a node this server didn't create.</p>
+<ul>
+<li>Server and client application notifications are exposed as handler
+  registries. Each <code>server.on&lt;Category&gt;Notification</code> — <code>Lifecycle</code>,
+  <code>SecureChannel</code>, <code>Session</code>, <code>Service</code>, <code>Subscription</code>, <code>MonitoredItem</code>,
+  <code>DiscoveryRegisterServer</code>, <code>DiscoveryServerOnNetwork</code> and <code>Audit</code> — is a
+  list-like registry usable as a decorator, assignable as a whole, and
+  changeable while the server runs:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@server</span><span class="o">.</span><span class="n">onSessionNotification</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">_audit</span><span class="p">(</span><span class="n">notification</span><span class="p">):</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">notification</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The client side offers <code>onLifecycleNotification</code>, <code>onServiceNotification</code>,
+  and <code>onGlobalNotification</code>, which sees every notification the connection
+  produces. A handler on either side receives an <code>o6.Notification</code> carrying
+  <code>type</code> and <code>payload</code>, a read-only <code>str -&gt; Any</code> mapping of that
+  notification's fields.</p>
+<ul>
+<li>
+<p><code>Server.addSubscribedDataSet(name, metadata, targets)</code> creates a native
+  standalone subscribed DataSet, and <code>removeSubscribedDataSet(dataSetId)</code>
+  removes it. This defines the dataset without creating or enabling a
+  <code>DataSetReader</code>.</p>
+</li>
+<li>
+<p><code>ServerConfig.maxSubscriptions</code> and <code>ServerConfig.maxSubscriptionsPerSession</code>
+  cap the number of subscriptions across all sessions and within one session:</p>
+</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">server</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">maxSubscriptions</span> <span class="o">=</span> <span class="mi">50</span>
+</span></code></pre></div>
+<h3 id="improvements_1">Improvements<a class="headerlink" href="#improvements_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><code>Server.createEventMonitoredItem</code> raises <code>ValueError</code> when the effective
+  <code>EventFilter</code> has no select clauses, instead of letting the server answer
+  <code>BadEventFilterInvalid</code>.</p>
+</li>
+<li>
+<p>The server manual gains a tutorial series covering type declaration, method
+  implementations, variables with sources, callbacks, events and timers,
+  access control, security policies, monitoring and history.</p>
+</li>
+<li>History reads now support continuation points for paging large result sets.
+  Use <code>client.serviceHistoryRead()</code> with <code>HistoryReadValueId.continuationPoint</code>
+  to resume reading from where the previous batch ended.</li>
+</ul>
+<h3 id="bug-fixes_1">Bug Fixes<a class="headerlink" href="#bug-fixes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>An OPC UA enumeration is a Python <code>enum.IntEnum</code>, an OptionSet an
+  <code>enum.IntFlag</code>, chosen by the declaring decorator. An enumeration no longer
+  drops a member valued zero, or one whose value is the sum of two others, from
+  iteration, <code>dir()</code> and <code>repr</code>:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">list</span><span class="p">(</span><span class="n">ApplicationType</span><span class="p">)</span>   <span class="c1"># all four members, not two</span>
+</span></code></pre></div>
+<p>Members consequently compose as integers: <code>A | B</code> is a plain <code>int</code> rather than
+  a member, and <code>issubclass(SomeEnum, enum.Flag)</code> is <code>False</code>. OptionSets are
+  unchanged — in ns0, 48 enumerations change and 19 OptionSets do not.</p>
+<ul>
+<li>An enumeration value outside the declared set decodes instead of raising, so
+  one out-of-specification field no longer fails the read containing it. The
+  value is preserved as sent, including a negative one:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">BrowseResultMask</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>   <span class="c1"># None</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">int</span><span class="p">(</span><span class="n">BrowseResultMask</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>   <span class="c1"># 12</span>
+</span></code></pre></div>
+<ul>
+<li><code>value in SomeType</code> now answers the same question on every supported
+  interpreter, for both enumerations and OptionSets — including <code>StatusCode</code>.
+  On 3.13+, an expression like <code>99 in SomeOptionSet</code> used to answer <code>True</code> for
+  every integer; it now discriminates. On 3.11, the same kind of expression
+  used to raise <code>TypeError</code>; it now answers instead:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="mi">999999</span> <span class="ow">in</span> <span class="n">AccessLevelType</span>   <span class="c1"># False, not True (3.13+) or TypeError (3.11)</span>
+</span></code></pre></div>
+<ul>
+<li>
+<p>A notification payload no longer reports a corrupted namespace index for the
+  node it concerns. The conversion borrowed the native namespace index rather
+  than copying it, so a monitored <code>NodeId</code> could surface under the wrong
+  namespace once the native value was released.</p>
+</li>
+<li>
+<p>A default <code>DisplayName</code> derived from a <code>BrowseName</code> no longer carries the
+  namespace qualifier:</p>
+</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">machine</span> <span class="o">=</span> <span class="n">Machine</span><span class="p">(</span><span class="n">server</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">objectsNode</span><span class="p">,</span> <span class="n">browseName</span><span class="o">=</span><span class="s2">&quot;ns=plant;Machine&quot;</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">machine</span><span class="p">(</span><span class="n">attr</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">AttributeId</span><span class="o">.</span><span class="n">DISPLAY_NAME</span><span class="p">)</span>   <span class="c1"># &quot;Machine&quot;, not &quot;ns=plant;Machine&quot;</span>
+</span></code></pre></div>
+<p>An explicitly passed <code>displayName</code> is preserved unchanged.</p>
+<ul>
+<li>Building from source on Windows no longer fails on a backslashed nodeset
+  directory path handed to CMake.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h2 id="203">2.0.3<a class="headerlink" href="#203" title="Permanent link">&para;</a></h2>
+<h3 id="new-features_2">New Features<a class="headerlink" href="#new-features_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>@o6.optionsettype</code> and <code>o6.bitmask</code> declare an integer-form OPC UA OptionSet.
+  Members are bit masks, and <code>base=</code> names the unsigned integer the OptionSet
+  subtypes — it carries the wire width and the <code>HasSubtype</code> parent, and is
+  mandatory:</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">@o6</span><span class="o">.</span><span class="n">optionsettype</span><span class="p">(</span><span class="n">ns</span><span class="o">=</span><span class="s2">&quot;plant&quot;</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="n">o6</span><span class="o">.</span><span class="n">Byte</span><span class="p">)</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">AccessLevelType</span><span class="p">:</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">CURRENT_READ</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">bitmask</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;CurrentRead&quot;</span><span class="p">)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">HISTORY_WRITE</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">bitmask</span><span class="p">(</span><span class="mh">0x01</span> <span class="o">&lt;&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;HistoryWrite&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Bit fields declared with <code>@o6.enumtype</code> should move to it; <code>@o6.enumtype</code> now
+  rejects <code>o6.bitmask</code> members, and <code>@o6.optionsettype</code> rejects <code>o6.enumfield</code>.</p>
+<ul>
+<li><code>o6.optionsetbit</code> declares one bit of a structure-form OptionSet — an
+  <code>@o6.datatype</code> subtyping the ns0 <code>OptionSet</code>. Reading a bit is three-valued
+  (<code>None</code> when <code>ValidBits</code> says the bit means nothing); assigning writes <code>Value</code>
+  and <code>ValidBits</code> together. Generated structure-form OptionSets now carry one
+  accessor per declared bit instead of leaving the two ByteStrings to be
+  hand-masked.</li>
+</ul>
+<h3 id="improvements_2">Improvements<a class="headerlink" href="#improvements_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The client's limit on concurrent service calls is now configurable through
+  <code>client.config.maxAsyncServiceCalls</code> (default <code>32</code>, <code>0</code> disables it). Like
+  all <code>client.config</code> fields, it must be set before <code>connect()</code>.</li>
+<li>Reusing send buffer improves async throughput by ~25% </li>
+</ul>
+<h3 id="bug-fixes_2">Bug Fixes<a class="headerlink" href="#bug-fixes_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Synchronous client calls no longer hang forever when the event loop passed as
+  <code>Client(loop=...)</code> is not being run; they are driven to completion inline.
+  Callbacks (data change, event, state) are still only delivered while that loop
+  runs.</li>
+<li>OptionSet-typed structure fields now surface as their flag class on read-back,
+  in every namespace including ns0.</li>
+<li><code>del instance.member</code> on a generated structure no longer crashes the
+  interpreter; it raises <code>AttributeError</code>, since a structure member always has a
+  value on the wire. <code>instance.__dict__</code> and <code>vars(instance)</code> now answer with a
+  dictionary instead of raising, so debuggers and generic introspection work on
+  structure instances.</li>
+<li><code>import o6.ns.&lt;x&gt;.datatypes</code> no longer executes the module body twice.</li>
+<li><code>Argument.dataType</code> resolved to the wrong namespace in several regenerated
+  packages; it now points at the specification the argument's namespace
+  actually intends:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>namespace</th>
+<th>was</th>
+<th>is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>additive_manufacturing</code>, <code>cutting_tool</code></td>
+<td><code>ns=dexpi;i=3006</code>, <code>ns=dexpi;i=3013</code></td>
+<td><code>ns=isa95_jobcontrol_v2;i=3006</code>, <code>ns=isa95_jobcontrol_v2;i=3013</code></td>
+</tr>
+<tr>
+<td><code>glass_flat_v2</code></td>
+<td><code>ns=aml;i=3006</code>, <code>ns=aml;i=3013</code></td>
+<td><code>ns=isa95_jobcontrol_v2;i=3006</code>, <code>ns=isa95_jobcontrol_v2;i=3013</code></td>
+</tr>
+<tr>
+<td><code>machine_tool</code>, <code>shotblasting</code>, <code>surface_technology_plasma</code>, <code>woodworking</code></td>
+<td><code>ns=bacnet;i=3006</code>, <code>ns=bacnet;i=3013</code></td>
+<td><code>ns=isa95_jobcontrol_v2;i=3006</code>, <code>ns=isa95_jobcontrol_v2;i=3013</code></td>
+</tr>
+<tr>
+<td><code>machinery_jobs</code></td>
+<td><code>ns=amb;i=3006</code>, <code>ns=amb;i=3013</code></td>
+<td><code>ns=isa95_jobcontrol_v2;i=3006</code>, <code>ns=isa95_jobcontrol_v2;i=3013</code></td>
+</tr>
+<tr>
+<td><code>wire_harness</code></td>
+<td><code>ns=amb;i=3008</code>, <code>ns=amb;i=3010</code></td>
+<td><code>ns=isa95_jobcontrol_v2;i=3008</code>, <code>ns=isa95_jobcontrol_v2;i=3010</code></td>
+</tr>
+<tr>
+<td><code>gms</code></td>
+<td><code>ns=amb;i=3005</code>, <code>ns=amb;i=3008</code></td>
+<td><code>ns=machinery_result;i=3005</code>, <code>ns=machinery_result;i=3008</code></td>
+</tr>
+<tr>
+<td>- Integer-form OptionSet member values are now masks, not bit positions. Applies</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>to every integer-form OptionSet, including <code>AccessLevelType</code>,</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>AttributeWriteMask</code> and <code>PermissionType</code>. Ordinary <code>@o6.enumtype</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>enumerations are unaffected.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If a value relied on the previous bit position, drop the extra shift:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># before — double-shifted because members were bit positions</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">my_flag</span><span class="p">)</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">my_other_flag</span><span class="p">)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># after — members are masks</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">value</span> <span class="o">=</span> <span class="n">my_flag</span> <span class="o">|</span> <span class="n">my_other_flag</span>
+</span></code></pre></div>
+<ul>
+<li>The wire format of five struct fields is now correct against conformant
+  equipment. Sizes are in bytes, measured against the same NodeSet on
+  each release:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>declared base</th>
+<th>v2.0.2</th>
+<th>now</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>safety.RequestSPDUDataType.inFlags</code></td>
+<td>Byte</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>safety.ResponseSPDUDataType.outFlags</code></td>
+<td>Byte</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>fx_ac.AggregatedHealthDataType.aggregatedDeviceHealth</code></td>
+<td>UInt16</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>fx_cm.ConnectionDiagnosticsDataType.lastActivity</code></td>
+<td>UInt16</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>machinery_jobs.OutputInformationDataType.outputInfo</code></td>
+<td>Byte</td>
+<td>4</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>o6.AccessLevel</code>, <code>o6.WriteMask</code> and <code>o6.Permission</code> are retired. They aliased
+  generated NS0 OptionSet DataTypes; the generated types are now the only spelling.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>before</th>
+<th>after</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>o6.AccessLevel</code></td>
+<td><code>o6.ns.ns0.datatypes.AccessLevelType</code></td>
+</tr>
+<tr>
+<td><code>o6.WriteMask</code></td>
+<td><code>o6.ns.ns0.datatypes.AttributeWriteMask</code></td>
+</tr>
+<tr>
+<td><code>o6.Permission</code></td>
+<td><code>o6.ns.ns0.datatypes.PermissionType</code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h2 id="202">2.0.2<a class="headerlink" href="#202" title="Permanent link">&para;</a></h2>
+<h3 id="improvements_3">Improvements<a class="headerlink" href="#improvements_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>New documentation site at <a href="https://docs.o6-automation.com/o6-python/">https://docs.o6-automation.com/o6-python/</a>, with a
+  restructured manual, client and server tutorials, a full API reference, and
+  performance benchmarks.</li>
+<li>The PyPI project page now renders the package documentation and links to the
+  docs site.</li>
+</ul>
+<h3 id="bug-fixes_3">Bug Fixes<a class="headerlink" href="#bug-fixes_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>@o6.enumtype(isAbstract=True)</code> no longer crashes on Python 3.11 (the
+  abstract-enum path used a functional-API call shape that 3.12's
+  <code>enum.IntFlag</code> accepts but 3.11 rejects).</li>
+</ul>
+<h3 id="breaking-changes_1">Breaking Changes<a class="headerlink" href="#breaking-changes_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Generated type names starting with a digit are spelled out instead of
+  <code>_</code>-prefixed: <code>_3DVector</code> becomes <code>ThreeDVector</code>, <code>_3DFrameType</code> becomes
+  <code>ThreeDFrameType</code>, and so on for all <code>_3D*</code> types in <code>ns0</code> and the companion
+  specs. This matches the OPC UA type dictionary and open62541. Enum members are
+  unaffected and keep their <code>_16_BIT</code> spelling.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<h2 id="201">2.0.1<a class="headerlink" href="#201" title="Permanent link">&para;</a></h2>
+<h3 id="distribution">Distribution<a class="headerlink" href="#distribution" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Public <code>o6</code> wheels contain the full Client and Server API.</li>
+<li>Without an issued Credential, the public wheel runs in the existing two-hour
+  evaluation mode. Its process-wide timer starts when <code>o6</code> is imported; a valid
+  Credential removes the time limit. Expiry terminates the process with a
+  failure exit status; POSIX expiry is an immediate signal-safe hard exit.</li>
+<li>An unreadable, malformed, incorrectly signed, not-yet-valid, or expired
+  Credential prints the reason and falls back to evaluation mode instead of
+  failing import. Fallback warnings remain visible when routine startup output
+  is suppressed, as do the Trial Mode and expiry notices.</li>
+<li>Commercial builds use <code>O6PYTHON_LICENSE_FILE</code> when set; otherwise they check
+  <code>o6python_license.json</code> in the current working directory. AGPL builds do not
+  use Credentials or evaluation mode. A missing configured path warns; a
+  missing default file proceeds directly to the Trial Mode message.</li>
+<li>Credential Feature Scopes independently control <code>client</code>, <code>server</code>, and
+  <code>pubsub</code>; PubSub requires Server. Compiled symbols remain importable, while
+  unauthorized construction or PubSub operations raise <code>PermissionError</code>.
+  PubSub-disabled Servers omit the native PubSub manager, information-model
+  methods, and transports.</li>
+<li>Standard GIL-enabled CPython 3.11–3.14 is supported on Linux and macOS
+  <code>x86_64</code>/ARM64 and Windows AMD64/ARM64.</li>
+<li>Linux wheels require glibc 2.28 or newer (<code>manylinux_2_28</code>).</li>
+<li>macOS wheels require macOS 15 Sequoia or newer.</li>
+<li>Windows AMD64 supports Windows 10 Enterprise LTSC 2021 and Windows Server
+  2022 or newer; Windows ARM64 supports Windows 11 or newer.</li>
+<li>Supported NumPy versions are <code>&gt;=2.0,&lt;3</code>; the native extension targets the
+  NumPy 2.0 C API and is tested with minimum and current NumPy 2.x releases.</li>
+</ul>
+<h3 id="api-organization">API organization<a class="headerlink" href="#api-organization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added explicit public exports for <code>o6</code> and its public modules.</li>
+<li>Moved subscription classes to the canonical <code>o6.subscription</code> module and
+  callback protocols and contexts to <code>o6.server</code>; the previous paths have
+  been removed.</li>
+<li>Made declaration, decorator, reference, datatype-registration, and node
+  backend implementation paths private without changing the supported root
+  authoring helpers.</li>
+<li>Standardized public methods, properties, parameters, and model members on
+  lowerCamelCase (<code>nodeId</code>, <code>browseName</code>, <code>addVariable</code>, <code>encodeJson</code>). Types
+  remain PascalCase and decorators remain lowercase compounds. Previous public
+  spellings have been removed rather than retained as compatibility aliases.</li>
+<li>Grouped companion-spec symbols under each namespace's <code>datatypes</code>,
+  <code>objtypes</code>, <code>vartypes</code>, <code>reftypes</code>, and <code>instances</code> modules instead of
+  flattening them onto the namespace object.</li>
+<li>Standardized datatype-discovery result keys on lowerCamelCase (<code>typeName</code>,
+  <code>typeId</code>, <code>binaryEncodingId</code>, <code>typeKind</code>, <code>structureType</code>, <code>membersSize</code>).</li>
+</ul>
+<h3 id="breaking-changes_2">Breaking Changes<a class="headerlink" href="#breaking-changes_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><code>o6.ns.&lt;ns&gt;.datatypes.&lt;X&gt;()</code> now <strong>instantiates</strong> the concrete datatype. </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>o6.Int32()</code></td>
+<td><code>numpy.int32(0)</code></td>
+</tr>
+<tr>
+<td><code>o6.nsx.ns0.BaseDataType.Structure.Argument()</code></td>
+<td><code>o6.Argument</code></td>
+</tr>
+</tbody>
+</table>
+<p>To obtain the NodeId, use <code>o6.NodeId(o6.ns.&lt;ns&gt;.datatypes.&lt;X&gt;)</code>. 
+Abstract datatypes (e.g. <code>BaseDataType</code>, <code>Number</code>, <code>Integer</code>) will throw when tried to instantiate.</p>
+</li>
+<li>
+<p>struct members caml vs. snake case. </p>
+<p>In order to be PEP8 compliant previous versions converted member names of UA Structs and DataTypes to snake case naming convention.
+For better clarity, we are dropping this conversion and replacing these member names with their official names from the UA Namespace 0 and companion specs.
+In order to adhere closer to PEP8 we allow a single exception to the UA naming convention:
+the first character may be lower case for class members of python classes, that represent UA DataTypes and Structs.</p>
+</li>
+<li>
+<p>enum members are consequently converted to capitalized snake case</p>
+</li>
+<li>
+<p><code>dir()</code> on a node lists instance children in lowerCamelCase</p>
+<p>Browsing a node now surfaces its Object, Variable, Method and View children under the
+lowerCamelCase name derived from their BrowseName, so completion offers
+<code>client.objects.server.serverStatus</code> instead of <code>ServerStatus</code> — the same spelling that
+generated declarations already use for their members. Type children (ObjectType,
+VariableType, ReferenceType, DataType) keep their PascalCase BrowseName.
+Dot access remains case-insensitive, so <code>client.objects.server.ServerStatus</code> still resolves.</p>
+</li>
+</ul>
+<h3 id="new-features_3">New Features<a class="headerlink" href="#new-features_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>OPC UA Browser, now built in feature of the <code>o6.Client</code> available through <code>client.browseInteractive</code></li>
+<li>Cleaned up Client API<ul>
+<li>removed <code>client.fully_connected</code>, <code>client.connected</code> is now only true when there's a secure channel and a session</li>
+<li>removed <code>client.disconnect_secure_channel</code> in favor of <code>client.disconnect()</code> parameters <code>closeSession</code> and <code>deleteSubscriptions</code></li>
+<li>added range parameter for <code>client.read</code> and <code>client.write</code>, that lets one read into a slice of an array variable with e.g. "1:10"</li>
+<li>StatusCode is now a proper Python <code>IntFlag</code> with full bitwise support:
+    <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span> <span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">Bad</span> <span class="ow">in</span> <span class="n">status_code</span><span class="p">:</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="c1">#...</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">my_status_code</span> <span class="o">=</span> <span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">Good</span> <span class="o">|</span> <span class="n">o6</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">UncertainLastUsableValue</span>
+</span></code></pre></div></li>
+<li>added support for browse continuation point, i.e. <code>client.browse</code> now guarantees to return the complete list of references</li>
+<li>cleand up and simplified history access through the client</li>
+<li>revised the client node-management function parameters and added useful defaults for<ul>
+<li><code>parentReference</code> - <code>o6.ns.ns0.hasComponent</code></li>
+<li><code>typeDefinition</code> - <code>o6.ns.ns0.objtypes.BaseDataVariableType</code></li>
+</ul>
+</li>
+<li>added callbacks for subscriptions<ul>
+<li><code>onCreated</code> - fires when this subscription was created on the server</li>
+<li><code>onStatusChange</code> - fires when the server reports a status change for this subscription (e.g. keepalive timeout exceeded, session transfer on reconnect), receives the new <code>StatusCode</code></li>
+<li><code>onDeleted</code> - fires when this subscription was deleted on the server</li>
+</ul>
+</li>
+<li>added callbacks for monitored item<ul>
+<li><code>onCreated</code> - fires when this monitored item was created on the server</li>
+<li><code>onDeleted</code> - fires when this monitored item was deleted on the server</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="bug-fixes_4">Bug Fixes<a class="headerlink" href="#bug-fixes_4" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../implementation-details/wire-format-mapping/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Wire-format mapping">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Wire-format mapping
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../examples/" class="md-footer__link md-footer__link--next" aria-label="Next: Examples">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Examples
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+
+  <div class="md-copyright">
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","header.autohide","navigation.expand","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>
