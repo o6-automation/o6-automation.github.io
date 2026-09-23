@@ -1,0 +1,18 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:tns="http://opcfoundation.org/UA/"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://opcfoundation.org/UA/"
+>
+
+  <opc:Import Namespace="http://opcfoundation.org/BinarySchema/" />
+
+  <opc:StructuredType Name="MySimpleStruct">
+    <opc:Documentation>A simple test struct</opc:Documentation>
+    <opc:Field Name="Foo" TypeName="opc:UInt32" />
+    <opc:Field Name="Bar" TypeName="opc:String" />
+  </opc:StructuredType>
+
+</opc:TypeDictionary>

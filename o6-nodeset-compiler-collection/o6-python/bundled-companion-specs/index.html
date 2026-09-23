@@ -1,0 +1,1935 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nodeset Compiler Collection — compile OPC UA NodeSet XML to C or Python source">
+      
+      
+        <meta name="author" content="o6-automation">
+      
+      
+        <link rel="canonical" href="https://docs.o6-automation.com/o6-nodeset-compiler-collection/o6-python/bundled-companion-specs/">
+      
+      
+        <link rel="prev" href="../dependencies/">
+      
+      
+        <link rel="next" href="../../utility/inventory/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.41">
+    
+    
+      
+        <title>Bundled companion specs - o6\ncc</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.fba56155.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/o6-zensical-theme.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#historical-models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="o6\ncc" class="md-header__button md-logo" aria-label="o6\ncc" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\ncc">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            o6\ncc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bundled companion specs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../open62541/" class="md-tabs__link">
+          
+  
+  open62541
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  o6\Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+      
+    
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../utility/inventory/" class="md-tabs__link">
+          
+  
+  Utility
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="o6\ncc" class="md-nav__button md-logo" aria-label="o6\ncc" data-md-component="logo">
+      
+  <img src="../../assets/o6.png" alt="o6\ncc">
+
+    </a>
+    o6\ncc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Home
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Home
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Compatibility
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shell-completion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Shell completion
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  open62541
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  open62541
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open62541/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open62541/reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Command reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open62541/datatypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Datatype tables
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open62541/cmake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CMake integration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../open62541/migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Migrating from open62541
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  o6\Python
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  o6\Python
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quickstart
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Command reference
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generated-package/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Use generated packages
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Dependencies & shortnames
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  List of bundled companion specs
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  List of bundled companion specs
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historical-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Historical models
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Versions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Utility
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Utility
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility/inventory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Inventory
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utility/graphviz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Graphviz
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historical-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Historical models
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Versions
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<!-- Generated by internal/docs/gen_bundled_specs.py — do not edit by hand. -->
+
+<h1 id="list-of-bundled-companion-specs">List of bundled companion specs<a class="headerlink" href="#list-of-bundled-companion-specs" title="Permanent link">&para;</a></h1>
+<p>o6\Python dependency declarations such as <code>-e ns0 -e di</code> select XML shipped with
+<code>ncc</code>. No download is needed during compilation. At runtime, shorthand uses the
+companion namespaces shipped with o6\Python. Your own generated versions belong in your
+project and use <a href="../dependencies/#custom-dependency-locations">custom dependency declarations</a>.
+See <a href="../../compatibility/">compatibility</a> and <a href="../dependencies/">dependency usage</a>.</p>
+<p>The bundle contains 136 canonical definitions and three compatibility definitions.
+The source-only entry <code>irdi_v1_01_0</code> has no corresponding runtime module and
+cannot be used as bundled shorthand.</p>
+<h2 id="historical-models">Historical models<a class="headerlink" href="#historical-models" title="Permanent link">&para;</a></h2>
+<p>Names such as <code>irdi_v1_00</code> and <code>irdi_v1_0_0</code> select different model releases even
+when they share a Model URI. <code>irdi_v1_00</code> also loads a supplement that supplies
+missing references. You must still declare other transitive dependencies explicitly.
+Use a <a href="../dependencies/#custom-dependency-locations">custom dependency</a> when you
+supply your own model version and runtime package.</p>
+<h2 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h2>
+<p>A blank version means the original XML does not declare one.</p>
+<table>
+<thead>
+<tr>
+<th>Shortname</th>
+<th>XML version</th>
+<th>Model URI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ns0</code></td>
+<td>1.05.07</td>
+<td><code>http://opcfoundation.org/UA/</code></td>
+</tr>
+<tr>
+<td><code>additive_manufacturing</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/AdditiveManufacturing/</code></td>
+</tr>
+<tr>
+<td><code>adi</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/ADI/</code></td>
+</tr>
+<tr>
+<td><code>amb</code></td>
+<td>1.01.1</td>
+<td><code>http://opcfoundation.org/UA/AMB/</code></td>
+</tr>
+<tr>
+<td><code>aml</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/AML/</code></td>
+</tr>
+<tr>
+<td><code>aml_libraries</code></td>
+<td></td>
+<td><code>http://opcfoundation.org/UA/AMLLibs/</code></td>
+</tr>
+<tr>
+<td><code>auto_id</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/AutoID/</code></td>
+</tr>
+<tr>
+<td><code>bacnet</code></td>
+<td>2.00.1</td>
+<td><code>http://opcfoundation.org/UA/BACnet_V2/</code></td>
+</tr>
+<tr>
+<td><code>cas</code></td>
+<td>1.00.1</td>
+<td><code>http://opcfoundation.org/UA/CAS/</code></td>
+</tr>
+<tr>
+<td><code>cnc</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/CNC</code></td>
+</tr>
+<tr>
+<td><code>commercial_kitchen</code></td>
+<td>1.0</td>
+<td><code>http://opcfoundation.org/UA/CommercialKitchenEquipment/</code></td>
+</tr>
+<tr>
+<td><code>cranes_hoists</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/CranesHoists/</code></td>
+</tr>
+<tr>
+<td><code>csp_plus</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/CSPPlusForMachine/</code></td>
+</tr>
+<tr>
+<td><code>cutting_tool</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/CuttingTool/</code></td>
+</tr>
+<tr>
+<td><code>dexpi</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/DEXPI/</code></td>
+</tr>
+<tr>
+<td><code>di</code></td>
+<td>1.05.0</td>
+<td><code>http://opcfoundation.org/UA/DI/</code></td>
+</tr>
+<tr>
+<td><code>di_package_metadata</code></td>
+<td>1.05.0</td>
+<td><code>http://opcfoundation.org/UA/DI/PackageMetadata/</code></td>
+</tr>
+<tr>
+<td><code>ecm</code></td>
+<td>1.0.1</td>
+<td><code>http://opcfoundation.org/UA/ECM/</code></td>
+</tr>
+<tr>
+<td><code>eumabois</code></td>
+<td>0.14</td>
+<td><code>http://opcfoundation.org/UA/Eumabois/</code></td>
+</tr>
+<tr>
+<td><code>fdi</code></td>
+<td>1.1</td>
+<td><code>http://fdi-cooperation.com/OPCUA/FDI5/</code></td>
+</tr>
+<tr>
+<td><code>fdi7</code></td>
+<td></td>
+<td><code>http://fdi-cooperation.com/OPCUA/FDI7/</code></td>
+</tr>
+<tr>
+<td><code>fdt</code></td>
+<td>1.01.00</td>
+<td><code>http://opcfoundation.org/UA/FDT/</code></td>
+</tr>
+<tr>
+<td><code>fx_ac</code></td>
+<td>1.00.04</td>
+<td><code>http://opcfoundation.org/UA/FX/AC/</code></td>
+</tr>
+<tr>
+<td><code>fx_cm</code></td>
+<td>1.00.04</td>
+<td><code>http://opcfoundation.org/UA/FX/CM/</code></td>
+</tr>
+<tr>
+<td><code>fx_data</code></td>
+<td>1.00.04</td>
+<td><code>http://opcfoundation.org/UA/FX/Data/</code></td>
+</tr>
+<tr>
+<td><code>gds</code></td>
+<td>1.05.07</td>
+<td><code>http://opcfoundation.org/UA/GDS/</code></td>
+</tr>
+<tr>
+<td><code>glass_flat</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Glass/Flat/</code></td>
+</tr>
+<tr>
+<td><code>glass_flat_v2</code></td>
+<td>2.0.0</td>
+<td><code>http://opcfoundation.org/UA/Glass/Flat/v2/</code></td>
+</tr>
+<tr>
+<td><code>gms</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/GMS/</code></td>
+</tr>
+<tr>
+<td><code>gpos</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/GPOS/</code></td>
+</tr>
+<tr>
+<td><code>i4aas</code></td>
+<td>5.0.0</td>
+<td><code>http://opcfoundation.org/UA/I4AAS/</code></td>
+</tr>
+<tr>
+<td><code>ia</code></td>
+<td>1.01.4</td>
+<td><code>http://opcfoundation.org/UA/IA/</code></td>
+</tr>
+<tr>
+<td><code>ijt_base</code></td>
+<td>1.01.0</td>
+<td><code>http://opcfoundation.org/UA/IJT/Base/</code></td>
+</tr>
+<tr>
+<td><code>ijt_tightening</code></td>
+<td>2.00.1</td>
+<td><code>http://opcfoundation.org/UA/IJT/Tightening/</code></td>
+</tr>
+<tr>
+<td><code>io_link</code></td>
+<td>1.00.1</td>
+<td><code>http://opcfoundation.org/UA/IOLink/</code></td>
+</tr>
+<tr>
+<td><code>io_link_iodd</code></td>
+<td>1.00.1</td>
+<td><code>http://opcfoundation.org/UA/IOLink/IODD/</code></td>
+</tr>
+<tr>
+<td><code>irdi</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/Dictionary/IRDI</code></td>
+</tr>
+<tr>
+<td><code>irdi_v1_00</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/Dictionary/IRDI</code></td>
+</tr>
+<tr>
+<td><code>irdi_v1_01_0</code></td>
+<td>1.01.0</td>
+<td><code>http://opcfoundation.org/UA/Dictionary/IRDI</code></td>
+</tr>
+<tr>
+<td><code>irdi_v1_0_0</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Dictionary/IRDI</code></td>
+</tr>
+<tr>
+<td><code>iredes</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/ExternalStandards/IREDES</code></td>
+</tr>
+<tr>
+<td><code>isa95</code></td>
+<td>1.00</td>
+<td><code>http://www.OPCFoundation.org/UA/2013/01/ISA95</code></td>
+</tr>
+<tr>
+<td><code>isa95_jobcontrol_v2</code></td>
+<td>2.0.0</td>
+<td><code>http://opcfoundation.org/UA/ISA95-JOBCONTROL_V2/</code></td>
+</tr>
+<tr>
+<td><code>lads</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/LADS/</code></td>
+</tr>
+<tr>
+<td><code>laser_systems</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/LaserSystems/</code></td>
+</tr>
+<tr>
+<td><code>machine_tool</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/MachineTool/</code></td>
+</tr>
+<tr>
+<td><code>machine_vision</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/MachineVision</code></td>
+</tr>
+<tr>
+<td><code>machine_vision_amcm</code></td>
+<td>1.00.0</td>
+<td><code>http://opcfoundation.org/UA/MachineVision/AMCM/</code></td>
+</tr>
+<tr>
+<td><code>machinery</code></td>
+<td>1.04.1</td>
+<td><code>http://opcfoundation.org/UA/Machinery/</code></td>
+</tr>
+<tr>
+<td><code>machinery_energy</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/Machinery/Energy/</code></td>
+</tr>
+<tr>
+<td><code>machinery_jobs</code></td>
+<td>1.0.1</td>
+<td><code>http://opcfoundation.org/UA/Machinery/Jobs/</code></td>
+</tr>
+<tr>
+<td><code>machinery_processvalues</code></td>
+<td>1.00.0</td>
+<td><code>http://opcfoundation.org/UA/Machinery/ProcessValues/</code></td>
+</tr>
+<tr>
+<td><code>machinery_result</code></td>
+<td>1.01.0</td>
+<td><code>http://opcfoundation.org/UA/Machinery/Result/</code></td>
+</tr>
+<tr>
+<td><code>mdis</code></td>
+<td>1.3</td>
+<td><code>http://opcfoundation.org/UA/MDIS</code></td>
+</tr>
+<tr>
+<td><code>metal_forming</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/MetalForming/</code></td>
+</tr>
+<tr>
+<td><code>mining</code></td>
+<td>1.01.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_armoured_face_conveyor</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/TransportDumping/ArmouredFaceConveyor/</code></td>
+</tr>
+<tr>
+<td><code>mining_development_support</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/DevelopmentSupport/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_dozer</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/DevelopmentSupport/Dozer/</code></td>
+</tr>
+<tr>
+<td><code>mining_extraction</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/Extraction/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_face_alignment</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/PELOServices/FaceAlignmentSystem/</code></td>
+</tr>
+<tr>
+<td><code>mining_hydraulic_excavator</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/Loading/HydraulicExcavator/</code></td>
+</tr>
+<tr>
+<td><code>mining_loading</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/Loading/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_mineral_processing</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/MineralProcessing/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_monitoring_supervision</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/MonitoringSupervisionServices/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_pelo_services</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/PELOServices/General/</code></td>
+</tr>
+<tr>
+<td><code>mining_rear_dump_truck</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/TransportDumping/RearDumpTruck/</code></td>
+</tr>
+<tr>
+<td><code>mining_rock_crusher</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/MineralProcessing/RockCrusher/</code></td>
+</tr>
+<tr>
+<td><code>mining_roof_support</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/DevelopmentSupport/RoofSupportSystem/</code></td>
+</tr>
+<tr>
+<td><code>mining_shearer_loader</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/Extraction/ShearerLoader/</code></td>
+</tr>
+<tr>
+<td><code>mining_transport_dumping</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Mining/TransportDumping/General/</code></td>
+</tr>
+<tr>
+<td><code>mt_connect</code></td>
+<td>2.00.01</td>
+<td><code>http://opcfoundation.org/UA/MTConnect/v2/</code></td>
+</tr>
+<tr>
+<td><code>onboarding</code></td>
+<td>1.05.04</td>
+<td><code>http://opcfoundation.org/UA/Onboarding/</code></td>
+</tr>
+<tr>
+<td><code>open_scs</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/OPENSCS-SER/</code></td>
+</tr>
+<tr>
+<td><code>pack_ml</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/PackML/</code></td>
+</tr>
+<tr>
+<td><code>padim</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/PADIM/</code></td>
+</tr>
+<tr>
+<td><code>paefs</code></td>
+<td>1.0.1</td>
+<td><code>http://opcfoundation.org/UA/PAEFS/</code></td>
+</tr>
+<tr>
+<td><code>plastics_dosing</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Dosing/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/GeneralTypes/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_calender</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Calender/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_calibrator</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Calibrator/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_corrugator</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Corrugator/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_cutter</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Cutter/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_die</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Die/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_extruder</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Extruder/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_filter</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Filter/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_haul_off</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/HaulOff/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_line</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/ExtrusionLine/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_melt_pump</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/MeltPump/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_pelletizer</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion_v2/Pelletizer/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/GeneralTypes/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_calender</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Calender/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_calibrator</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Calibrator/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_corrugator</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Corrugator/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_cutter</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Cutter/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_die</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Die/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_extruder</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Extruder/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_filter</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Filter/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_haul_off</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/HaulOff/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_line</code></td>
+<td>1.00.01</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/ExtrusionLine/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_melt_pump</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/MeltPump/</code></td>
+</tr>
+<tr>
+<td><code>plastics_extrusion_v1_pelletizer</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/Extrusion/Pelletizer/</code></td>
+</tr>
+<tr>
+<td><code>plastics_foam_cutting</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/FlexiblePURFoam/Cutting/</code></td>
+</tr>
+<tr>
+<td><code>plastics_hot_runner</code></td>
+<td>1.00</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/HotRunner/</code></td>
+</tr>
+<tr>
+<td><code>plastics_imm2mes</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/IMM2MES/</code></td>
+</tr>
+<tr>
+<td><code>plastics_lds</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/LDS/</code></td>
+</tr>
+<tr>
+<td><code>plastics_rubber</code></td>
+<td>1.03</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/GeneralTypes/</code></td>
+</tr>
+<tr>
+<td><code>plastics_tcd</code></td>
+<td>1.01</td>
+<td><code>http://opcfoundation.org/UA/PlasticsRubber/TCD/</code></td>
+</tr>
+<tr>
+<td><code>plcopen</code></td>
+<td>1.02</td>
+<td><code>http://PLCopen.org/OpcUa/IEC61131-3/</code></td>
+</tr>
+<tr>
+<td><code>pndrv</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PDRV/</code></td>
+</tr>
+<tr>
+<td><code>pnem</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PNEM/</code></td>
+</tr>
+<tr>
+<td><code>pnenc</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PNENC/</code></td>
+</tr>
+<tr>
+<td><code>pngsdgm</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/PNGSDGM/</code></td>
+</tr>
+<tr>
+<td><code>pnrio</code></td>
+<td>1.00.1</td>
+<td><code>http://opcfoundation.org/UA/PNRIO/</code></td>
+</tr>
+<tr>
+<td><code>powerlink</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/POWERLINK/</code></td>
+</tr>
+<tr>
+<td><code>powertrain</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Powertrain/</code></td>
+</tr>
+<tr>
+<td><code>profinet</code></td>
+<td>1.0.1</td>
+<td><code>http://opcfoundation.org/UA/PROFINET/</code></td>
+</tr>
+<tr>
+<td><code>pumps</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/Pumps/</code></td>
+</tr>
+<tr>
+<td><code>robotics</code></td>
+<td>1.02</td>
+<td><code>http://opcfoundation.org/UA/Robotics/</code></td>
+</tr>
+<tr>
+<td><code>rsl</code></td>
+<td>1.00.1</td>
+<td><code>http://opcfoundation.org/UA/RSL/</code></td>
+</tr>
+<tr>
+<td><code>safety</code></td>
+<td>1.05.04</td>
+<td><code>http://opcfoundation.org/UA/Safety</code></td>
+</tr>
+<tr>
+<td><code>scales</code></td>
+<td>2.00</td>
+<td><code>http://opcfoundation.org/UA/Scales/V2/</code></td>
+</tr>
+<tr>
+<td><code>scheduler</code></td>
+<td>1.05.02</td>
+<td><code>http://opcfoundation.org/UA/Scheduler/</code></td>
+</tr>
+<tr>
+<td><code>sercos</code></td>
+<td>1.00</td>
+<td><code>http://sercos.org/UA/</code></td>
+</tr>
+<tr>
+<td><code>shotblasting</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/SurfaceTechnology/ShotBlasting/</code></td>
+</tr>
+<tr>
+<td><code>surface_technology</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/SurfaceTechnology/GeneralTypes/</code></td>
+</tr>
+<tr>
+<td><code>surface_technology_cleaning</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/SurfaceTechnology/CleaningPretreatment/</code></td>
+</tr>
+<tr>
+<td><code>surface_technology_mss</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/SurfaceTechnology/OCT-MSS/</code></td>
+</tr>
+<tr>
+<td><code>surface_technology_plasma</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/SurfaceTechnology/Plasma/</code></td>
+</tr>
+<tr>
+<td><code>tmc</code></td>
+<td>2.00.1</td>
+<td><code>http://opcfoundation.org/UA/TMC/v2/</code></td>
+</tr>
+<tr>
+<td><code>ttd</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/TTD/</code></td>
+</tr>
+<tr>
+<td><code>unattended_retail</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/UnattendedRetail/</code></td>
+</tr>
+<tr>
+<td><code>weihenstephan</code></td>
+<td>1.00.0</td>
+<td><code>http://opcfoundation.org/UA/Weihenstephan/</code></td>
+</tr>
+<tr>
+<td><code>wire_harness</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/WireHarness/</code></td>
+</tr>
+<tr>
+<td><code>wire_harness_vec</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/WireHarness/VEC/</code></td>
+</tr>
+<tr>
+<td><code>wmtp</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/WMTP/</code></td>
+</tr>
+<tr>
+<td><code>woodworking</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/Woodworking/</code></td>
+</tr>
+<tr>
+<td><code>wot</code></td>
+<td>1.02.0</td>
+<td><code>http://opcfoundation.org/UA/WoT-Con/</code></td>
+</tr>
+<tr>
+<td><code>xml</code></td>
+<td>1.0.0</td>
+<td><code>http://opcfoundation.org/UA/XML/</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../dependencies/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dependencies &amp; shortnames">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Dependencies & shortnames
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../utility/inventory/" class="md-footer__link md-footer__link--next" aria-label="Next: Inventory">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Inventory
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 o6-Automation
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.instant","navigation.instant.prefetch","navigation.instant.progress","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dbc0afdc.min.js"></script>
+      
+    
+  </body>
+</html>

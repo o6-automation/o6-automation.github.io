@@ -1,0 +1,1101 @@
+/*
+ * SPDX-FileCopyrightText: 2026 o6 Automation GmbH
+ * SPDX-License-Identifier: LicenseRef-o6-Commercial
+ */
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-Regular.woff2") format("woff2"),
+    local("ABC Diatype"), local("ABCDiatype-Regular");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-RegularItalic.woff2") format("woff2"),
+    local("ABC Diatype Italic"), local("ABCDiatype-RegularItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-Medium.woff2") format("woff2"),
+    local("ABC Diatype Medium"), local("ABCDiatype-Medium");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-MediumItalic.woff2") format("woff2"),
+    local("ABC Diatype Medium Italic"), local("ABCDiatype-MediumItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-Bold.woff2") format("woff2"),
+    local("ABC Diatype Bold"), local("ABCDiatype-Bold");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "ABC Diatype Docs";
+  src: url("../fonts/abc-diatype/ABCDiatype-BoldItalic.woff2") format("woff2"),
+    local("ABC Diatype Bold Italic"), local("ABCDiatype-BoldItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-Regular.woff2") format("woff2"),
+    local("ABC Diatype Mono"), local("ABCDiatypeMono-Regular");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-RegularItalic.woff2") format("woff2"),
+    local("ABC Diatype Mono Italic"), local("ABCDiatypeMono-RegularItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-Medium.woff2") format("woff2"),
+    local("ABC Diatype Mono Medium"), local("ABCDiatypeMono-Medium");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-MediumItalic.woff2") format("woff2"),
+    local("ABC Diatype Mono Medium Italic"), local("ABCDiatypeMono-MediumItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-Bold.woff2") format("woff2"),
+    local("ABC Diatype Mono Bold"), local("ABCDiatypeMono-Bold");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "ABC Diatype Mono Docs";
+  src: url("../fonts/abc-diatype/ABCDiatypeMono-BoldItalic.woff2") format("woff2"),
+    local("ABC Diatype Mono Bold Italic"), local("ABCDiatypeMono-BoldItalic");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Commit Mono Docs";
+  src: url("../fonts/commit-mono/CommitMono%20VariableFont.woff2") format("woff2-variations");
+  font-display: swap;
+  font-feature-settings: "cv02" 1, "cv03" 1, "cv06" 1, "cv10" 1;
+  font-style: normal;
+  font-variation-settings: "ital" 0;
+  font-weight: 200 700;
+}
+
+@font-face {
+  font-family: "Commit Mono Docs";
+  src: url("../fonts/commit-mono/CommitMono%20VariableFont.woff2") format("woff2-variations");
+  font-display: swap;
+  font-feature-settings: "cv02" 1, "cv03" 1, "cv06" 1, "cv10" 1;
+  font-style: italic;
+  font-variation-settings: "ital" 1;
+  font-weight: 200 700;
+}
+
+:root {
+  --md-text-font: "ABC Diatype Docs", ui-sans-serif, system-ui, sans-serif;
+  --md-code-font: "ABC Diatype Mono Docs", "Commit Mono Docs", ui-monospace, monospace;
+  --o6-header-height: 3.6rem;
+  --o6-weight-regular: 400;
+  --o6-weight-medium: 500;
+  --o6-weight-bold: 700;
+  --o6-code-weight-regular: 400;
+  --o6-code-weight-medium: 550;
+  --o6-code-weight-bold: 700;
+  --o6-doc-font-size-h1: 34px;
+  --o6-doc-font-size-h2: 26px;
+  --o6-doc-font-size-h3: 21px;
+  --o6-doc-font-size-body: 15px;
+  --o6-doc-font-size-small: 14px;
+  --o6-doc-line-height-h1: 1.15;
+  --o6-doc-line-height-h2: 1.2;
+  --o6-doc-line-height-h3: 1.3;
+  --o6-doc-line-height-body: 1.55;
+  --o6-doc-line-height-small: 1.4;
+  --o6-doc-letter-spacing-h1: -0.02em;
+  --o6-doc-letter-spacing-h2: -0.015em;
+  --o6-doc-letter-spacing-h3: -0.01em;
+}
+
+.md-header .md-logo img {
+  filter: none;
+}
+
+/* These tokens mirror theme/colors.yml, which is the source of truth for the
+   corporate palette. There is no generator in this repository, so the two are
+   kept in step by hand: change colors.yml first, then reflect it here. */
+/* Usage rules: docs/color-system.md (light) and docs/color-system-dark.md. */
+/* WCAG checks, light scheme: body text: 18.62:1; code text: 17.06:1; links: 18.62:1; header text: 18.62:1; focus indicators: 15.79:1; accent teal on white: 4.74:1; danger indicators: 5.49:1; warning indicators: 4.80:1; success indicators: 5.89:1; inactive text: 5.01:1. */
+/* WCAG checks, dark scheme: body text: 17.06:1; code text: 14.47:1; links: 17.06:1; header text: 17.06:1; focus indicators: 18.62:1; accent teal on black ink: 5.66:1; danger indicators: 5.66:1; warning indicators: 5.71:1; success indicators: 5.66:1; inactive text: 5.69:1; code comments: 4.82:1. */
+:root {
+  --o6-color-black-ink: #111315;
+  --o6-color-full-white: #ffffff;
+  --o6-color-warm-chrome: #f4f5f6;
+  --o6-color-dark-steel: #142433;
+  --o6-color-accent-teal: #007f8f;
+  --o6-color-alarm-red: #b6404c;
+  --o6-color-warning-amber: #a86100;
+  --o6-color-normal-green: #257153;
+  --o6-color-inactive-gray: #697078;
+
+  --o6-primary: var(--o6-color-dark-steel);
+  --o6-ink: var(--o6-color-black-ink);
+  --o6-white: var(--o6-color-full-white);
+  --o6-neutral: var(--o6-color-warm-chrome);
+  --o6-teal: var(--o6-color-accent-teal);
+  --o6-alarm: var(--o6-color-alarm-red);
+  --o6-warning: var(--o6-color-warning-amber);
+  --o6-normal: var(--o6-color-normal-green);
+  --o6-inactive: var(--o6-color-inactive-gray);
+  --o6-secondary: var(--o6-inactive);
+  --o6-graphic: var(--o6-inactive);
+  --o6-interactive: var(--o6-ink);
+  --o6-accent: var(--o6-primary);
+  --o6-border: color-mix(in srgb, var(--o6-inactive) 28%, transparent);
+  --o6-layout-content-start: 0rem;
+
+  --o6-color-text: var(--o6-color-black-ink);
+  --o6-color-surface: var(--o6-color-full-white);
+  --o6-color-surface-muted: var(--o6-color-warm-chrome);
+  --o6-color-brand: var(--o6-color-dark-steel);
+  --o6-color-brand-surface: var(--o6-color-black-ink);
+  --o6-color-brand-active: var(--o6-color-dark-steel);
+  --o6-color-brand-accent: var(--o6-color-accent-teal);
+  --o6-color-danger: var(--o6-color-alarm-red);
+  --o6-color-warning: var(--o6-color-warning-amber);
+  --o6-color-success: var(--o6-color-normal-green);
+  --o6-color-inactive: var(--o6-color-inactive-gray);
+}
+
+html,
+body {
+  /* The modified web fonts use the corporate open a by default. In this build,
+     ss01 selects the closed alternate. The default six is already open. */
+  font-feature-settings: "ss01" 0, "ss07" 1, "ss11" 0;
+}
+
+body {
+  font-weight: var(--o6-weight-regular);
+}
+
+.md-typeset {
+  font-size: var(--o6-doc-font-size-body);
+  letter-spacing: normal;
+  line-height: var(--o6-doc-line-height-body);
+}
+
+.md-content__inner {
+  max-width: 74ch;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  color: var(--o6-color-text);
+  font-feature-settings: "ss01" 0, "ss07" 1, "ss11" 0;
+  font-weight: var(--o6-weight-medium);
+  text-wrap: balance;
+}
+
+.md-typeset h1 {
+  color: var(--o6-color-brand);
+  font-size: var(--o6-doc-font-size-h1);
+  letter-spacing: var(--o6-doc-letter-spacing-h1);
+  line-height: var(--o6-doc-line-height-h1);
+  margin: 0 0 0.6em;
+}
+
+.md-typeset h2 {
+  font-size: var(--o6-doc-font-size-h2);
+  letter-spacing: var(--o6-doc-letter-spacing-h2);
+  line-height: var(--o6-doc-line-height-h2);
+  margin: 1.6em 0 0.6em;
+}
+
+.md-typeset h3 {
+  font-size: var(--o6-doc-font-size-h3);
+  letter-spacing: var(--o6-doc-letter-spacing-h3);
+  line-height: var(--o6-doc-line-height-h3);
+  margin: 1.6em 0 0.6em;
+}
+
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-size: var(--o6-doc-font-size-small);
+  letter-spacing: normal;
+  line-height: var(--o6-doc-line-height-small);
+  margin: 1.4em 0 0.5em;
+}
+
+.md-typeset small {
+  font-size: var(--o6-doc-font-size-small);
+  font-weight: var(--o6-weight-medium);
+  line-height: var(--o6-doc-line-height-small);
+}
+
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd {
+  font-size: 0.7rem;
+  font-weight: var(--o6-code-weight-regular);
+  line-height: 1.55;
+}
+
+[data-md-color-scheme="default"] {
+  --md-default-fg-color: var(--o6-color-text);
+  --md-default-bg-color: var(--o6-color-surface);
+  --md-code-fg-color: var(--o6-color-text);
+  --md-code-bg-color: var(--o6-color-surface-muted);
+  --md-code-hl-number-color: var(--o6-color-text);
+  --md-code-hl-special-color: var(--o6-color-brand);
+  --md-code-hl-function-color: var(--o6-color-brand);
+  --md-code-hl-constant-color: var(--o6-color-text);
+  --md-code-hl-keyword-color: var(--o6-color-brand);
+  --md-code-hl-string-color: var(--o6-color-text);
+  --md-code-hl-name-color: var(--o6-color-text);
+  --md-code-hl-operator-color: var(--o6-color-inactive);
+  --md-code-hl-punctuation-color: var(--o6-color-inactive);
+  --md-code-hl-comment-color: var(--o6-color-inactive);
+  --md-code-hl-generic-color: var(--o6-color-inactive);
+  --md-code-hl-variable-color: var(--o6-color-text);
+  --md-typeset-a-color: var(--o6-color-brand-surface);
+  --md-accent-fg-color: var(--o6-color-brand-surface);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--o6-color-brand) 10%, transparent);
+  --md-code-hl-color: color-mix(in srgb, var(--o6-color-inactive) 12%, transparent);
+  --md-typeset-table-color: var(--o6-border);
+}
+
+[data-md-color-primary="indigo"] {
+  --md-primary-fg-color: var(--o6-color-brand);
+  --md-primary-fg-color--light: var(--o6-color-brand);
+  --md-primary-fg-color--dark: var(--o6-color-brand-active);
+  --md-primary-fg-color--transparent: color-mix(in srgb, var(--o6-color-brand) 10%, transparent);
+  --md-primary-bg-color: var(--o6-color-surface);
+}
+
+/* Dark scheme. The palette extension and its derivation are specified in
+   docs/color-system-dark.md. The structural roles reuse existing corporate
+   colors -- Black Ink is the page, Dark Steel is the raised surface, Warm
+   Chrome carries body text and Full White is reserved for emphasis -- so only
+   the four functional roles take the dark-surface variants. Because the
+   component rules above consume role tokens rather than literal aliases,
+   re-pointing the roles here flips the whole theme; the handful of rules that
+   need a different treatment on a dark ground follow this block. */
+[data-md-color-scheme="slate"] {
+  color-scheme: dark;
+
+  --o6-color-accent-teal-dark: #079caf;
+  --o6-color-alarm-red-dark: #d56f7a;
+  --o6-color-warning-amber-dark: #cf7a05;
+  --o6-color-normal-green-dark: #389f76;
+  --o6-color-inactive-gray-dark: #888f96;
+
+  --o6-color-text: var(--o6-color-warm-chrome);
+  --o6-color-surface: var(--o6-color-black-ink);
+  --o6-color-surface-muted: var(--o6-color-dark-steel);
+  --o6-color-brand: var(--o6-color-full-white);
+  --o6-color-brand-surface: var(--o6-color-warm-chrome);
+  --o6-color-brand-active: var(--o6-color-full-white);
+  --o6-color-brand-accent: var(--o6-color-accent-teal-dark);
+  --o6-color-danger: var(--o6-color-alarm-red-dark);
+  --o6-color-warning: var(--o6-color-warning-amber-dark);
+  --o6-color-success: var(--o6-color-normal-green-dark);
+  --o6-color-inactive: var(--o6-color-inactive-gray-dark);
+
+  /* Borders and quiet fills are alpha constructions in both schemes. On a dark
+     ground they invert to Full White, at a lower alpha because light-on-dark
+     edges read stronger than dark-on-light ones at the same value. */
+  --o6-border: color-mix(in srgb, var(--o6-color-full-white) 16%, transparent);
+
+  --md-default-fg-color: var(--o6-color-text);
+  --md-default-bg-color: var(--o6-color-surface);
+  --md-code-fg-color: var(--o6-color-text);
+  --md-code-bg-color: var(--o6-color-surface-muted);
+  /* Syntax highlighting keeps the light scheme's restraint, inverted: the
+     brand tone carries language structure, the text tone carries values, and
+     the inactive tone carries comments and punctuation. */
+  --md-code-hl-number-color: var(--o6-color-text);
+  --md-code-hl-special-color: var(--o6-color-brand);
+  --md-code-hl-function-color: var(--o6-color-brand);
+  --md-code-hl-constant-color: var(--o6-color-text);
+  --md-code-hl-keyword-color: var(--o6-color-brand);
+  --md-code-hl-string-color: var(--o6-color-text);
+  --md-code-hl-name-color: var(--o6-color-text);
+  --md-code-hl-operator-color: var(--o6-color-inactive);
+  --md-code-hl-punctuation-color: var(--o6-color-inactive);
+  --md-code-hl-comment-color: var(--o6-color-inactive);
+  --md-code-hl-generic-color: var(--o6-color-inactive);
+  --md-code-hl-variable-color: var(--o6-color-text);
+  --md-typeset-a-color: var(--o6-color-brand-surface);
+  --md-accent-fg-color: var(--o6-color-brand-surface);
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--o6-color-brand) 10%, transparent);
+  --md-code-hl-color: color-mix(in srgb, var(--o6-color-inactive) 20%, transparent);
+  --md-typeset-table-color: var(--o6-border);
+
+  /* The theme leaves the search overlay, its input and its result list to
+     Zensical, which drives them from these graded variables and the shadow
+     scale. The light scheme inherits usable defaults; the dark scheme does
+     not, so they are set explicitly here to keep the overlay in the corporate
+     palette instead of a mix of both. */
+  --md-default-fg-color--light: color-mix(in srgb, var(--o6-color-text) 72%, transparent);
+  --md-default-fg-color--lighter: color-mix(in srgb, var(--o6-color-text) 45%, transparent);
+  --md-default-fg-color--lightest: color-mix(in srgb, var(--o6-color-text) 18%, transparent);
+  --md-default-bg-color--light: color-mix(in srgb, var(--o6-color-surface) 70%, transparent);
+  --md-default-bg-color--lighter: color-mix(in srgb, var(--o6-color-surface) 45%, transparent);
+  --md-default-bg-color--lightest: color-mix(in srgb, var(--o6-color-surface) 12%, transparent);
+  --md-shadow-z1: 0 0.2rem 0.5rem rgb(0 0 0 / 40%), 0 0 0.05rem rgb(0 0 0 / 20%);
+  --md-shadow-z2: 0 0.2rem 0.5rem rgb(0 0 0 / 60%), 0 0 0.05rem rgb(0 0 0 / 40%);
+  --md-shadow-z3: 0 0.2rem 0.5rem rgb(0 0 0 / 80%), 0 0 0.05rem rgb(0 0 0 / 60%);
+}
+
+/* The footer is a Dark Steel field with light text in the light scheme, which
+   the role swap would turn into a white block at the foot of a dark page. On a
+   dark ground it becomes the raised surface instead. */
+[data-md-color-scheme="slate"] .md-footer {
+  color: var(--o6-color-text);
+  background-color: var(--o6-color-surface-muted);
+}
+
+[data-md-color-scheme="slate"] .md-footer .md-copyright,
+[data-md-color-scheme="slate"] .md-footer .md-copyright__highlight {
+  color: var(--o6-color-text);
+}
+
+/* Selection is inverted inside the footer and code blocks because both are
+   dark fields in the light scheme. In the dark scheme the whole page is a dark
+   field, so the ordinary selection treatment already applies there. */
+[data-md-color-scheme="slate"] .md-footer ::selection,
+[data-md-color-scheme="slate"] .highlight ::selection {
+  color: var(--o6-color-surface);
+  background: var(--o6-color-brand);
+}
+
+/* A 12% tint reads clearly over Full White but nearly disappears over Black
+   Ink, so the admonition and details headers carry a stronger mix on a dark
+   ground. */
+[data-md-color-scheme="slate"] .md-typeset .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset summary {
+  background-color: color-mix(in srgb, var(--o6-color-inactive) 20%, transparent);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .warning > .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset .warning > summary {
+  background-color: color-mix(in srgb, var(--o6-color-warning) 20%, transparent);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .danger > .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset .error > .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset .danger > summary,
+[data-md-color-scheme="slate"] .md-typeset .error > summary {
+  background-color: color-mix(in srgb, var(--o6-color-danger) 20%, transparent);
+}
+
+[data-md-color-scheme="slate"] .md-typeset .success > .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset .success > summary {
+  background-color: color-mix(in srgb, var(--o6-color-success) 20%, transparent);
+}
+
+/* The wordmark is a fixed-color asset drawn for light backgrounds. */
+[data-md-color-scheme="slate"] .md-header .md-logo img {
+  filter: brightness(0) invert(1);
+}
+
+::selection {
+  color: var(--o6-color-surface);
+  background: var(--o6-color-brand);
+}
+
+.md-footer ::selection,
+.highlight ::selection {
+  color: var(--o6-color-brand);
+  background: var(--o6-color-surface);
+}
+
+.md-footer {
+  color: var(--o6-color-surface);
+  background-color: var(--o6-color-brand);
+}
+
+.md-header,
+.md-tabs {
+  color: var(--o6-color-text);
+  background-color: var(--o6-color-surface);
+}
+
+.md-header {
+  min-height: var(--o6-header-height);
+  border-bottom: 1px solid var(--o6-border);
+  box-shadow: none;
+}
+
+.md-header__inner {
+  min-height: var(--o6-header-height);
+}
+
+.md-tabs__link,
+.md-header__button {
+  color: var(--o6-color-text);
+}
+
+.md-header__source {
+  display: none;
+}
+
+.md-header__topic:first-child {
+  font-size: 0.9rem;
+  font-weight: var(--o6-weight-medium);
+  line-height: 1.3333;
+}
+
+.md-header__topic:first-child > .md-ellipsis {
+  font-weight: var(--o6-weight-medium);
+}
+
+.md-tabs__item {
+  height: auto;
+  padding: 0;
+}
+
+.md-tabs__item--active {
+  border-bottom: 0;
+}
+
+.md-tabs__link {
+  margin: 0;
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: var(--o6-weight-medium);
+  line-height: 1.3333;
+  opacity: 1;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.md-header__button[for="__drawer"] {
+  background-color: var(--o6-color-surface-muted);
+  border: 1px solid var(--o6-border);
+  border-radius: 0.6rem;
+}
+
+.md-tabs__link:hover,
+.md-tabs__link:focus-visible,
+.md-header__button:hover,
+.md-header__button:focus-visible {
+  color: var(--o6-color-brand);
+  background-color: var(--o6-color-surface-muted);
+}
+
+.md-tabs__item--active .md-tabs__link {
+  color: var(--o6-color-brand);
+  background-color: var(--o6-color-surface-muted);
+  border-color: var(--o6-color-surface-muted);
+  opacity: 1;
+}
+
+.md-typeset a {
+  text-decoration-color: var(--o6-color-inactive);
+  text-underline-offset: 0.12em;
+}
+
+.md-typeset a:hover,
+.md-typeset a:focus-visible {
+  color: var(--o6-color-brand);
+}
+
+.md-typeset .md-button--primary {
+  color: var(--o6-color-surface);
+  background-color: var(--o6-color-brand);
+  border-color: var(--o6-color-brand);
+}
+
+.md-typeset .md-button--primary:hover,
+.md-typeset .md-button--primary:focus-visible {
+  color: var(--o6-color-brand);
+  background-color: var(--o6-color-surface);
+}
+
+.md-typeset .md-button {
+  white-space: nowrap;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td,
+.md-typeset hr {
+  border-color: var(--o6-border);
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-color: var(--o6-color-inactive);
+  box-shadow: none;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background-color: color-mix(in srgb, var(--o6-color-inactive) 12%, transparent);
+}
+
+.md-typeset .admonition-title::before,
+.md-typeset summary::before {
+  background-color: var(--o6-color-inactive);
+}
+
+.md-typeset :focus-visible {
+  outline-color: var(--o6-color-brand);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: var(--o6-color-warning);
+}
+
+.md-typeset .warning > .admonition-title,
+.md-typeset .warning > summary {
+  background-color: color-mix(in srgb, var(--o6-color-warning) 12%, transparent);
+}
+
+.md-typeset .warning > .admonition-title::before,
+.md-typeset .warning > summary::before {
+  background-color: var(--o6-color-warning);
+}
+
+.md-typeset .admonition.danger,
+.md-typeset .admonition.error,
+.md-typeset details.danger,
+.md-typeset details.error {
+  border-color: var(--o6-color-danger);
+}
+
+.md-typeset .danger > .admonition-title,
+.md-typeset .error > .admonition-title,
+.md-typeset .danger > summary,
+.md-typeset .error > summary {
+  background-color: color-mix(in srgb, var(--o6-color-danger) 12%, transparent);
+}
+
+.md-typeset .danger > .admonition-title::before,
+.md-typeset .error > .admonition-title::before,
+.md-typeset .danger > summary::before,
+.md-typeset .error > summary::before {
+  background-color: var(--o6-color-danger);
+}
+
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: var(--o6-color-success);
+}
+
+.md-typeset .success > .admonition-title,
+.md-typeset .success > summary {
+  background-color: color-mix(in srgb, var(--o6-color-success) 12%, transparent);
+}
+
+.md-typeset .success > .admonition-title::before,
+.md-typeset .success > summary::before {
+  background-color: var(--o6-color-success);
+}
+
+.md-typeset del {
+  text-decoration-color: var(--o6-color-danger);
+}
+
+.md-typeset ins {
+  text-decoration-color: var(--o6-color-success);
+}
+
+.md-typeset :disabled,
+.md-typeset [aria-disabled="true"] {
+  color: var(--o6-color-inactive);
+}
+
+@media screen and (min-width: 64em) {
+  /* Native modern Zensical nests the tabs inside the header, after the header
+     controls. Overlay both layers into the single o6 menu row and reserve the
+     row's height for page content. */
+  .md-container {
+    padding-top: var(--o6-header-height);
+  }
+
+  .md-tabs,
+  .md-tabs[hidden] {
+    display: block;
+    height: var(--o6-header-height);
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: auto;
+    overflow: hidden;
+    border-bottom: 1px solid var(--o6-border);
+    box-shadow: none;
+  }
+
+  .md-tabs[hidden] .md-tabs__link {
+    opacity: 1;
+    transform: none;
+    transition: color 0.15s, background-color 0.15s;
+  }
+
+  .md-tabs[hidden] .md-tabs__item--active .md-tabs__link,
+  .md-tabs[hidden] .md-tabs__link:hover,
+  .md-tabs[hidden] .md-tabs__link:focus-visible {
+    opacity: 1;
+  }
+
+  .md-header {
+    position: fixed;
+    inset: 0 0 auto;
+    height: var(--o6-header-height);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    pointer-events: none;
+  }
+
+  .md-header__inner {
+    height: var(--o6-header-height);
+    position: relative;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .md-header .md-logo,
+  .md-header [data-md-component="palette"],
+  .md-header__button[for="__search"],
+  .md-header .md-search {
+    pointer-events: auto;
+  }
+
+  .md-header .md-logo {
+    display: block;
+    width: 2.05rem;
+    height: 2.05rem;
+    margin: 0 0.45rem 0 0.8rem;
+    padding: 0;
+  }
+
+  .md-header .md-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .md-header__title {
+    flex: 0 0 9.5rem;
+    width: 9.5rem;
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+    color: var(--o6-color-text);
+  }
+
+  .md-header__ellipsis {
+    display: block;
+    overflow: visible;
+  }
+
+  .md-header__topic:first-child {
+    max-width: none;
+    top: calc(50% - 0.025rem);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    z-index: 0;
+    font-size: 0.9rem;
+    font-weight: var(--o6-weight-medium);
+    line-height: 1.3333;
+    cursor: text;
+    user-select: text;
+    white-space: nowrap;
+  }
+
+  .md-header__topic:first-child > .md-ellipsis {
+    overflow: visible;
+  }
+
+  .md-header__title--active .md-header__topic:first-child {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .md-header__topic + .md-header__topic {
+    display: none;
+  }
+
+  .md-header__button[for="__drawer"] {
+    display: none;
+    order: 3;
+  }
+
+  .md-header__button[for="__drawer"] + .md-header__title {
+    order: 1;
+  }
+
+  .md-header__source {
+    display: none;
+  }
+
+  .md-tabs__list {
+    align-items: center;
+    gap: 0.2rem;
+    min-height: var(--o6-header-height);
+    padding-right: 4.1rem;
+    padding-left: 13.8rem;
+  }
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-tabs__list {
+    padding-left: 13.8rem;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .md-header__button[for="__search"] {
+    display: none;
+  }
+
+  .md-header .md-search {
+    display: block;
+    order: 4;
+    margin-left: auto;
+    margin-right: 0.8rem;
+  }
+
+  .md-header .md-search__button {
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    overflow: hidden;
+    color: var(--o6-color-brand);
+    background: transparent;
+    border: 0;
+    border-radius: 0.4rem;
+    font-size: 0;
+    text-indent: -999rem;
+  }
+
+  .md-header .md-search__button::before {
+    left: 0.6rem;
+    background-color: var(--o6-color-brand);
+  }
+
+  .md-header .md-search__button::after {
+    display: none;
+  }
+
+  .md-header .md-search__button:hover,
+  .md-header .md-search__button:focus-visible {
+    background: var(--o6-color-surface-muted);
+  }
+}
+
+@media screen and (max-width: 63.984375em) {
+  .md-header__topic:first-child {
+    top: 50%;
+    font-size: 0.9rem;
+    transform: translateY(-50%);
+  }
+
+  .md-header__title--active .md-header__topic:first-child {
+    transform: translateY(-50%);
+  }
+
+}
+
+@media screen and (max-width: 59.984375em) {
+  .md-header .md-search {
+    display: none;
+  }
+
+  .md-header__button[for="__search"] {
+    display: inline-flex;
+    margin-left: auto;
+    border-radius: 0.6rem;
+  }
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-sidebar--primary,
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-nav--primary,
+  .md-nav--primary .md-nav {
+    color: var(--o6-color-text);
+    background-color: var(--o6-color-surface);
+  }
+
+  .md-sidebar--primary {
+    border-right: 1px solid var(--o6-border);
+  }
+
+  .md-nav--primary .md-nav__title,
+  .md-nav--primary .md-nav__link {
+    color: var(--o6-color-text);
+    background-color: transparent;
+  }
+
+  .md-nav .md-nav__title[for="__drawer"] {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 3.2rem;
+    padding: 0.65rem 0.8rem;
+    color: var(--o6-color-brand);
+    font-size: 0.9rem;
+    font-weight: var(--o6-weight-medium);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .md-nav .md-nav__title[for="__drawer"] .md-logo {
+    display: none;
+  }
+
+  .md-nav--primary .md-nav__link {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border: 0;
+    border-radius: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: var(--o6-weight-medium);
+    line-height: 1.3333;
+  }
+
+  .md-nav--primary .md-nav__link:is([for], [href]):is(:focus, :hover):not(.md-nav__link--active) {
+    color: var(--o6-color-brand);
+    background-color: var(--o6-color-surface-muted);
+  }
+
+  .md-nav--primary .md-nav--secondary .md-nav__link[href]:is(:focus, :hover) {
+    color: var(--o6-color-brand);
+    background-color: var(--o6-color-surface-muted);
+  }
+
+  .md-nav--primary .md-nav__item .md-nav__link--active {
+    color: var(--o6-color-brand);
+    background: var(--o6-color-surface-muted);
+    border-color: var(--o6-color-surface-muted);
+  }
+}
+
+@media screen and (min-width: 64em) and (max-width: 76.234375em) {
+  .md-sidebar--primary {
+    left: auto;
+    right: auto;
+    position: sticky;
+    top: 2.4rem;
+    height: 0;
+    padding: 1.1rem 0;
+    transform: none;
+    transition: none;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    z-index: auto;
+  }
+
+  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    transform: none;
+  }
+
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    position: static;
+    margin: 0;
+    overscroll-behavior-y: auto;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-nav--primary,
+  .md-nav--primary .md-nav {
+    color: var(--o6-color-text);
+    background: transparent;
+  }
+
+  .md-sidebar--primary .md-sidebar__inner {
+    padding-right: 0.6rem;
+  }
+
+  .md-nav--primary .md-nav__title,
+  .md-nav--primary .md-nav__link {
+    color: var(--o6-color-text);
+  }
+
+  .md-nav--primary {
+    margin: 0.1rem 0;
+  }
+
+  .md-nav .md-nav__title[for="__drawer"],
+  .md-nav__source {
+    display: none;
+  }
+
+  .md-nav--primary .md-nav__link {
+    padding: 0.35rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: var(--o6-weight-regular);
+  }
+
+  .md-nav--primary .md-nav__link:hover,
+  .md-nav--primary .md-nav__link:focus-visible {
+    color: var(--o6-color-brand);
+    background-color: transparent;
+  }
+
+  .md-nav--primary .md-nav__item .md-nav__link--active {
+    color: var(--o6-color-brand);
+    background: transparent;
+    border-color: transparent;
+    font-weight: 500;
+  }
+
+  .md-nav__item--section > .md-nav__container > :nth-child(2) {
+    display: none;
+  }
+
+  [dir="ltr"] .md-nav__list .md-nav__item--section > .md-nav > .md-nav__list {
+    margin-left: 0;
+  }
+
+  [dir="rtl"] .md-nav__list .md-nav__item--section > .md-nav > .md-nav__list {
+    margin-right: 0;
+  }
+
+  .md-nav__item--section > .md-nav__link {
+    font-weight: var(--o6-weight-medium);
+  }
+
+  .md-nav__item--section > .md-nav__link:not(.md-nav__container) {
+    pointer-events: none;
+  }
+
+  .md-nav__item--section > .md-nav {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item {
+    display: none;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active {
+    display: block;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav {
+    margin-top: 0.1rem;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav > .md-nav__list::before,
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active > .md-nav__link {
+    display: none;
+  }
+
+  .md-nav--lifted > .md-nav__list > .md-nav__item--active.md-nav__item--section {
+    margin: 0;
+  }
+
+  .md-nav--lifted .md-nav[data-md-level="1"] {
+    grid-template-rows: minmax(0.4rem, 1fr);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .md-overlay {
+    display: none;
+  }
+}
+
+.md-nav--secondary .md-nav__link,
+.md-nav--primary .md-nav--secondary .md-nav__link,
+.md-footer .md-copyright {
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 64em) {
+  .md-sidebar--primary .md-nav__link {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+}
+
+.md-footer .md-copyright,
+.md-footer .md-copyright__highlight {
+  color: var(--o6-color-surface);
+  opacity: 1;
+}
+
+@media screen and (min-width: 64em) and (max-width: 76.234375em) {
+  :root {
+    --o6-layout-content-start: 12.7rem;
+  }
+
+  .md-footer .md-copyright {
+    margin-inline-start: var(--o6-layout-content-start);
+  }
+}
+
+@media screen and (min-width: 76.25em) {
+  :root {
+    --o6-layout-content-start: 13.1rem;
+  }
+
+  .md-footer .md-copyright {
+    margin-inline-start: var(--o6-layout-content-start);
+  }
+}

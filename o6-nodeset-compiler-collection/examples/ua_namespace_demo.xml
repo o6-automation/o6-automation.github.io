@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>urn:ncc:demo</Uri>
+    <Uri>urn:ncc:demo:base</Uri>
+  </NamespaceUris>
+  <Models>
+    <Model ModelUri="urn:ncc:demo" Version="1.0.0" PublicationDate="2026-01-01T00:00:00Z">
+      <RequiredModel ModelUri="http://opcfoundation.org/UA/" />
+      <RequiredModel ModelUri="urn:ncc:demo:base" Version="1.0.0" PublicationDate="2026-01-01T00:00:00Z" />
+    </Model>
+  </Models>
+  <UAObject NodeId="ns=1;i=2001" BrowseName="1:Demo">
+    <DisplayName>Demo</DisplayName>
+    <References>
+      <Reference ReferenceType="i=35" IsForward="false">i=85</Reference>
+      <Reference ReferenceType="i=40">ns=2;i=1001</Reference>
+    </References>
+  </UAObject>
+</UANodeSet>

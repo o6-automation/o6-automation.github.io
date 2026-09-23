@@ -1,0 +1,21 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Copyright 2026 (c) o6-Automation GmbH (Author: Daniel Opitz)
+ */
+
+/* Project-specific overrides. Loaded after the o6 theme stylesheet, so
+   anything here wins. Keep it small — presentation belongs in the theme. */
+
+/* The reference tables on these pages are mostly flag names and Model URIs.
+   Keep them from wrapping mid-token at narrow widths. */
+.md-typeset table:not([class]) td code {
+  white-space: nowrap;
+}
+
+/* Long Model URIs are the exception: they must be allowed to wrap. */
+.md-typeset table:not([class]) td:last-child code {
+  white-space: normal;
+  word-break: break-all;
+}
